@@ -1,0 +1,32 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion vSdkTarget
+    buildToolsVersion vBuildTools
+
+    defaultConfig {
+        applicationId "com.github.nitrico.lastadapterproject"
+        minSdkVersion vSdkMin
+        targetSdkVersion vSdkTarget
+        versionCode 1
+        versionName "1.0"
+    }
+    dataBinding {
+        enabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile "com.android.support:appcompat-v7:$vSupport"
+    compile "com.android.support:recyclerview-v7:$vSupport"
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$vKotlin"
+    compile project(":lastadapter")
+}
