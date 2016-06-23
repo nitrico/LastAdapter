@@ -4,7 +4,7 @@ import android.databinding.ObservableList
 import android.os.Looper
 import java.lang.ref.WeakReference
 
-class WeakReferenceOnListChangedCallback<T : Any>(val adapter: LastAdapter<T>)
+class WeakReferenceOnListChangedCallback<T : Any>(private val adapter: LastAdapter<T>)
 : ObservableList.OnListChangedCallback<ObservableList<T>>() {
 
     private val adapterRef = WeakReference<LastAdapter<T>>(adapter)
