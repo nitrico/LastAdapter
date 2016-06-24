@@ -15,6 +15,7 @@ android {
         enabled true 
     }
 }
+
 dependencies {
     compile 'com.github.nitrico.lastadapter:lastadapter:0.1.2'
 }
