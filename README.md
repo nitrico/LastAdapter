@@ -4,6 +4,17 @@
 # LastAdapter
 Don't write a RecyclerView adapter again. Not even a ViewHolder!
 
+## Features
+
+* Supports multiple item types
+* No need to write a RecyclerView.Adapter
+* No need to write any RecyclerView.ViewHolder
+* No need to notify changes on the adapter
+* No need to modify your model classes
+* Very fast - doesn't use reflection
+* Tiny size: 20 KB
+
+
 ## Usage
 
 #### Java
