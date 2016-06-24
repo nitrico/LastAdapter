@@ -7,9 +7,7 @@
 
 ## Usage
 
-#### Java
-
-Create your item layout using data binding. For example:
+Enable data binding in your project and create your item layouts in that way:
 
 ```xml
 <layout xmlns:android="http://schemas.android.com/apk/res/android" >
@@ -27,6 +25,8 @@ Create your item layout using data binding. For example:
 ```
 
 It is important that all the item types have the same variable name, in this case "item". This name is passed to the adapter builder as BR.variableName, in this case BR.item
+
+#### Java
 
 ```java
 LastAdapter.with(listOfItems, BR.item)
