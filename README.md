@@ -24,7 +24,7 @@ Enable data binding in your project and create your item layouts in that way:
 </layout>
 ```
 
-It is important that all the item types have the same variable name, in this case "item". This name is passed to the adapter builder as BR.variableName, in this case BR.item
+**It is important that all the item types have the same variable name**, in this case "item". This name is passed to the adapter builder as BR.variableName, in this case BR.item
 
 #### Java
 
@@ -45,6 +45,8 @@ LastAdapter.with(listOfItems, BR.item)
            .onBindListener(listener)           // optional
            .into(recyclerView)                 // or build() if you don't want to assign it yet
 ```
+
+----
 
 Use `.build()` method instead of `.into(recyclerView)` if you want to create the adapter but don't assign it to the RecyclerView yet. Both methods return the adapter.
 
