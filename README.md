@@ -3,7 +3,7 @@
 
 # LastAdapter
 
-###### Don't write a RecyclerView adapter again. Not even a ViewHolder!
+##### Don't write a RecyclerView adapter again. Not even a ViewHolder!
 
 ## Usage
 
@@ -13,15 +13,16 @@ Create your item layout using data binding. For example:
 
 ```xml
 <layout xmlns:android="http://schemas.android.com/apk/res/android" >
+
     <data>
         <variable name="item" type="com.github.nitrico.lastadapterproject.item.Header" />
     </data>
+    
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@{item.text}"
-        android:onClick="@{(v) -> item.onItemClick(v)}"
-        android:onLongClick="@{(v) -> item.onItemLongClick(v)}" />
+        android:text="@{item.text}" />
+        
 </layout>
 ```
 
