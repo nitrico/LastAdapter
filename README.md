@@ -37,7 +37,7 @@ LastAdapter.with(listOfItems, BR.item)
 
 If you want to create the adapter but not to assign it to the RecyclerView yet, you can use .build() method instead of .into(recyclerView). Both methods return the adapter.
 
-## Download
+## Setup
 
 #### Gradle
 
