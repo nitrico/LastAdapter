@@ -10,20 +10,20 @@ Don't write a RecyclerView adapter again. Not even a ViewHolder!
 
 ```java
 LastAdapter.with(Data.INSTANCE.getItems(), BR.item)
-                .map(Header.class, R.layout.item_header)
-                .map(Point.class, R.layout.item_point)
-                .onBindListener(this)
-                .into(list);
+           .map(Header.class, R.layout.item_header)
+           .map(Point.class, R.layout.item_point)
+           .onBindListener(this)
+           .into(list);
 ```
 
 #### Kotlin
 
 ```kotlin
 LastAdapter.with(Data.items, BR.item)
-                .map<Header>(R.layout.item_header)
-                .map<Point>(R.layout.item_point)
-                .onBindListener(this)
-                .into(list)
+           .map<Header>(R.layout.item_header)
+           .map<Point>(R.layout.item_point)
+           .onBindListener(this)
+           .into(list)
 ```
 
 
