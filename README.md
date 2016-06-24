@@ -9,34 +9,23 @@
 
 #### Java
 
-Create your layout using data binding. For example:
+Create your item layout using data binding. For example:
 
 ```xml
 <layout xmlns:android="http://schemas.android.com/apk/res/android" >
-
     <data>
-        <variable name="item" type="com.github.nitrico.lastadapterproject.item.Point" />
+        <variable name="item" type="com.github.nitrico.lastadapterproject.item.Header" />
     </data>
-
-    <LinearLayout
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:orientation="vertical"
-        android:onClick="@{(v) -> item.onItemClick(v)}" >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text='@{"" +item.x}' />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text='@{"" +item.y}' />
-    </LinearLayout>
-
+        android:text="@{item.text}"
+        android:onClick="@{(v) -> item.onItemClick(v)}"
+        android:onLongClick="@{(v) -> item.onItemLongClick(v)}" />
 </layout>
 ```
 
+It is important that all the item types have the same variable name, in this case "item". This name is passed to the adapter builder as BR.variableName, in this case BR.item
 
 ```java
 LastAdapter.with(listOfItems, BR.item)
