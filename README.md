@@ -6,12 +6,12 @@ Don't write a RecyclerView adapter again. Not even a ViewHolder!
 
 ## Features
 
-* Supports multiple item types
-* No need to write a RecyclerView.Adapter
-* No need to write any RecyclerView.ViewHolder
-* No need to notify changes on the adapter
-* No need to modify your model classes
-* Very fast - doesn't use reflection
+* Does it support multiple item types? Yes
+* Do I need to write a RecyclerView.Adapter? No
+* Do I need to write any RecyclerView.ViewHolder? No
+* Do I need to notify changes on the adapter? No
+* Do I No need to modify my model classes? No
+* Very fast / doesn't use reflection
 * Tiny size: 20 KB
 
 
@@ -35,7 +35,7 @@ LastAdapter.with(listOfItems, BR.item)
            .into(recyclerView)
 ```
 
-If you want to create the adapter but not to assign it to the RecyclerView yet, you can use .build() method instead of .into(recyclerView). Both methods return the adapter.
+If you want to create the adapter but not to assign it to the RecyclerView yet, you can use `.build()` method instead of `.into(recyclerView)`. Both methods return the adapter.
 
 ## Setup
 
