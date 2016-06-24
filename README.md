@@ -1,6 +1,6 @@
 [![Download](https://api.bintray.com/packages/moreno/maven/lastadapter/images/download.svg)](https://bintray.com/moreno/maven/lastadapter/_latestVersion)
-[![Kotlin](https://img.shields.io/badge/Kotlin-1.0.2-blue.svg)](http://kotlinlang.org)
-[![License](https://img.shields.io/:License-Apache-orange.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
+[![Kotlin](https://img.shields.io/badge/Kotlin-1.0.2-orange.svg)](http://kotlinlang.org)
+[![License](https://img.shields.io/:License-Apache-red.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
 # LastAdapter
 
