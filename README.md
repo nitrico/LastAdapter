@@ -9,21 +9,19 @@ Don't write a RecyclerView adapter again. Not even a ViewHolder!
 #### Java
 
 ```java
-LastAdapter.with(Data.INSTANCE.getItems(), BR.item)
+LastAdapter.with(listOfItems, BR.item)
            .map(Header.class, R.layout.item_header)
            .map(Point.class, R.layout.item_point)
-           .onBindListener(this)
-           .into(list);
+           .into(recyclerView);
 ```
 
 #### Kotlin
 
 ```kotlin
-LastAdapter.with(Data.items, BR.item)
-           .map<Header>(R.layout.item_header)
-           .map<Point>(R.layout.item_point)
-           .onBindListener(this)
-           .into(list)
+LastAdapter.with(listOfItems, BR.item)
+           .map(Header::class.java, R.layout.item_header)  // or even shorter: .map<Header>(R.layout.item_header)
+           .map(Point::class.java, R.layout.item_point)    // or .map<Point>(R.layout.item_point)
+           .into(recyclerView)
 ```
 
 
