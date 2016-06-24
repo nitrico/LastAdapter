@@ -46,6 +46,8 @@ LastAdapter.with(listOfItems, BR.item)
 
 ---
 
+The list of items can be an `ObservableList` if you want to get the adapter *automatically updated* when the its content changes, or a simple `List` if you don't need to use this feature.
+
 Use `.build()` method instead of `.into(recyclerView)` if you want to create the adapter but don't assign it to the RecyclerView yet. Both methods return the adapter.
 
 If there is any operation that you can't achieve through Data Binding, you can set an **OnBindListener** with `.onBindListener(listener)` before calling .build or .into()
