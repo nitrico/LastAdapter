@@ -3,7 +3,7 @@
 
 # LastAdapter
 
-##### Don't write a RecyclerView adapter again. Not even a ViewHolder!
+**Don't write a RecyclerView adapter again. Not even a ViewHolder!**
 
 ## Usage
 
@@ -46,7 +46,7 @@ LastAdapter.with(listOfItems, BR.item)
 
 ---
 
-The list of items can be an `ObservableList` if you want to get the adapter *automatically updated* when the its content changes, or a simple `List` if you don't need to use this feature.
+The list of items can be an `ObservableList` if you want to get the adapter **automatically updated** when the its content changes, or a simple `List` if you don't need to use this feature.
 
 Use `.build()` method instead of `.into(recyclerView)` if you want to create the adapter but don't assign it to the RecyclerView yet. Both methods return the adapter.
 
