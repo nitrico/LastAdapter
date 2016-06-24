@@ -2,18 +2,8 @@
 [![License](https://img.shields.io/:License-Apache-orange.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
 # LastAdapter
-Don't write a RecyclerView adapter again. Not even a ViewHolder!
 
-## Features
-
-* Does it support multiple item types? Yes
-* Do I need to write a RecyclerView.Adapter? No
-* Do I need to write any RecyclerView.ViewHolder? No
-* Do I need to notify changes on the adapter? No
-* Do I No need to modify my model classes? No
-* Very fast / doesn't use reflection
-* Tiny size: 20 KB
-
+###### Don't write a RecyclerView adapter again. Not even a ViewHolder!
 
 ## Usage
 
@@ -35,7 +25,9 @@ LastAdapter.with(listOfItems, BR.item)
            .into(recyclerView)
 ```
 
-If you want to create the adapter but not to assign it to the RecyclerView yet, you can use `.build()` method instead of `.into(recyclerView)`. Both methods return the adapter.
+Use `.build()` method instead of `.into(recyclerView)` if you want to create the adapter but don't assign it to the RecyclerView yet. Both methods return the adapter.
+
+If there is any operation that you can't achieve through Data Binding, you can set an **OnBindListener** with `.onBindListener(listener)` before calling .build or .into()
 
 ## Setup
 
