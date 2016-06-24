@@ -32,8 +32,7 @@ Enable data binding in your project and create your item layouts in that way:
 LastAdapter.with(listOfItems, BR.item)
            .map(Header.class, R.layout.item_header)
            .map(Point.class, R.layout.item_point)
-           .onBindListener(listener)  // optional                 
-           .into(recyclerView);       // or build() if you don't want to assign it yet
+           .into(recyclerView);
 ```
 
 #### Kotlin
@@ -42,11 +41,10 @@ LastAdapter.with(listOfItems, BR.item)
 LastAdapter.with(listOfItems, BR.item)
            .map<Header>(R.layout.item_header)  // or .map(Header::class.java, R.layout.item_header)
            .map<Point>(R.layout.item_point)    // or .map(Point::class.java, R.layout.item_point)
-           .onBindListener(listener)           // optional
-           .into(recyclerView)                 // or build() if you don't want to assign it yet
+           .into(recyclerView)
 ```
 
-----
+---
 
 Use `.build()` method instead of `.into(recyclerView)` if you want to create the adapter but don't assign it to the RecyclerView yet. Both methods return the adapter.
 
