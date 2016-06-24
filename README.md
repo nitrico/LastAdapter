@@ -30,8 +30,8 @@ LastAdapter.with(listOfItems, BR.item)
 
 ```kotlin
 LastAdapter.with(listOfItems, BR.item)
-           .map(Header::class.java, R.layout.item_header)  // or .map<Header>(R.layout.item_header)
-           .map(Point::class.java, R.layout.item_point)    // or .map<Point>(R.layout.item_point)
+           .map<Header>(R.layout.item_header)  // or .map(Header::class.java, R.layout.item_header)
+           .map<Point>(R.layout.item_point)    // or .map(Point::class.java, R.layout.item_point)
            .into(recyclerView)
 ```
 
