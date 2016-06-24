@@ -9,7 +9,7 @@ class WeakReferenceOnListChangedCallback<T : Any>(private val adapter: LastAdapt
 
     private val adapterRef = WeakReference<LastAdapter<T>>(adapter)
 
-    override fun onChanged(list: ObservableList<T>?) {
+    override fun onChanged(list: ObservableList<T>) {
         val adapter = adapterRef.get() ?: return
         ensureChangeOnMainThread()
         adapter.notifyDataSetChanged()

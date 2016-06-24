@@ -4,12 +4,8 @@ apply plugin: 'kotlin-android'
 android {
     compileSdkVersion vSdkTarget
     buildToolsVersion vBuildTools
-    defaultConfig {
-        minSdkVersion vSdkMin
-    }
-    dataBinding {
-        enabled true
-    }
+    defaultConfig { minSdkVersion vSdkMin }
+    dataBinding { enabled true }
 }
 
 dependencies {
@@ -18,8 +14,6 @@ dependencies {
     kapt "com.android.databinding:compiler:$vGradlePlugin"
 }
 
-kapt {
-    generateStubs = true
-}
+kapt { generateStubs = true }
 
 apply from: 'publish.gradle'

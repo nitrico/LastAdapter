@@ -6,11 +6,11 @@ def libGroup = 'com.github.nitrico.' + libName
 def libSite = 'https://github.com/nitrico/' + libName
 def libGit = libSite + '.git'
 def libTracker = libSite + '/issues'
-def libDesc = "Don't write any other RecyclerView adapter again. Nor even a ViewHolder!"
+def libDesc = "Don't write any other RecyclerView adapter again. Not even a ViewHolder!"
 def libTags = ['android', 'recyclerview', 'adapter', 'data binding', 'kotlin']
 
 group = libGroup
-version = '0.1.1'
+version = '0.1.2'
 
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
