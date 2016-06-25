@@ -14,9 +14,9 @@
 * No need to notify the adapter when data set changed
 * No need to modify your models
 * OnBindListeners
-* Super easy and fancy API
-* Tiny size: 20 KB
-* Min Android SDK: 7
+* Super easy API
+* Tiny size: **20 KB**
+* Min Android SDK: **7**
 
 ## Usage
 
