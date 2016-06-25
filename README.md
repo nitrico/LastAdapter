@@ -10,10 +10,10 @@
 * Written in [**Kotlin**](http://kotlinlang.org)
 * No need to write the adapter
 * No need to write the viewholders
-* No need to notify the adapter when data set changed
 * No need to modify your model classes
+* No need to notify the adapter when data set changed
 * Supports multiple view types
-* OnBindListener's
+* Optional OnBindListener's
 * Super easy API
 * Tiny size: **20 KB**
 * Minimum Android SDK: **7**
