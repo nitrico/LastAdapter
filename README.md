@@ -4,7 +4,14 @@
 
 # LastAdapter
 
-LastAdapter is an Android library that avoids you the need of writing adapters and viewholders when working with RecyclerView. It is based on [Data Binding](https://developer.android.com/topic/libraries/data-binding/index.html) and written in [Kotlin](http://kotlinlang.org).
+LastAdapter is an Android library that avoids you the need of writing adapters and viewholders when working with RecyclerView. 
+
+#### Features
+
+* Based on [Data Binding](https://developer.android.com/topic/libraries/data-binding/index.html)
+* Written in [Kotlin](http://kotlinlang.org)
+* Supports multiple view types
+* Tiny size: 20 KB
 
 ## Usage
 
