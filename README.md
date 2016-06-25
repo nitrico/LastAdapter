@@ -11,7 +11,7 @@
 * No need to write the adapter
 * No need to write the viewholders
 * No need to notify the adapter when data set changed
-* No need to modify your models
+* No need to modify your model classes
 * Supports multiple view types
 * OnBindListener's
 * Super easy API
