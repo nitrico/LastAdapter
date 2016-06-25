@@ -4,6 +4,8 @@
 
 # LastAdapter
 
+[![Join the chat at https://gitter.im/nitrico/LastAdapter](https://badges.gitter.im/nitrico/LastAdapter.svg)](https://gitter.im/nitrico/LastAdapter?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 LastAdapter is an Android library that avoids you the need of writing adapters and viewholders when working with RecyclerView. It is based on [Data Binding](https://developer.android.com/topic/libraries/data-binding/index.html) and written in [Kotlin](http://kotlinlang.org).
 
 ## Usage
