@@ -6,17 +6,17 @@
 
 **Don't write a RecyclerView adapter again. Not even a ViewHolder!**
 
-* Based on [**Data Binding**](https://developer.android.com/topic/libraries/data-binding/index.html)
+* Based on [**Android Data Binding**](https://developer.android.com/topic/libraries/data-binding/index.html)
 * Written in [**Kotlin**](http://kotlinlang.org)
 * Supports multiple view types
 * No need to write the adapter
 * No need to write the viewholders
 * No need to notify the adapter when data set changed
 * No need to modify your models
-* OnBindListeners
+* OnBindListener's
 * Super easy API
 * Tiny size: **20 KB**
-* Min Android SDK: **7**
+* Minimum Android SDK: **7**
 
 ## Usage
 
