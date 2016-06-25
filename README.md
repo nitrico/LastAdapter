@@ -83,9 +83,6 @@ dependencies {
 }
 ```
 
-## Acknowledgments
-
-Thanks to **Yigit Boyar** and **George Mount** for [this talk](https://realm.io/news/data-binding-android-boyar-mount/).
 
 ## Author
 
@@ -95,6 +92,11 @@ I'm open to new job positions - Contact me!
 
 |[Email](mailto:nitrico@gmail.com)|[Facebook](https://www.facebook.com/miguelangelmoreno)|[Google+](https://plus.google.com/+Miguel%C3%81ngelMorenoS)|[Linked.in](https://www.linkedin.com/in/morenomiguelangel)|[Twitter](https://twitter.com/nitrico/)
 |---|---|---|---|---|
+
+##### Acknowledgments
+
+Thanks to **Yigit Boyar** and **George Mount** for [this talk](https://realm.io/news/data-binding-android-boyar-mount/).
+
 
 ## License
 ```txt
