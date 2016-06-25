@@ -36,7 +36,7 @@ Enable data binding in your project and create your item layouts in that way:
 </layout>
 ```
 
-**It is important that all the item types have the same variable name**, in this case "item". 
+**It is important that all the item types have _the same variable name_**, in this case "item". 
 This name is passed to the adapter builder as BR.variableName, in this case BR.item:
 
 #### Java
