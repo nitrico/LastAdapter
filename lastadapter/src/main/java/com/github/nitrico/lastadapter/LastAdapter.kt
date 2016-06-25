@@ -12,7 +12,9 @@ import android.view.ViewGroup
 class LastAdapter<T : Any> private constructor(private val list: List<T>,
                                                private val variable: Int,
                                                private val map: Map<Class<*>, Int>,
-                                               private val listener: OnBindListener?)
+                                               private val onBind: OnBindListener?,
+                                               private val onClick: OnClickListener?,
+                                               private val onLongClick: OnLongClickListener?)
 : RecyclerView.Adapter<LastAdapter.ViewHolder>() {
 
     companion object {
@@ -23,30 +25,36 @@ class LastAdapter<T : Any> private constructor(private val list: List<T>,
     class Builder<T : Any> internal constructor(private val list: List<T>,
                                                 private val variable: Int) {
         private val map: MutableMap<Class<*>, Int> = mutableMapOf()
-        private var listener: OnBindListener? = null
+        private var onBind: OnBindListener? = null
+        private var onClick: OnClickListener? = null
+        private var onLongClick: OnLongClickListener? = null
         inline fun <reified T : Any> map(@LayoutRes layout: Int) = map(T::class.java, layout)
         fun map(clazz: Class<*>, @LayoutRes layout: Int) = apply { map.put(clazz, layout) }
-        fun onBindListener(listener: OnBindListener) = apply { this.listener = listener }
-        fun build() = LastAdapter(list, variable, map, listener)
-        fun into(recyclerView: RecyclerView): LastAdapter<T> {
-            val adapter = build()
-            recyclerView.adapter = adapter
-            return adapter
-        }
+        fun onBindListener(listener: OnBindListener) = apply { onBind = listener }
+        fun onClickListener(listener: OnClickListener) = apply { onClick = listener }
+        fun onLongClickListener(listener: OnLongClickListener) = apply { onLongClick = listener }
+        fun into(recyclerView: RecyclerView) = build().apply { recyclerView.adapter = this }
+        fun build() = LastAdapter(list, variable, map, onBind, onClick, onLongClick)
     }
 
 
-    interface OnBindListener {
-        fun onBind(item: Any, view: View, position: Int)
-    }
+    interface OnBindListener { fun onBind(item: Any, view: View, position: Int) }
+
+    interface OnClickListener { fun onClick(item: Any, view: View, position: Int) }
+
+    interface OnLongClickListener { fun onLongClick(item: Any, view: View, position: Int) }
 
 
     class ViewHolder(internal val binding: ViewDataBinding,
                      internal val variable: Int) : RecyclerView.ViewHolder(binding.root) {
-        fun bindTo(item: Any, listener: OnBindListener?, pos: Int) {
+        fun bindTo(item: Any, position: Int, onBind: OnBindListener?, onClick: OnClickListener?,
+                   onLongClick: OnLongClickListener?) {
             binding.setVariable(variable, item)
             binding.executePendingBindings()
-            listener?.onBind(item, binding.root, pos)
+            val view = binding.root
+            view.setOnClickListener { onClick?.onClick(item, view, position) }
+            view.setOnLongClickListener { onLongClick?.onLongClick(item, view, position); true }
+            onBind?.onBind(item, binding.root, position)
         }
     }
 
@@ -64,7 +72,9 @@ class LastAdapter<T : Any> private constructor(private val list: List<T>,
         return holder
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, pos: Int) = holder.bindTo(list[pos], listener, pos)
+    override fun onBindViewHolder(holder: ViewHolder, pos: Int) {
+        holder.bindTo(list[pos], pos, onBind, onClick, onLongClick)
+    }
 
     override fun onBindViewHolder(holder: ViewHolder, pos: Int, payloads: MutableList<Any>?) {
         if (isForDataBinding(payloads)) holder.binding.executePendingBindings()
@@ -74,7 +84,7 @@ class LastAdapter<T : Any> private constructor(private val list: List<T>,
     override fun getItemCount() = list.size
 
     override fun getItemViewType(i: Int) = map[list[i].javaClass]
-            ?: throw RuntimeException("Invalid object at position: $i: ${list[i]}")
+            ?: throw RuntimeException("Invalid object at position $i: ${list[i]}")
 
     override fun onAttachedToRecyclerView(rv: RecyclerView?) {
         if (recyclerView == null && list is ObservableList) list.addOnListChangedCallback(onListChanged)

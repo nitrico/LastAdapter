@@ -13,17 +13,10 @@ public class JavaListFragment extends ListFragment implements LastAdapter.OnBind
 
     public JavaListFragment() { }
 
-    private RecyclerView list;
-
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        list = (RecyclerView) view.findViewById(R.id.list);
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+        RecyclerView list = (RecyclerView) view.findViewById(R.id.list);
 
         LastAdapter.with(Data.INSTANCE.getItems(), BR.item)
                 .map(Header.class, R.layout.item_header)

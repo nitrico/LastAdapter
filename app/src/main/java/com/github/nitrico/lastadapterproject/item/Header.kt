@@ -6,11 +6,11 @@ import android.widget.Toast
 class Header(val text: String) {
 
     fun onItemClick(v: View) {
-        Toast.makeText(v.context, "Header clicked: $text", Toast.LENGTH_SHORT).show()
+        Toast.makeText(v.context, "Click on Header $text", Toast.LENGTH_SHORT).show()
     }
 
     fun onItemLongClick(v: View): Boolean {
-        Toast.makeText(v.context, "Header long clicked: $text", Toast.LENGTH_SHORT).show()
+        Toast.makeText(v.context, "Long click on Header $text", Toast.LENGTH_SHORT).show()
         return true
     }
 

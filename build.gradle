@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        vSdkMin = 16
+        vSdkMin = 7
         vSdkTarget = 24
         vBuildTools = '24.0.0'
         vGradlePlugin = '2.1.2'

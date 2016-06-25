@@ -11,7 +11,7 @@
         android:background="@android:color/darker_gray"
         android:orientation="vertical"
         android:text="@{item.text}"
-        android:onClick="@{(v) -> item.onItemClick(v)}"
-        android:onLongClick="@{(v) -> item.onItemLongClick(v)}" />
+        android:onClick="@{v -> item.onItemClick(v)}"
+        android:onLongClick="@{v -> item.onItemLongClick(v)}" />
 
 </layout>

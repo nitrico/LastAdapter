@@ -1,6 +1,5 @@
 <layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" >
+    xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <data>
         <variable name="item" type="com.github.nitrico.lastadapterproject.item.Point" />
@@ -11,8 +10,8 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:orientation="vertical"
-        android:onClick="@{(v) -> item.onItemClick(v)}"
-        android:onLongClick="@{(v) -> item.onItemLongClick(v)}" >
+        android:onClick="@{v -> item.onItemClick(v)}"
+        android:onLongClick="@{v -> item.onItemLongClick(v)}" >
 
         <TextView
             android:layout_width="wrap_content"
