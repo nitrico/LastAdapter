@@ -15,15 +15,14 @@ class LastAdapter<T : Any> private constructor(private val list: List<T>,
                                                private val onBind: OnBindListener?,
                                                private val onClick: OnClickListener?,
                                                private val onLongClick: OnLongClickListener?)
-: RecyclerView.Adapter<LastAdapter.ViewHolder>() {
+: RecyclerView.Adapter<LastAdapter<T>.ViewHolder>() {
 
     companion object {
         @JvmStatic fun <T : Any> with(list: List<T>, variable: Int) = Builder(list, variable)
     }
 
     @Keep
-    class Builder<T : Any> internal constructor(private val list: List<T>,
-                                                private val variable: Int) {
+    class Builder<T : Any> internal constructor(private val list: List<T>, private val variable: Int) {
         private val map: MutableMap<Class<*>, Int> = mutableMapOf()
         private var onBind: OnBindListener? = null
         private var onClick: OnClickListener? = null
@@ -45,10 +44,10 @@ class LastAdapter<T : Any> private constructor(private val list: List<T>,
     interface OnLongClickListener { fun onLongClick(item: Any, view: View, position: Int) }
 
 
-    class ViewHolder(internal val binding: ViewDataBinding,
-                     internal val variable: Int) : RecyclerView.ViewHolder(binding.root) {
-        fun bindTo(item: Any, position: Int, onBind: OnBindListener?, onClick: OnClickListener?,
-                   onLongClick: OnLongClickListener?) {
+    inner class ViewHolder(internal val binding: ViewDataBinding,
+                           internal val variable: Int) : RecyclerView.ViewHolder(binding.root) {
+        fun bindTo(item: Any, position: Int/*, onBind: OnBindListener?, onClick: OnClickListener?,
+                   onLongClick: OnLongClickListener?*/) {
             binding.setVariable(variable, item)
             binding.executePendingBindings()
             val view = binding.root
@@ -73,7 +72,7 @@ class LastAdapter<T : Any> private constructor(private val list: List<T>,
     }
 
     override fun onBindViewHolder(holder: ViewHolder, pos: Int) {
-        holder.bindTo(list[pos], pos, onBind, onClick, onLongClick)
+        holder.bindTo(list[pos], pos/*, onBind, onClick, onLongClick*/)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, pos: Int, payloads: MutableList<Any>?) {
