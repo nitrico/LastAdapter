@@ -12,6 +12,7 @@ LastAdapter is an Android library that avoids you the need of writing adapters a
 * Written in [Kotlin](http://kotlinlang.org)
 * Supports multiple view types
 * Tiny size: 20 KB
+* Min SDK: 7
 
 ## Usage
 
