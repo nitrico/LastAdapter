@@ -8,11 +8,11 @@
 
 * Based on [**Android Data Binding**](https://developer.android.com/topic/libraries/data-binding/index.html)
 * Written in [**Kotlin**](http://kotlinlang.org)
-* Supports multiple view types
 * No need to write the adapter
 * No need to write the viewholders
 * No need to notify the adapter when data set changed
 * No need to modify your models
+* Supports multiple view types
 * OnBindListener's
 * Super easy API
 * Tiny size: **20 KB**
