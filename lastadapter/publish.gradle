@@ -10,7 +10,7 @@ def libDesc = "Don't write any other RecyclerView adapter again. Not even a View
 def libTags = ['android', 'recyclerview', 'adapter', 'data binding', 'kotlin']
 
 group = libGroup
-version = '0.1.3'
+version = '0.1.4'
 
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
