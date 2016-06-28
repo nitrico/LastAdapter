@@ -15,7 +15,7 @@
 * Supports multiple view types
 * Optional OnBindListener's
 * Super easy API
-* Tiny size: **20 KB**
+* Tiny size: **25 KB**
 * Minimum Android SDK: **7**
 
 ## Usage
@@ -66,6 +66,35 @@ Use `.build()` method instead of `.into(recyclerView)` if you want to create the
 
 If there is any operation that you can't achieve through Data Binding, you can set an **OnBindListener** with `.onBindListener(listener)` before calling .build or .into()
 
+#### LayoutHandler
+
+The LayoutHandler interface allows you to use different layouts based on more complex criteria. Its one single method receives the item and the position and returns the layout resource id.
+
+```java
+LastAdapter.with(listOfItems, BR.item)
+           .layoutHandler(handler)
+           .into(recyclerView);
+
+// Java sample
+private LastAdapter.LayoutHandler handler = new LastAdapter.LayoutHandler() {
+    @Override public int getItemLayout(@NotNull Object item, int index) {
+        if (item instanceof Header) {
+            if (index == 0) return R.layout.item_header;
+            else return R.layout.item_header_first;
+        }
+        else return R.layout.item_point;
+    }
+};
+
+// Kotlin sample
+private val handler = object: LastAdapter.LayoutHandler {
+    override fun getItemLayout(item: Any, index: Int) = when (item) {
+        is Header -> if (index == 0) R.layout.item_header_first else R.layout.item_header_first
+        else -> R.layout.item_point
+    }
+}
+```
+
 ## Setup
 
 #### Gradle
@@ -79,7 +108,7 @@ android {
 }
 
 dependencies {
-    compile 'com.github.nitrico.lastadapter:lastadapter:0.1.2'
+    compile 'com.github.nitrico.lastadapter:lastadapter:0.1.7'
 }
 ```
 
@@ -97,6 +126,7 @@ I'm open to new job positions - Contact me!
 |---|---|---|---|---|
 
 ## License
+
 ```txt
 Copyright 2016 Miguel Ángel Moreno
 
