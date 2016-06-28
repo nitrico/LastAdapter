@@ -74,7 +74,8 @@ The LayoutHandler interface allows you to use different layouts based on more co
 LastAdapter.with(listOfItems, BR.item)
            .layoutHandler(handler)
            .into(recyclerView);
-
+```
+```java
 // Java sample
 private LastAdapter.LayoutHandler handler = new LastAdapter.LayoutHandler() {
     @Override public int getItemLayout(@NotNull Object item, int index) {
@@ -85,7 +86,8 @@ private LastAdapter.LayoutHandler handler = new LastAdapter.LayoutHandler() {
         else return R.layout.item_point;
     }
 };
-
+```
+```kotlin
 // Kotlin sample
 private val handler = object: LastAdapter.LayoutHandler {
     override fun getItemLayout(item: Any, index: Int) = when (item) {
