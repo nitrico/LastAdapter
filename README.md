@@ -89,7 +89,7 @@ private LastAdapter.LayoutHandler handler = new LastAdapter.LayoutHandler() {
 // Kotlin sample
 private val handler = object: LastAdapter.LayoutHandler {
     override fun getItemLayout(item: Any, index: Int) = when (item) {
-        is Header -> if (index == 0) R.layout.item_header_first else R.layout.item_header_first
+        is Header -> if (index == 0) R.layout.item_header_first else R.layout.item_header
         else -> R.layout.item_point
     }
 }
