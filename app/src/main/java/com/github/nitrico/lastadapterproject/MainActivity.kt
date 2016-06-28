@@ -1,10 +1,14 @@
 package com.github.nitrico.lastadapterproject
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
+import android.view.Menu
+import android.view.MenuItem
+import com.github.nitrico.lastadapterproject.item.Header
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -13,6 +17,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         pager.adapter = ViewPagerAdapter(supportFragmentManager)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.add -> { Data.items.add(0, Header("New Header")); true }
+        //R.id.pager -> { startActivity(Intent(this, PagerActivity::class.java)); true }
+        else -> super.onOptionsItemSelected(item)
     }
 
     class ViewPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {

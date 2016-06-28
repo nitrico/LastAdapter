@@ -19,6 +19,13 @@ public class JavaListFragment extends ListFragment implements LastAdapter.OnBind
         RecyclerView list = (RecyclerView) view.findViewById(R.id.list);
 
         LastAdapter.with(Data.INSTANCE.getItems(), BR.item)
+                /*.layoutHandler(new LastAdapter.LayoutHandler() {
+                    @Override
+                    public int getItemLayout(@NotNull Object item, int index) {
+                        if (item instanceof Header) return R.layout.item_header;
+                        else return R.layout.item_point;
+                    }
+                })*/
                 .map(Header.class, R.layout.item_header)
                 .map(Point.class, R.layout.item_point)
                 .onBindListener(this)

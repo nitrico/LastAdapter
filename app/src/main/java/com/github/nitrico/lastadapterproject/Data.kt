@@ -2,11 +2,13 @@ package com.github.nitrico.lastadapterproject
 
 import android.databinding.ObservableArrayList
 import com.github.nitrico.lastadapterproject.item.Header
+import com.github.nitrico.lastadapterproject.item.Page
 import com.github.nitrico.lastadapterproject.item.Point
 
 object Data {
 
     val items = ObservableArrayList<Any>()
+    val pages = ObservableArrayList<Any>()
 
     init {
         with(items) {
@@ -30,6 +32,12 @@ object Data {
             add(Point(5, 3))
             add(Point(5, 4))
             add(Point(5, 5))
+        }
+        with(pages) {
+            add(Page("1"))
+            add(Page("2"))
+            add(Page("3"))
+            add(Page("4"))
         }
     }
 
