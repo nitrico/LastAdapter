@@ -61,19 +61,14 @@ class LastAdapter<T : Any> private constructor(private val list: List<T>,
 
     class ViewHolder(internal val binding: ViewDataBinding,
                      internal val variable: Int) : RecyclerView.ViewHolder(binding.root) {
-        fun bindTo(item: Any, position: Int, onBind: OnBindListener?, onClick: OnClickListener?,
+        fun bindTo(item: Any, i: Int, onBind: OnBindListener?, onClick: OnClickListener?,
                    onLongClick: OnLongClickListener?) {
             binding.setVariable(variable, item)
             binding.executePendingBindings()
-            val view = binding.root
-            if (onClick != null) view.setOnClickListener {
-                onClick.onClick(item, view, position)
-            }
-            if (onLongClick != null) view.setOnLongClickListener {
-                onLongClick.onLongClick(item, view, position)
-                true
-            }
-            onBind?.onBind(item, binding.root, position)
+            val v = binding.root
+            if (onClick != null) v.setOnClickListener { onClick.onClick(item, v, i) }
+            if (onLongClick != null) v.setOnLongClickListener { onLongClick.onLongClick(item, v, i); true }
+            onBind?.onBind(item, v, i)
         }
     }
 
@@ -91,8 +86,8 @@ class LastAdapter<T : Any> private constructor(private val list: List<T>,
         return holder
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, pos: Int) {
-        holder.bindTo(list[pos], pos, onBind, onClick, onLongClick)
+    override fun onBindViewHolder(holder: ViewHolder, i: Int) {
+        holder.bindTo(list[i], i, onBind, onClick, onLongClick)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, pos: Int, payloads: MutableList<Any>?) {

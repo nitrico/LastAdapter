@@ -32,7 +32,6 @@ class KotlinListFragment : ListFragment(),
     }
 
     override fun onBind(item: Any, view: View, position: Int) {
-        //if (item is Header) (view as TextView).text = "$position"
         println("onBind position $position: $item")
     }
 

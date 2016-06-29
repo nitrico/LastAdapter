@@ -13,21 +13,27 @@ public class JavaListFragment extends ListFragment implements LastAdapter.OnBind
 
     public JavaListFragment() { }
 
+    /*
+    public LastAdapter.LayoutHandler handler = new LastAdapter.LayoutHandler() {
+        @Override public int getItemLayout(@NotNull Object item, int index) {
+            if (item instanceof Header) {
+                if (index == 0) return R.layout.item_header;
+                else return R.layout.item_header_first;
+            }
+            else return R.layout.item_point;
+        }
+    };
+    */
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         RecyclerView list = (RecyclerView) view.findViewById(R.id.list);
 
         LastAdapter.with(Data.INSTANCE.getItems(), BR.item)
-                /*.layoutHandler(new LastAdapter.LayoutHandler() {
-                    @Override
-                    public int getItemLayout(@NotNull Object item, int index) {
-                        if (item instanceof Header) return R.layout.item_header;
-                        else return R.layout.item_point;
-                    }
-                })*/
                 .map(Header.class, R.layout.item_header)
                 .map(Point.class, R.layout.item_point)
+                //.layoutHandler(handler)
                 .onBindListener(this)
                 .into(list);
     }
