@@ -57,7 +57,6 @@ LastAdapter.with(listOfItems, BR.item)
            .map<Point>(R.layout.item_point)    // or .map(Point::class.java, R.layout.item_point)
            .into(recyclerView)
 ```
-
 ---
 
 The list of items can be an `ObservableList` if you want to get the adapter **automatically updated** when its content changes, or a simple `List` if you don't need to use this feature.
@@ -65,6 +64,8 @@ The list of items can be an `ObservableList` if you want to get the adapter **au
 Use `.build()` method instead of `.into(recyclerView)` if you want to create the adapter but don't assign it to the RecyclerView yet. Both methods return the adapter.
 
 If there is any operation that you can't achieve through Data Binding, you can set an **OnBindListener** with `.onBindListener(listener)` before calling .build or .into()
+
+You might want to try [**FontBinder**](https://github.com/nitrico/FontBinder) to easily use custom fonts to your XML layouts.
 
 #### LayoutHandler
 
@@ -110,7 +111,7 @@ android {
 }
 
 dependencies {
-    compile 'com.github.nitrico.lastadapter:lastadapter:0.1.7'
+    compile 'com.github.nitrico.lastadapter:lastadapter:1.0.0'
 }
 ```
 
