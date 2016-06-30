@@ -65,8 +65,6 @@ Use `.build()` method instead of `.into(recyclerView)` if you want to create the
 
 If there is any operation that you can't achieve through Data Binding, you can set an **OnBindListener** with `.onBindListener(listener)` before calling .build or .into()
 
-You might want to try [**FontBinder**](https://github.com/nitrico/FontBinder) to easily use custom fonts to your XML layouts.
-
 #### LayoutHandler
 
 The LayoutHandler interface allows you to use different layouts based on more complex criteria. Its one single method receives the item and the position and returns the layout resource id.
@@ -97,6 +95,10 @@ private val handler = object: LastAdapter.LayoutHandler {
     }
 }
 ```
+
+#### Custom fonts
+
+You might also want to try [**FontBinder**](https://github.com/nitrico/FontBinder) to easily use custom fonts in your XML layouts.
 
 ## Setup
 
