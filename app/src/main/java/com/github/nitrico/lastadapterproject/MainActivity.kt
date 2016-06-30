@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.add -> { Data.items.add(0, Header("New Header")); true }
-        //R.id.pager -> { startActivity(Intent(this, PagerActivity::class.java)); true }
         else -> super.onOptionsItemSelected(item)
     }
 

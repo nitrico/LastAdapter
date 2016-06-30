@@ -43,7 +43,7 @@ class LastAdapter<T : Any> private constructor(private val list: List<T>,
     }
 
     interface LayoutHandler {
-        @LayoutRes fun getItemLayout(item: Any, index: Int): Int
+        @LayoutRes fun getItemLayout(item: Any, position: Int): Int
     }
 
     interface OnBindListener {
