@@ -81,8 +81,8 @@ LastAdapter.with(listOfItems, BR.item)
 private LastAdapter.LayoutHandler handler = new LastAdapter.LayoutHandler() {
     @Override public int getItemLayout(@NotNull Object item, int index) {
         if (item instanceof Header) {
-            if (index == 0) return R.layout.item_header;
-            else return R.layout.item_header_first;
+            if (index == 0) return R.layout.item_header_first;
+            else return R.layout.item_header;
         }
         else return R.layout.item_point;
     }
