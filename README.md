@@ -79,20 +79,20 @@ LastAdapter.with(listOfItems, BR.item)
 ```java
 // Java sample
 private LastAdapter.LayoutHandler handler = new LastAdapter.LayoutHandler() {
-    @Override public int getItemLayout(@NotNull Object item, int index) {
+    @Override public int getItemLayout(@NotNull Object item, int position) {
         if (item instanceof Header) {
-            if (index == 0) return R.layout.item_header_first;
-            else return R.layout.item_header;
+            return (position == 0) ? R.layout.item_header_first : R.layout.item_header;
+        } else {
+            return R.layout.item_point;
         }
-        else return R.layout.item_point;
     }
 };
 ```
 ```kotlin
 // Kotlin sample
 private val handler = object: LastAdapter.LayoutHandler {
-    override fun getItemLayout(item: Any, index: Int) = when (item) {
-        is Header -> if (index == 0) R.layout.item_header_first else R.layout.item_header
+    override fun getItemLayout(item: Any, position: Int) = when (item) {
+        is Header -> if (position == 0) R.layout.item_header_first else R.layout.item_header
         else -> R.layout.item_point
     }
 }
