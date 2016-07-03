@@ -4,7 +4,7 @@ buildscript {
         vSdkTarget = 24
         vBuildTools = '24.0.0'
         vGradlePlugin = '2.1.2'
-        vKotlin = '1.0.2-1'
+        vKotlin = '1.0.3'
         vSupport = '24.0.0'
     }
     repositories {
