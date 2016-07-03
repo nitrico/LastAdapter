@@ -17,6 +17,7 @@
 * Supports multiple view types
 * Optional OnBindListener's
 * Set item click/long-click listeners in the layout or in the adapter creation
+* Very fast — no reflection
 * Super easy API
 * Tiny size: **30 KB**
 * Minimum Android SDK: **7**
