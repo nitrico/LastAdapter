@@ -96,8 +96,7 @@ private LastAdapter.LayoutHandler handler = new LastAdapter.LayoutHandler() {
 ```kotlin
 // Kotlin sample
 LastAdapter.with(listOfItems, BR.item).layout { 
-    // 'item: Any' and 'position: Int' are available inside the lambda
-    when(item) {
+    when (item) { // 'item: Any' and 'position: Int' are available inside the lambda
         is Header -> if (position == 0) R.layout.item_header_first else R.layout.item_header
         else -> R.layout.item_point 
     }
