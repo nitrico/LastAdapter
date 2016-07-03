@@ -120,7 +120,7 @@ android {
 }
 
 dependencies {
-    compile 'com.github.nitrico.lastadapter:lastadapter:1.1.0'
+    compile 'com.github.nitrico.lastadapter:lastadapter:1.1.1'
 }
 ```
 
