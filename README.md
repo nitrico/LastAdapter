@@ -61,6 +61,7 @@ LastAdapter.with(listOfItems, BR.item)
 LastAdapter.with(listOfItems, BR.item)
            .map<Header>(R.layout.item_header)  // or .map(Header::class.java, R.layout.item_header)
            .map<Point>(R.layout.item_point)    // or .map(Point::class.java, R.layout.item_point)
+           // 'item: Any', 'position: Int' and 'view: View' are available inside the lambdas
            .onBind { println("binded view $view at position $position: $item") }             // Optional
            .onClick { println("clicked view $view at position $position: $item") }           // Optional
            .onLongClick { println("long-clicked view $view at position $position: $item") }  // Optional
@@ -95,6 +96,7 @@ private LastAdapter.LayoutHandler handler = new LastAdapter.LayoutHandler() {
 ```kotlin
 // Kotlin sample
 LastAdapter.with(listOfItems, BR.item).layout { 
+    // 'item: Any' and 'position: Int' are available inside the lambda
     when(item) {
         is Header -> if (position == 0) R.layout.item_header_first else R.layout.item_header
         else -> R.layout.item_point 
