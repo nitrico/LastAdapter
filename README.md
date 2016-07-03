@@ -1,5 +1,5 @@
 [![Download](https://api.bintray.com/packages/moreno/maven/lastadapter/images/download.svg)](https://bintray.com/moreno/maven/lastadapter/_latestVersion)
-[![Size](https://img.shields.io/badge/Size-25 KB-e91e63.svg)](http://www.methodscount.com/?lib=com.github.nitrico.lastadapter%3Alastadapter%3A%2B)
+[![Size](https://img.shields.io/badge/Size-30 KB-e91e63.svg)](http://www.methodscount.com/?lib=com.github.nitrico.lastadapter%3Alastadapter%3A%2B)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-LastAdapter-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/3810)
 [![License](https://img.shields.io/:License-Apache 2.0-orange.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 [![Gitter](https://badges.gitter.im/nitrico/LastAdapter.svg)](https://gitter.im/nitrico/LastAdapter?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
@@ -16,8 +16,9 @@
 * No need to notify the adapter when data set changed
 * Supports multiple view types
 * Optional OnBindListener's
+* Set item click/long-click listeners in the layout or in the adapter creation
 * Super easy API
-* Tiny size: **25 KB**
+* Tiny size: **30 KB**
 * Minimum Android SDK: **7**
 
 ## Usage
@@ -48,6 +49,9 @@ This name is passed to the adapter builder as BR.variableName, in this case BR.i
 LastAdapter.with(listOfItems, BR.item)
            .map(Header.class, R.layout.item_header)
            .map(Point.class, R.layout.item_point)
+           .onBindListener(this)       // Optional. 'this' is LastAdapter.OnBindListener
+           .onClickListener(this)      // Optional. 'this' is LastAdapter.OnClickListener
+           .onLongClickListener(this)  // Optional. 'this' is LastAdapter.OnLongClickListener
            .into(recyclerView);
 ```
 
@@ -57,6 +61,9 @@ LastAdapter.with(listOfItems, BR.item)
 LastAdapter.with(listOfItems, BR.item)
            .map<Header>(R.layout.item_header)  // or .map(Header::class.java, R.layout.item_header)
            .map<Point>(R.layout.item_point)    // or .map(Point::class.java, R.layout.item_point)
+           .onBind { println("binded view $view at position $position: $item") }             // Optional
+           .onClick { println("clicked view $view at position $position: $item") }           // Optional
+           .onLongClick { println("long-clicked view $view at position $position: $item") }  // Optional
            .into(recyclerView)
 ```
 ---
@@ -65,19 +72,16 @@ The list of items can be an `ObservableList` if you want to get the adapter **au
 
 Use `.build()` method instead of `.into(recyclerView)` if you want to create the adapter but don't assign it to the RecyclerView yet. Both methods return the adapter.
 
-If there is any operation that you can't achieve through Data Binding, you can set an **OnBindListener** with `.onBindListener(listener)` before calling .build or .into()
-
 #### LayoutHandler
 
 The LayoutHandler interface allows you to use different layouts based on more complex criteria. Its one single method receives the item and the position and returns the layout resource id.
 
 ```java
+// Java sample
 LastAdapter.with(listOfItems, BR.item)
            .layoutHandler(handler)
            .into(recyclerView);
-```
-```java
-// Java sample
+
 private LastAdapter.LayoutHandler handler = new LastAdapter.LayoutHandler() {
     @Override public int getItemLayout(@NotNull Object item, int position) {
         if (item instanceof Header) {
@@ -90,12 +94,12 @@ private LastAdapter.LayoutHandler handler = new LastAdapter.LayoutHandler() {
 ```
 ```kotlin
 // Kotlin sample
-private val handler = object: LastAdapter.LayoutHandler {
-    override fun getItemLayout(item: Any, position: Int) = when (item) {
+LastAdapter.with(listOfItems, BR.item).layout { 
+    when(item) {
         is Header -> if (position == 0) R.layout.item_header_first else R.layout.item_header
-        else -> R.layout.item_point
+        else -> R.layout.item_point 
     }
-}
+}.into(recyclerView)
 ```
 
 #### Custom fonts
@@ -115,7 +119,7 @@ android {
 }
 
 dependencies {
-    compile 'com.github.nitrico.lastadapter:lastadapter:1.0.0'
+    compile 'com.github.nitrico.lastadapter:lastadapter:1.1.0'
 }
 ```
 
