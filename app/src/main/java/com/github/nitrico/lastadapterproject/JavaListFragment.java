@@ -3,6 +3,7 @@ package com.github.nitrico.lastadapterproject;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Toast;
 import com.github.nitrico.lastadapter.LastAdapter;
 import com.github.nitrico.lastadapterproject.item.Header;
 import com.github.nitrico.lastadapterproject.item.Point;
@@ -47,12 +48,12 @@ public class JavaListFragment extends ListFragment implements LastAdapter.Layout
 
     @Override
     public void onClick(@NotNull Object item, @NotNull View view, int position) {
-        System.out.println("onClick position " +position +": " +item);
+        Toast.makeText(getActivity(), "onClick position " +position +": " +item, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onLongClick(@NotNull Object item, @NotNull View view, int position) {
-        System.out.println("onLongClick position " +position +": " +item);
+        Toast.makeText(getActivity(), "onLongClick position " +position +": " +item, Toast.LENGTH_SHORT).show();
     }
 
 }

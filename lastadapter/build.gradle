@@ -9,7 +9,6 @@ android {
 }
 
 dependencies {
-    //compile "com.android.support:appcompat-v7:$vSupport"
     compile "com.android.support:recyclerview-v7:$vSupport"
     compile "org.jetbrains.kotlin:kotlin-stdlib:$vKotlin"
     kapt "com.android.databinding:compiler:$vGradlePlugin"
