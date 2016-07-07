@@ -43,8 +43,6 @@ dependencies {
 
 ## Usage
 
-Enable data binding in your project and create your item layouts in that way:
-
 ```xml
 <layout xmlns:android="http://schemas.android.com/apk/res/android" >
 
