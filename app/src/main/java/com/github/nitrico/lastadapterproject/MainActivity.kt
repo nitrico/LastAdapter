@@ -2,7 +2,6 @@ package com.github.nitrico.lastadapterproject
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import android.view.Menu
@@ -30,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 
     class ViewPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
         override fun getCount() = 2
-        override fun getItem(i: Int): Fragment = if (i == 0) KotlinListFragment() else JavaListFragment()
+        override fun getItem(i: Int) = if (i==0) KotlinListFragment() else JavaListFragment()
     }
 
 }

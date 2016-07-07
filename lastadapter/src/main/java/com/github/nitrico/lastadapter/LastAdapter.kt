@@ -11,21 +11,21 @@ import android.view.ViewGroup
 import java.lang.ref.WeakReference
 
 @Keep
-class LastAdapter<T : Any> private constructor(private val list: List<T>,
-                                               private val variable: Int,
-                                               private val map: Map<Class<*>, Int>,
-                                               private val handler: LayoutHandler?,
-                                               private val onBind: OnBindListener?,
-                                               private val onClick: OnClickListener?,
-                                               private val onLongClick: OnLongClickListener?)
+class LastAdapter<T: Any> private constructor(private val list: List<T>,
+                                              private val variable: Int,
+                                              private val map: Map<Class<*>, Int>,
+                                              private val handler: LayoutHandler?,
+                                              private val onBind: OnBindListener?,
+                                              private val onClick: OnClickListener?,
+                                              private val onLongClick: OnLongClickListener?)
 : RecyclerView.Adapter<LastAdapter.ViewHolder>() {
 
     companion object {
-        @JvmStatic fun <T : Any> with(list: List<T>, variable: Int) = Builder(list, variable)
+        @JvmStatic fun <T: Any> with(list: List<T>, variable: Int) = Builder(list, variable)
     }
 
     @Keep
-    class Builder<T : Any> internal constructor(private val list: List<T>, private val variable: Int) {
+    class Builder<T: Any> internal constructor(private val list: List<T>, private val variable: Int) {
 
         private val map: MutableMap<Class<*>, Int> = mutableMapOf()
         private var handler: LayoutHandler? = null
@@ -33,9 +33,11 @@ class LastAdapter<T : Any> private constructor(private val list: List<T>,
         private var onClick: OnClickListener? = null
         private var onLongClick: OnLongClickListener? = null
 
-        inline fun <reified T : Any> map(@LayoutRes layout: Int) = map(T::class.java, layout)
-
         fun map(clazz: Class<*>, @LayoutRes layout: Int) = apply { map.put(clazz, layout) }
+
+        inline fun <reified T: Any> map(@LayoutRes layout: Int) = map(T::class.java, layout)
+
+        fun layoutHandler(layoutHandler: LayoutHandler) = apply { handler = layoutHandler }
 
         inline fun layout(crossinline f: ItemPosition.() -> Int) = apply {
             layoutHandler(object : LayoutHandler {
@@ -44,7 +46,7 @@ class LastAdapter<T : Any> private constructor(private val list: List<T>,
             })
         }
 
-        fun layoutHandler(layoutHandler: LayoutHandler) = apply { handler = layoutHandler }
+        fun onBindListener(listener: OnBindListener) = apply { onBind = listener }
 
         inline fun onBind(crossinline f: ItemViewPosition.() -> Unit) = apply {
             onBindListener(object : OnBindListener {
@@ -53,7 +55,7 @@ class LastAdapter<T : Any> private constructor(private val list: List<T>,
             })
         }
 
-        fun onBindListener(listener: OnBindListener) = apply { onBind = listener }
+        fun onClickListener(listener: OnClickListener) = apply { onClick = listener }
 
         inline fun onClick(crossinline f: ItemViewPosition.() -> Unit) = apply {
             onClickListener(object : OnClickListener {
@@ -62,7 +64,7 @@ class LastAdapter<T : Any> private constructor(private val list: List<T>,
             })
         }
 
-        fun onClickListener(listener: OnClickListener) = apply { onClick = listener }
+        fun onLongClickListener(listener: OnLongClickListener) = apply { onLongClick = listener }
 
         inline fun onLongClick(crossinline f: ItemViewPosition.() -> Unit) = apply {
             onLongClickListener(object : OnLongClickListener {
@@ -70,8 +72,6 @@ class LastAdapter<T : Any> private constructor(private val list: List<T>,
                         = ItemViewPosition(item, view, position).f()
             })
         }
-
-        fun onLongClickListener(listener: OnLongClickListener) = apply { onLongClick = listener }
 
         fun into(recyclerView: RecyclerView) = build().apply { recyclerView.adapter = this }
 
@@ -102,23 +102,16 @@ class LastAdapter<T : Any> private constructor(private val list: List<T>,
     }
 
 
-    class ViewHolder(internal val binding: ViewDataBinding, internal val variable: Int)
+    class ViewHolder(internal val binding: ViewDataBinding, private val variable: Int)
     : RecyclerView.ViewHolder(binding.root) {
 
-        fun bindTo(item: Any, pos: Int, onBind: OnBindListener?, onClick: OnClickListener?,
-                   onLongClick: OnLongClickListener?) {
-
+        fun bindTo(item: Any, pos: Int, b: OnBindListener?, c: OnClickListener?, l: OnLongClickListener?) {
             binding.setVariable(variable, item)
             binding.executePendingBindings()
             val view = binding.root
-
-            if (onClick != null) view.setOnClickListener {
-                onClick.onClick(item, view, pos)
-            }
-            if (onLongClick != null) view.setOnLongClickListener {
-                onLongClick.onLongClick(item, view, pos); true
-            }
-            onBind?.onBind(item, view, pos)
+            if (c != null) view.setOnClickListener { c.onClick(item, view, pos) }
+            if (l != null) view.setOnLongClickListener { l.onLongClick(item, view, pos); true }
+            b?.onBind(item, view, pos)
         }
 
     }
@@ -130,16 +123,14 @@ class LastAdapter<T : Any> private constructor(private val list: List<T>,
     private var inflater: LayoutInflater? = null
 
     override fun onCreateViewHolder(view: ViewGroup, type: Int): ViewHolder {
-        if (inflater == null) inflater = LayoutInflater.from(view.context)
         val binding = DataBindingUtil.inflate<ViewDataBinding>(inflater, type, view, false)
         val holder = ViewHolder(binding, variable)
         addOnRebindCallback(binding, recyclerView, holder.adapterPosition)
         return holder
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, pos: Int) {
-        holder.bindTo(list[pos], pos, onBind, onClick, onLongClick)
-    }
+    override fun onBindViewHolder(holder: ViewHolder, pos: Int)
+            = holder.bindTo(list[pos], pos, onBind, onClick, onLongClick)
 
     override fun onBindViewHolder(holder: ViewHolder, pos: Int, payloads: MutableList<Any>?) {
         if (isForDataBinding(payloads)) holder.binding.executePendingBindings()
@@ -152,18 +143,19 @@ class LastAdapter<T : Any> private constructor(private val list: List<T>,
             ?: map[list[pos].javaClass]
             ?: throw RuntimeException("Invalid object at position $pos: ${list[pos]}")
 
-    override fun onAttachedToRecyclerView(rv: RecyclerView?) {
+    override fun onAttachedToRecyclerView(rv: RecyclerView) {
         if (recyclerView == null && list is ObservableList) list.addOnListChangedCallback(onChange)
         recyclerView = rv
+        inflater = LayoutInflater.from(rv.context)
     }
 
-    override fun onDetachedFromRecyclerView(rv: RecyclerView?) {
+    override fun onDetachedFromRecyclerView(rv: RecyclerView) {
         if (recyclerView != null && list is ObservableList) list.removeOnListChangedCallback(onChange)
         recyclerView = null
     }
 
     private fun addOnRebindCallback(b: ViewDataBinding, rv: RecyclerView?, pos: Int) {
-        b.addOnRebindCallback(object: OnRebindCallback<ViewDataBinding>() {
+        b.addOnRebindCallback(object : OnRebindCallback<ViewDataBinding>() {
             override fun onPreBind(binding: ViewDataBinding) = rv != null && rv.isComputingLayout
             override fun onCanceled(binding: ViewDataBinding) {
                 if (rv == null || rv.isComputingLayout) return
@@ -179,32 +171,31 @@ class LastAdapter<T : Any> private constructor(private val list: List<T>,
     }
 
 
-    private class WeakReferenceOnListChangedCallback<T : Any>(private val adapter: LastAdapter<T>)
+    private class WeakReferenceOnListChangedCallback<T: Any>(adapter: LastAdapter<T>)
     : ObservableList.OnListChangedCallback<ObservableList<T>>() {
 
-        private val adapterRef = WeakReference<LastAdapter<T>>(adapter)
+        private val reference = WeakReference<LastAdapter<T>>(adapter)
 
-        private fun getAdapter(): LastAdapter<T> {
-            if (Thread.currentThread() != Looper.getMainLooper().thread) {
-                throw IllegalStateException("You cannot modify the ObservableList on a background thread")
+        private val adapter: LastAdapter<T>
+            get() = when (Thread.currentThread()) {
+                Looper.getMainLooper().thread -> reference.get()
+                else -> throw IllegalStateException("You cannot modify the ObservableList on a background thread")
             }
-            return adapterRef.get()
-        }
 
         override fun onChanged(list: ObservableList<T>)
-                = getAdapter().notifyDataSetChanged()
+                = adapter.notifyDataSetChanged()
 
         override fun onItemRangeChanged(list: ObservableList<T>, from: Int, count: Int)
-                = getAdapter().notifyItemRangeChanged(from, count)
+                = adapter.notifyItemRangeChanged(from, count)
 
         override fun onItemRangeInserted(list: ObservableList<T>, from: Int, count: Int)
-                = getAdapter().notifyItemRangeInserted(from, count)
+                = adapter.notifyItemRangeInserted(from, count)
 
         override fun onItemRangeRemoved(list: ObservableList<T>, from: Int, count: Int)
-                = getAdapter().notifyItemRangeRemoved(from, count)
+                = adapter.notifyItemRangeRemoved(from, count)
 
         override fun onItemRangeMoved(list: ObservableList<T>, from: Int, to: Int, count: Int)
-                = with(getAdapter()) { for (i in 0..count) notifyItemMoved(from+i, to+i) }
+                = with(adapter) { for (i in 0..count) notifyItemMoved(from+i, to+i) }
 
     }
 
