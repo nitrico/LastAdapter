@@ -43,6 +43,7 @@ dependencies {
 
 ## Usage
 
+Create your item layouts with `<layout>` as root:
 ```xml
 <layout xmlns:android="http://schemas.android.com/apk/res/android" >
 
