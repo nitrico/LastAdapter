@@ -1,5 +1,5 @@
 [![Download](https://api.bintray.com/packages/moreno/maven/lastadapter/images/download.svg)](https://bintray.com/moreno/maven/lastadapter/_latestVersion)
-[![Size](https://img.shields.io/badge/Size-30 KB-e91e63.svg)](http://www.methodscount.com/?lib=com.github.nitrico.lastadapter%3Alastadapter%3A%2B)
+[![Size](https://img.shields.io/badge/Size-31 KB-e91e63.svg)](http://www.methodscount.com/?lib=com.github.nitrico.lastadapter%3Alastadapter%3A%2B)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-LastAdapter-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/3810)
 [![License](https://img.shields.io/:License-Apache 2.0-orange.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 [![Gitter](https://badges.gitter.im/nitrico/LastAdapter.svg)](https://gitter.im/nitrico/LastAdapter?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
@@ -19,7 +19,7 @@
 * Optional OnBindListener's
 * Very fast — no reflection
 * Super easy API
-* Tiny size: **30 KB**
+* Tiny size: **31 KB**
 * Minimum Android SDK: **7**
 
 
@@ -36,7 +36,7 @@ android {
 }
 
 dependencies {
-    compile 'com.github.nitrico.lastadapter:lastadapter:1.1.1'
+    compile 'com.github.nitrico.lastadapter:lastadapter:1.2.0'
 }
 ```
 
@@ -80,7 +80,7 @@ LastAdapter.with(listOfItems, BR.item)
 LastAdapter.with(listOfItems, BR.item)
            .map<Header>(R.layout.item_header)  // or .map(Header::class.java, R.layout.item_header)
            .map<Point>(R.layout.item_point)    // or .map(Point::class.java, R.layout.item_point)
-           // 'item: Any', 'position: Int' and 'view: View' are available inside the lambdas
+           // 'item: Any', 'view: View', 'type: Int' and 'position: Int' and are available inside the lambdas
            .onBind { println("binded view $view at position $position: $item") }             // Optional
            .onClick { println("clicked view $view at position $position: $item") }           // Optional
            .onLongClick { println("long-clicked view $view at position $position: $item") }  // Optional
