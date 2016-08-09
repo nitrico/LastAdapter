@@ -136,11 +136,11 @@ Thanks to **Yigit Boyar** and **George Mount** for [this talk](https://realm.io/
 
 ## Author
 
-### Miguel Ángel Moreno
+#### Miguel Ángel Moreno
 
 I'm open to new job positions - Contact me!
 
-|[Email](mailto:nitrico@gmail.com) |[Facebook](https://www.facebook.com/miguelangelmoreno) |[Google+](https://plus.google.com/+Miguel%C3%81ngelMorenoS) |[Linked.in](https://www.linkedin.com/in/morenomiguelangel) |[Twitter](https://twitter.com/nitrico/) 
+|[Email](mailto:nitrico@gmail.com)|[Facebook](https://www.facebook.com/miguelangelmoreno)|[Google+](https://plus.google.com/+Miguel%C3%81ngelMorenoS) |[Linked.in](https://www.linkedin.com/in/morenomiguelangel)|[Twitter](https://twitter.com/nitrico/)
 |---|---|---|---|---|
 
 
