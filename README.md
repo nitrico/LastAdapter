@@ -15,8 +15,8 @@
 * No need to modify your model classes
 * No need to notify the adapter when data set changed
 * Supports multiple view types
-* Manage item click/long-click in the layout or in the adapter builder
-* Optional OnBindListener's
+* Manage item click/long-click in layout or builder
+* Optional OnBindListener
 * Very fast — no reflection
 * Super easy API
 * Tiny size: **31 KB**
