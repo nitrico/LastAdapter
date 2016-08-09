@@ -25,7 +25,7 @@
 
 ## Setup
 
-#### Gradle
+### Gradle
 
 ```gradle
 android {
@@ -62,7 +62,7 @@ Create your item layouts with `<layout>` as root:
 **It is important that all the item types have the same variable name**, in this case "item". 
 This name is passed to the adapter builder as BR.variableName, in this case BR.item:
 
-#### Java
+### Java
 
 ```java
 LastAdapter.with(listOfItems, BR.item)
@@ -74,7 +74,7 @@ LastAdapter.with(listOfItems, BR.item)
            .into(recyclerView);
 ```
 
-#### Kotlin
+### Kotlin
 
 ```kotlin
 LastAdapter.with(listOfItems, BR.item)
@@ -92,7 +92,7 @@ The list of items can be an `ObservableList` if you want to get the adapter **au
 
 Use `.build()` method instead of `.into(recyclerView)` if you want to create the adapter but don't assign it to the RecyclerView yet. Both methods return the adapter.
 
-#### LayoutHandler
+### LayoutHandler
 
 The LayoutHandler interface allows you to use different layouts based on more complex criteria. Its one single method receives the item and the position and returns the layout resource id.
 
@@ -123,7 +123,7 @@ LastAdapter.with(listOfItems, BR.item)
             }.into(recyclerView)
 ```
 
-#### Custom fonts
+### Custom fonts
 
 You might also want to try [**FontBinder**](https://github.com/nitrico/FontBinder) to easily use custom fonts in your XML layouts.
 
@@ -135,7 +135,7 @@ Thanks to **Yigit Boyar** and **George Mount** for [this talk](https://realm.io/
 
 ## Author
 
-##### Miguel Ángel Moreno
+### Miguel Ángel Moreno
 
 I'm open to new job positions - Contact me!
 
