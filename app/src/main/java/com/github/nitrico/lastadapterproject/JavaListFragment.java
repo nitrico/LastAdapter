@@ -1,10 +1,13 @@
 package com.github.nitrico.lastadapterproject;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 import com.github.nitrico.lastadapter.LastAdapter;
+import com.github.nitrico.lastadapterproject.databinding.ItemHeaderBinding;
+import com.github.nitrico.lastadapterproject.databinding.ItemHeaderFirstBinding;
+import com.github.nitrico.lastadapterproject.databinding.ItemPointBinding;
 import com.github.nitrico.lastadapterproject.item.Header;
 import com.github.nitrico.lastadapterproject.item.Point;
 import org.jetbrains.annotations.NotNull;
@@ -18,9 +21,8 @@ public class JavaListFragment extends ListFragment implements LastAdapter.Layout
     public JavaListFragment() { }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        RecyclerView list = (RecyclerView) view.findViewById(R.id.list);
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
         LastAdapter.with(Data.INSTANCE.getItems(), BR.item)
                 .map(Header.class, R.layout.item_header)
@@ -42,17 +44,33 @@ public class JavaListFragment extends ListFragment implements LastAdapter.Layout
     }
 
     @Override
-    public void onBind(@NotNull Object item, @NotNull View view, int position) {
-        System.out.println("onBind position " +position +": " +item);
+    public void onBind(@NotNull Object item, @NotNull View view, int type, int position) {
+        switch (type) {
+            case R.layout.item_header_first:
+                ItemHeaderFirstBinding headerFirstBinding = DataBindingUtil.getBinding(view);
+                headerFirstBinding.headerFirstText.setTag("firstHeader");
+                break;
+            case R.layout.item_header:
+                ItemHeaderBinding headerBinding = DataBindingUtil.getBinding(view);
+                Header header = (Header) item;
+                headerBinding.headerText.setTag("header" + header.getText());
+                break;
+            case R.layout.item_point:
+                ItemPointBinding pointBinding = DataBindingUtil.getBinding(view);
+                Point point = (Point) item;
+                pointBinding.pointX.setTag("X:" + point.getX());
+                pointBinding.pointY.setTag("Y:" + point.getY());
+                break;
+        }
     }
 
     @Override
-    public void onClick(@NotNull Object item, @NotNull View view, int position) {
+    public void onClick(@NotNull Object item, @NotNull View view, int type, int position) {
         Toast.makeText(getActivity(), "onClick position " +position +": " +item, Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void onLongClick(@NotNull Object item, @NotNull View view, int position) {
+    public void onLongClick(@NotNull Object item, @NotNull View view, int type, int position) {
         Toast.makeText(getActivity(), "onLongClick position " +position +": " +item, Toast.LENGTH_SHORT).show();
     }
 

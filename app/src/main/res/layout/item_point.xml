@@ -1,5 +1,4 @@
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android" >
+<layout xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <data>
         <variable name="item" type="com.github.nitrico.lastadapterproject.item.Point" />
@@ -14,10 +13,12 @@
         android:onLongClick="@{v -> item.onItemLongClick(v)}" >
 
         <TextView
+            android:id="@+id/pointX"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text='@{"" +item.x}' />
         <TextView
+            android:id="@+id/pointY"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text='@{"" +item.y}' />

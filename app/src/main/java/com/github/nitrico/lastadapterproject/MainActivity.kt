@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 
     class ViewPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
         override fun getCount() = 2
-        override fun getItem(i: Int) = if (i==0) KotlinListFragment() else JavaListFragment()
+        override fun getItem(i: Int) = if (i == 0) KotlinListFragment() else JavaListFragment()
     }
 
 }
