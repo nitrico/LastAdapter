@@ -22,10 +22,28 @@
 * Tiny size: **30 KB**
 * Minimum Android SDK: **7**
 
+
+## Setup
+
+#### Gradle
+
+```gradle
+android {
+    ...
+    dataBinding { 
+        enabled true 
+    }
+}
+
+dependencies {
+    compile 'com.github.nitrico.lastadapter:lastadapter:1.1.1'
+}
+```
+
+
 ## Usage
 
-Enable data binding in your project and create your item layouts in that way:
-
+Create your item layouts with `<layout>` as root:
 ```xml
 <layout xmlns:android="http://schemas.android.com/apk/res/android" >
 
@@ -109,26 +127,11 @@ LastAdapter.with(listOfItems, BR.item)
 
 You might also want to try [**FontBinder**](https://github.com/nitrico/FontBinder) to easily use custom fonts in your XML layouts.
 
-## Setup
-
-#### Gradle
-
-```gradle
-android {
-    ...
-    dataBinding { 
-        enabled true 
-    }
-}
-
-dependencies {
-    compile 'com.github.nitrico.lastadapter:lastadapter:1.1.1'
-}
-```
 
 ## Acknowledgments
 
 Thanks to **Yigit Boyar** and **George Mount** for [this talk](https://realm.io/news/data-binding-android-boyar-mount/).
+
 
 ## Author
 
@@ -138,6 +141,7 @@ I'm open to new job positions - Contact me!
 
 |[Email](mailto:nitrico@gmail.com)|[Facebook](https://www.facebook.com/miguelangelmoreno)|[Google+](https://plus.google.com/+Miguel%C3%81ngelMorenoS)|[Linked.in](https://www.linkedin.com/in/morenomiguelangel)|[Twitter](https://twitter.com/nitrico/)
 |---|---|---|---|---|
+
 
 ## License
 
