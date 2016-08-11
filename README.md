@@ -136,10 +136,6 @@ Internally, LastAdapter uses the layout resource id to distinguish between diffe
 @Override
 public void onBind(@NotNull Object item, @NotNull View view, int type, int position) {
     switch (type) {
-        case R.layout.item_header_first:
-            ItemHeaderFirstBinding headerFirstBinding = DataBindingUtil.getBinding(view);
-            headerFirstBinding.headerFirstText.setTag("firstHeader");
-            break;
         case R.layout.item_header:
             ItemHeaderBinding headerBinding = DataBindingUtil.getBinding(view);
             headerBinding.headerText.setTag("header" + position);
