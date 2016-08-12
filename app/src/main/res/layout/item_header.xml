@@ -4,15 +4,20 @@
         <variable name="item" type="com.github.nitrico.lastadapterproject.item.Header" />
     </data>
 
-    <TextView
-        android:id="@+id/headerText"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:background="@android:color/darker_gray"
-        android:orientation="vertical"
-        android:text="@{item.text}"
-        android:onClick="@{v -> item.onItemClick(v)}"
-        android:onLongClick="@{v -> item.onItemLongClick(v)}" />
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/headerText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:background="@android:color/darker_gray"
+            android:text="@{item.text}"
+            android:onClick="@{v -> item.onItemClick(v)}"
+            android:onLongClick="@{v -> item.onItemLongClick(v)}" />
+
+    </FrameLayout>
 
 </layout>

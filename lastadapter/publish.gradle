@@ -9,19 +9,19 @@ def libTracker = libSite + '/issues'
 def libDesc = "Don't write any other RecyclerView adapter again. Not even a ViewHolder!"
 def libTags = ['android', 'recyclerview', 'adapter', 'data binding', 'kotlin']
 
-group = libGroup
-version = '1.2.0'
+group libGroup
+version '1.2.1'
 
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
 bintray {
-    user = properties.getProperty('bintray.user')
-    key = properties.getProperty('bintray.key')
     configurations = ['archives']
+    user properties.getProperty('bintray.user')
+    key properties.getProperty('bintray.key')
     pkg {
-        repo = 'maven'
         name = libName
+        repo = 'maven'
         desc = libDesc
         websiteUrl = libSite
         issueTrackerUrl = libTracker
@@ -36,23 +36,23 @@ bintray {
 install {
     repositories.mavenInstaller {
         pom.project {
+            name = libName
+            description = libDesc
             packaging 'aar'
             groupId libGroup
             artifactId libName
-            name libName
-            description libDesc
             url libSite
 
             licenses {
                 license {
-                    name 'The Apache Software License, Version 2.0'
+                    name = 'The Apache Software License, Version 2.0'
                     url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
                 }
             }
             developers {
                 developer {
+                    name = 'Miguel Ángel Moreno'
                     id 'moreno'
-                    name 'Miguel Ángel Moreno'
                     email 'nitrico@gmail.com'
                 }
             }
@@ -67,7 +67,7 @@ install {
 
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
-    classifier = 'sources'
+    classifier 'sources'
 }
 
 artifacts {

@@ -26,4 +26,26 @@ class KotlinListFragment : ListFragment() {
                 .into(list)
     }
 
+    /*
+    override fun onBind(item: Any, view: View, type: Int, position: Int) {
+        when (type) {
+            R.layout.item_header_first -> {
+                val binding = DataBindingUtil.getBinding<ItemHeaderFirstBinding>(view)
+                binding.headerFirstText.tag = "firstHeader"
+            }
+            R.layout.item_header -> {
+                val binding = DataBindingUtil.getBinding<ItemHeaderBinding>(view)
+                val header = item as Header
+                binding.headerText.tag = "header" + header.text
+            }
+            R.layout.item_point -> {
+                val binding = DataBindingUtil.getBinding<ItemPointBinding>(view)
+                val point = item as Point
+                binding.pointX.tag = "X:" + point.x
+                binding.pointY.tag = "Y:" + point.y
+            }
+        }
+    }
+    */
+
 }

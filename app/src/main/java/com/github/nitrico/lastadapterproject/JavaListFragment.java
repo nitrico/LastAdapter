@@ -25,9 +25,9 @@ public class JavaListFragment extends ListFragment implements LastAdapter.Layout
         super.onActivityCreated(savedInstanceState);
 
         LastAdapter.with(Data.INSTANCE.getItems(), BR.item)
-                .map(Header.class, R.layout.item_header)
-                .map(Point.class, R.layout.item_point)
-                //.layoutHandler(this)
+                //.map(Header.class, R.layout.item_header)
+                //.map(Point.class, R.layout.item_point)
+                .layoutHandler(this)
                 .onBindListener(this)
                 .onClickListener(this)
                 .onLongClickListener(this)
@@ -37,8 +37,8 @@ public class JavaListFragment extends ListFragment implements LastAdapter.Layout
     @Override
     public int getItemLayout(@NotNull Object item, int position) {
         if (item instanceof Header) {
-            if (position == 0) return R.layout.item_header;
-            else return R.layout.item_header_first;
+            if (position == 0) return R.layout.item_header_first;
+            else return R.layout.item_header;
         }
         else return R.layout.item_point;
     }
