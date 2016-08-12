@@ -1,5 +1,5 @@
 [![Download](https://api.bintray.com/packages/moreno/maven/lastadapter/images/download.svg)](https://bintray.com/moreno/maven/lastadapter/_latestVersion)
-[![Size](https://img.shields.io/badge/Size-30 KB-e91e63.svg)](http://www.methodscount.com/?lib=com.github.nitrico.lastadapter%3Alastadapter%3A%2B)
+[![Size](https://img.shields.io/badge/Size-31 KB-e91e63.svg)](http://www.methodscount.com/?lib=com.github.nitrico.lastadapter%3Alastadapter%3A%2B)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-LastAdapter-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/3810)
 [![License](https://img.shields.io/:License-Apache 2.0-orange.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 [![Gitter](https://badges.gitter.im/nitrico/LastAdapter.svg)](https://gitter.im/nitrico/LastAdapter?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
@@ -15,17 +15,17 @@
 * No need to modify your model classes
 * No need to notify the adapter when data set changed
 * Supports multiple view types
-* Manage item click/long-click in the layout or in the adapter builder
-* Optional OnBindListener's
+* Manage item click/long-click in layout or builder
+* Optional OnBindListener
 * Very fast — no reflection
 * Super easy API
-* Tiny size: **30 KB**
+* Tiny size: **31 KB**
 * Minimum Android SDK: **7**
 
 
 ## Setup
 
-#### Gradle
+### Gradle
 
 ```gradle
 android {
@@ -36,7 +36,7 @@ android {
 }
 
 dependencies {
-    compile 'com.github.nitrico.lastadapter:lastadapter:1.1.1'
+    compile 'com.github.nitrico.lastadapter:lastadapter:1.2.0'
 }
 ```
 
@@ -44,6 +44,7 @@ dependencies {
 ## Usage
 
 Create your item layouts with `<layout>` as root:
+
 ```xml
 <layout xmlns:android="http://schemas.android.com/apk/res/android" >
 
@@ -62,7 +63,7 @@ Create your item layouts with `<layout>` as root:
 **It is important that all the item types have the same variable name**, in this case "item". 
 This name is passed to the adapter builder as BR.variableName, in this case BR.item:
 
-#### Java
+### Java
 
 ```java
 LastAdapter.with(listOfItems, BR.item)
@@ -74,13 +75,13 @@ LastAdapter.with(listOfItems, BR.item)
            .into(recyclerView);
 ```
 
-#### Kotlin
+### Kotlin
 
 ```kotlin
 LastAdapter.with(listOfItems, BR.item)
            .map<Header>(R.layout.item_header)  // or .map(Header::class.java, R.layout.item_header)
            .map<Point>(R.layout.item_point)    // or .map(Point::class.java, R.layout.item_point)
-           // 'item: Any', 'position: Int' and 'view: View' are available inside the lambdas
+           // 'item: Any', 'view: View', 'type: Int' and 'position: Int' and are available inside the lambdas
            .onBind { println("binded view $view at position $position: $item") }             // Optional
            .onClick { println("clicked view $view at position $position: $item") }           // Optional
            .onLongClick { println("long-clicked view $view at position $position: $item") }  // Optional
@@ -92,7 +93,11 @@ The list of items can be an `ObservableList` if you want to get the adapter **au
 
 Use `.build()` method instead of `.into(recyclerView)` if you want to create the adapter but don't assign it to the RecyclerView yet. Both methods return the adapter.
 
-#### LayoutHandler
+`type` parameter in `onBind`, `onClick` and `onLongClick` is an integer value that **matches the layout resource id** used for each item type. You can use this value to:
+* Manage clicks for different item types in different ways.
+* Get the right binding class for each item (avoiding `findViewById` calls) if there is any operation that you cannot or simply don't want to do using Data Binding.
+
+### LayoutHandler
 
 The LayoutHandler interface allows you to use different layouts based on more complex criteria. Its one single method receives the item and the position and returns the layout resource id.
 
@@ -123,7 +128,7 @@ LastAdapter.with(listOfItems, BR.item)
             }.into(recyclerView)
 ```
 
-#### Custom fonts
+### Custom fonts
 
 You might also want to try [**FontBinder**](https://github.com/nitrico/FontBinder) to easily use custom fonts in your XML layouts.
 
@@ -135,12 +140,12 @@ Thanks to **Yigit Boyar** and **George Mount** for [this talk](https://realm.io/
 
 ## Author
 
-##### Miguel Ángel Moreno
+#### Miguel Ángel Moreno
 
 I'm open to new job positions - Contact me!
 
-|[Email](mailto:nitrico@gmail.com)|[Facebook](https://www.facebook.com/miguelangelmoreno)|[Google+](https://plus.google.com/+Miguel%C3%81ngelMorenoS)|[Linked.in](https://www.linkedin.com/in/morenomiguelangel)|[Twitter](https://twitter.com/nitrico/)
-|---|---|---|---|---|
+|[AngelList](https://angel.co/miguelangelmoreno)|[Email](mailto:nitrico@gmail.com)|[Facebook](https://www.facebook.com/miguelangelmoreno)|[Google+](https://plus.google.com/+Miguel%C3%81ngelMorenoS) |[Linked.in](https://www.linkedin.com/in/morenomiguelangel)|[Twitter](https://twitter.com/nitrico/)
+|---|---|---|---|---|---|
 
 
 ## License
