@@ -124,13 +124,13 @@ LastAdapter.with(listOfItems, BR.item)
             }.into(recyclerView)
 ```
 
-### About the binding classes, avoiding findViewById and performance
+### About binding, findViewById and performance
 
-There can be situations where you cannot or simply don't want to use Data Binding to do some kind of operations with your items, that's why OnBindListener interface is provided. One case could be, for example, to add a tag or a transitionName to a certain view when it is binded. In those situations, specially when doing so in the onBind method, you should avoid findViewById's as it is an expensive call.
+There can be situations where you cannot or simply don't want to use Data Binding to do some kind of operations with your items, that's the reason why `OnBindListener` interface is provided. One case could be, for example, to add a tag or a transition name to a certain view when it is binded. In those situations, specially when doing so in the `onBind` method, you should avoid `findViewById` as it is an expensive call.
 
-One advantage of using Data Binding is to avoid the findViewById calls. Typically, you inflate your layout or set your content view using DataBindingUtil and you get a binding instance that you can use to access all the views (that have an id) in the layout. The class of that binding instance is specifically created for that layout. Using LastAdapter, however, many layouts can be used and each one has its own binding class so, where is the binding instance and how to use it correctly? 
+One advantage of using Data Binding is to avoid the `findViewById` calls. Typically, you inflate your layout or set your content view using `DataBindingUtil` and you get a binding instance that you can use to access all the views (that have an id) in the layout. The class of that binding instance is specifically created for that layout. Using LastAdapter, however, many layouts can be used and each one has its own binding class. So, where is the binding instance and how to use it correctly?
 
-Internally, LastAdapter uses the layout resource id to distinguish between different item types. As the binding class used for each type also depends on that layout, you can use the type parameter to get the right binding class. Here is an example:
+Internally, LastAdapter uses the layout resource id to distinguish between different item types. As the binding class used for each type also depends on that layout, you can use the `type` parameter to get the right binding class. Here is an example:
 
 ```java
 @Override
