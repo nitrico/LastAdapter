@@ -93,6 +93,10 @@ The list of items can be an `ObservableList` if you want to get the adapter **au
 
 Use `.build()` method instead of `.into(recyclerView)` if you want to create the adapter but don't assign it to the RecyclerView yet. Both methods return the adapter.
 
+`type` parameter in `onBind`, `onClick` and `onLongClick` is an integer value that **matches the layout resource id** used for each item type. You can use this value to:
+* Manage clicks for different item types in different ways.
+* Get the right binding class for each item (avoiding `findViewById` calls) if there is any operation that you cannot or simply don't want to do using Data Binding.
+
 ### LayoutHandler
 
 The LayoutHandler interface allows you to use different layouts based on more complex criteria. Its one single method receives the item and the position and returns the layout resource id.
