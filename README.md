@@ -124,33 +124,6 @@ LastAdapter.with(listOfItems, BR.item)
             }.into(recyclerView)
 ```
 
-### About binding, findViewById and performance
-
-There can be situations where you cannot or simply don't want to use Data Binding to do some kind of operations with your items, that's the reason why `OnBindListener` interface is provided. One case could be, for example, to add a tag or a transition name to a certain view when it is binded. In those situations, specially when doing so in the `onBind` method, you should avoid `findViewById` as it is an expensive call.
-
-One advantage of using Data Binding is to avoid the `findViewById` calls. Typically, you inflate your layout or set your content view using `DataBindingUtil` and you get a binding instance that you can use to access all the views (that have an id) in the layout. The class of that binding instance is specifically created for that layout. Using LastAdapter, however, many layouts can be used and each one has its own binding class. So, where is the binding instance and how to use it correctly?
-
-Internally, LastAdapter uses the layout resource id to distinguish between different item types. As the binding class used for each type also depends on that layout, you can use the `type` parameter to get the right binding class. Here is an example:
-
-```java
-@Override
-public void onBind(@NotNull Object item, @NotNull View view, int type, int position) {
-    switch (type) {
-        case R.layout.item_header:
-            ItemHeaderBinding headerBinding = DataBindingUtil.getBinding(view);
-            headerBinding.headerText.setTag("header" + position);
-            break;
-        case R.layout.item_point:
-        	ItemPointBinding pointBinding = DataBindingUtil.getBinding(view);
-            pointBinding.pointX.setTag("X" + position);
-            pointBinding.pointY.setTag("Y" + position);
-            break;
-    }
-}
-```
-
-You can use this same approach also to manage click listeners for different item types in different ways.
-
 ### Custom fonts
 
 You might also want to try [**FontBinder**](https://github.com/nitrico/FontBinder) to easily use custom fonts in your XML layouts.
