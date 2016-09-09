@@ -37,10 +37,10 @@ android {
 
 dependencies {
     compile 'com.github.nitrico.lastadapter:lastadapter:1.2.2'
-    // kapt 'com.android.databinding:compiler:GRADLE_PLUGIN_VERSION' // only for Kotlin projects
+    // kapt 'com.android.databinding:compiler:GRADLE_PLUGIN_VERSION'  /* only for Kotlin projects */
 }
 
-// kapt { generateStubs = true } // only for Kotlin projects
+// kapt { generateStubs = true }  /* only for Kotlin projects */
 ```
 
 
