@@ -36,7 +36,7 @@ android {
 }
 
 dependencies {
-    compile 'com.github.nitrico.lastadapter:lastadapter:1.2.0'
+    compile 'com.github.nitrico.lastadapter:lastadapter:1.2.1'
 }
 ```
 
