@@ -5,7 +5,7 @@ android {
     compileSdkVersion vSdkTarget
     buildToolsVersion vBuildTools
     defaultConfig { minSdkVersion vSdkMin }
-    dataBinding { enabled true }
+    dataBinding { enabled = true }
 }
 
 dependencies {

@@ -16,30 +16,29 @@
 
 package com.github.nitrico.lastadapter
 
-import android.databinding.*
-import android.support.annotation.Keep
-import android.support.annotation.LayoutRes
+import android.databinding.DataBindingUtil
+import android.databinding.ObservableList
+import android.databinding.OnRebindCallback
+import android.databinding.ViewDataBinding
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-@Keep
-class LastAdapter<T: Any> private constructor(private val list: List<T>,
-                                              private val variable: Int,
-                                              private val map: Map<Class<*>, Int>,
-                                              private val layoutHandler: LayoutHandler?,
-                                              private val onBindListener: OnBindListener?,
-                                              private val onClickListener: OnClickListener?,
-                                              private val onLongClickListener: OnLongClickListener?)
-: RecyclerView.Adapter<LastAdapter<T>.ViewHolder>() {
+class LastAdapter private constructor(private val list: List<Any>,
+                                      private val variable: Int,
+                                      private val map: Map<Class<*>, Int>,
+                                      private val layoutHandler: LayoutHandler?,
+                                      private val onBindListener: OnBindListener?,
+                                      private val onClickListener: OnClickListener?,
+                                      private val onLongClickListener: OnLongClickListener?)
+: RecyclerView.Adapter<LastAdapter.ViewHolder>() {
 
     companion object {
-        @JvmStatic fun <T: Any> with(list: List<T>, variable: Int) = Builder(list, variable)
+        @JvmStatic fun with(list: List<Any>, variable: Int) = Builder(list, variable)
     }
 
-    @Keep
-    class Builder<T: Any> internal constructor(private val list: List<T>, private val variable: Int) {
+    class Builder internal constructor(private val list: List<Any>, private val variable: Int) {
 
         private val map = mutableMapOf<Class<*>, Int>()
         private var handler: LayoutHandler? = null
@@ -47,9 +46,9 @@ class LastAdapter<T: Any> private constructor(private val list: List<T>,
         private var onClick: OnClickListener? = null
         private var onLongClick: OnLongClickListener? = null
 
-        fun map(clazz: Class<*>, @LayoutRes layout: Int) = apply { map.put(clazz, layout) }
+        fun map(clazz: Class<*>, layout: Int) = apply { map.put(clazz, layout) }
 
-        inline fun <reified T: Any> map(@LayoutRes layout: Int) = map(T::class.java, layout)
+        inline fun <reified T: Any> map(layout: Int) = map(T::class.java, layout)
 
         fun layoutHandler(layoutHandler: LayoutHandler) = apply { handler = layoutHandler }
 
@@ -88,9 +87,10 @@ class LastAdapter<T: Any> private constructor(private val list: List<T>,
 
     inner class ViewHolder(internal val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bindTo(item: T) {
+        fun bindTo(item: Any) {
             binding.setVariable(variable, item)
             binding.executePendingBindings()
+
             if (onClickListener != null) itemView.setOnClickListener {
                 onClickListener.onClick(item, itemView, itemViewType, adapterPosition)
             }
@@ -158,24 +158,24 @@ class LastAdapter<T: Any> private constructor(private val list: List<T>,
 
 
     interface LayoutHandler {
-        @LayoutRes fun getItemLayout(item: Any, position: Int): Int
+        fun getItemLayout(item: Any, position: Int): Int
     }
 
     interface OnBindListener {
-        fun onBind(item: Any, view: View, @LayoutRes type: Int, position: Int)
+        fun onBind(item: Any, view: View, type: Int, position: Int)
     }
 
     interface OnClickListener {
-        fun onClick(item: Any, view: View, @LayoutRes type: Int, position: Int)
+        fun onClick(item: Any, view: View, type: Int, position: Int)
     }
 
     interface OnLongClickListener {
-        fun onLongClick(item: Any, view: View, @LayoutRes type: Int, position: Int)
+        fun onLongClick(item: Any, view: View, type: Int, position: Int)
     }
 
 
     class ItemPosition(val item: Any, val position: Int)
 
-    class ItemViewTypePosition(val item: Any, val view: View, @LayoutRes val type: Int, val position: Int)
+    class ItemViewTypePosition(val item: Any, val view: View, val type: Int, val position: Int)
 
 }

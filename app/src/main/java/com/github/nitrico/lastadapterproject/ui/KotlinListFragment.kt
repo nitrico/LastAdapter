@@ -1,9 +1,12 @@
-package com.github.nitrico.lastadapterproject
+package com.github.nitrico.lastadapterproject.ui
 
 import android.os.Bundle
 import com.github.nitrico.lastadapter.LastAdapter
-import com.github.nitrico.lastadapterproject.item.Header
-import com.github.nitrico.lastadapterproject.item.Point
+import com.github.nitrico.lastadapterproject.BR
+import com.github.nitrico.lastadapterproject.data.Data
+import com.github.nitrico.lastadapterproject.R
+import com.github.nitrico.lastadapterproject.data.Header
+import com.github.nitrico.lastadapterproject.data.Point
 
 class KotlinListFragment : ListFragment() {
 
@@ -21,8 +24,8 @@ class KotlinListFragment : ListFragment() {
                     }
                 }
                 .onBind { println("binded position $position of type $type: $item") }
-                .onClick { if (type == R.layout.item_point) activity.toast("onClick $position of type $type: $item") }
-                .onLongClick { activity.toast("onLongClick $position of type $type: $item") }
+                .onClick { if (type == R.layout.item_point) activity?.toast("onClick $position of type $type: $item") }
+                .onLongClick { activity?.toast("onLongClick $position of type $type: $item") }
                 .into(list)
     }
 

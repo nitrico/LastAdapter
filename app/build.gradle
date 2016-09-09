@@ -19,8 +19,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    dataBinding { enabled true }
+    dataBinding { enabled = true }
 }
+
 
 buildscript {
     repositories { mavenCentral() }
@@ -32,6 +33,8 @@ dependencies {
     compile "com.android.support:cardview-v7:$vSupport"
     compile "com.android.support:design:$vSupport"
     compile "com.android.support:recyclerview-v7:$vSupport"
+    compile "com.android.support:support-compat:$vSupport"
+    compile "com.android.support:support-fragment:$vSupport"
     compile "org.jetbrains.kotlin:kotlin-stdlib:$vKotlin"
     kapt "com.android.databinding:compiler:$vGradlePlugin"
     compile project(":lastadapter")
