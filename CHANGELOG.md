@@ -1,11 +1,18 @@
 Change Log
 ==========
 
+Version 1.2.2 *(2016-09-09)*
+----------------------------
+
+- **Fix:** [IllegalStateException: reference.get() must not be null](https://github.com/nitrico/LastAdapter/issues/5).
+- Removed unneeded "generics".
+- Dependencies updated (which increased min SDK version from 7 to 9).
+
 
 Version 1.2.1 *(2016-08-12)*
 ----------------------------
 
-- Code cleanup
+- Code cleanup.
 
 
 Version 1.2.0 *(2016-08-09)*

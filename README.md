@@ -20,7 +20,7 @@
 * Very fast — no reflection
 * Super easy API
 * Tiny size: **31 KB**
-* Minimum Android SDK: **7**
+* Minimum Android SDK: **9**
 
 
 ## Setup
@@ -36,8 +36,11 @@ android {
 }
 
 dependencies {
-    compile 'com.github.nitrico.lastadapter:lastadapter:1.2.1'
+    compile 'com.github.nitrico.lastadapter:lastadapter:1.2.2'
+    // kapt 'com.android.databinding:compiler:GRADLE_PLUGIN_VERSION'  // this line only for Kotlin projects
 }
+
+// kapt { generateStubs = true }  // this line only for Kotlin projects
 ```
 
 
@@ -81,7 +84,7 @@ LastAdapter.with(listOfItems, BR.item)
 LastAdapter.with(listOfItems, BR.item)
            .map<Header>(R.layout.item_header)  // or .map(Header::class.java, R.layout.item_header)
            .map<Point>(R.layout.item_point)    // or .map(Point::class.java, R.layout.item_point)
-           // 'item: Any', 'view: View', 'type: Int' and 'position: Int' and are available inside the lambdas
+           // 'item: Any', 'view: View', 'type: Int' and 'position: Int' are available inside the lambdas
            .onBind { println("binded view $view at position $position: $item") }             // Optional
            .onClick { println("clicked view $view at position $position: $item") }           // Optional
            .onLongClick { println("long-clicked view $view at position $position: $item") }  // Optional
