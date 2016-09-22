@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion vSdkTarget
@@ -8,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.github.nitrico.lastadapterproject"
-        minSdkVersion vSdkMin
+        minSdkVersion 11
         targetSdkVersion vSdkTarget
         versionCode 1
         versionName "1.0"
@@ -39,5 +40,3 @@ dependencies {
     kapt "com.android.databinding:compiler:$vGradlePlugin"
     compile project(":lastadapter")
 }
-
-kapt { generateStubs = true }

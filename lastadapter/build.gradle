@@ -11,9 +11,6 @@ android {
 dependencies {
     compile "com.android.support:recyclerview-v7:$vSupport"
     compile "org.jetbrains.kotlin:kotlin-stdlib:$vKotlin"
-    kapt "com.android.databinding:compiler:$vGradlePlugin"
 }
-
-kapt { generateStubs = true }
 
 apply from: 'publish.gradle'

@@ -3,9 +3,9 @@ buildscript {
         vSdkMin = 9
         vSdkTarget = 24
         vBuildTools = '24.0.2'
-        vGradlePlugin = '2.1.3'
-        vKotlin = '1.0.3'
-        vSupport = '24.2.0'
+        vGradlePlugin = '2.2.0'
+        vKotlin = '1.0.4'
+        vSupport = '24.2.1'
     }
     repositories {
         jcenter()
@@ -25,4 +25,6 @@ allprojects {
     }
 }
 
-task clean(type: Delete) { delete rootProject.buildDir }
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

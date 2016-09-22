@@ -6,13 +6,13 @@ import android.view.View;
 import android.widget.Toast;
 import com.github.nitrico.lastadapter.LastAdapter;
 import com.github.nitrico.lastadapterproject.BR;
-import com.github.nitrico.lastadapterproject.data.Data;
 import com.github.nitrico.lastadapterproject.R;
+import com.github.nitrico.lastadapterproject.data.Data;
+import com.github.nitrico.lastadapterproject.data.Header;
+import com.github.nitrico.lastadapterproject.data.Point;
 import com.github.nitrico.lastadapterproject.databinding.ItemHeaderBinding;
 import com.github.nitrico.lastadapterproject.databinding.ItemHeaderFirstBinding;
 import com.github.nitrico.lastadapterproject.databinding.ItemPointBinding;
-import com.github.nitrico.lastadapterproject.data.Header;
-import com.github.nitrico.lastadapterproject.data.Point;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
