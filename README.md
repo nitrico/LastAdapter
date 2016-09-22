@@ -28,7 +28,7 @@
 ### Gradle
 
 ```gradle
-// apply plugin: 'kotlin-kapt' // this line only for Kotlin projects
+// apply plugin: 'kotlin-kapt'  // this line only for Kotlin projects
 
 android {
     ...
@@ -38,8 +38,8 @@ android {
 }
 
 dependencies {
-    compile 'com.github.nitrico.lastadapter:lastadapter:1.2.3
-    // kapt 'com.android.databinding:compiler:GRADLE_PLUGIN_VERSION' // this line only for Kotlin projects
+    compile 'com.github.nitrico.lastadapter:lastadapter:1.2.3'
+    // kapt 'com.android.databinding:compiler:GRADLE_PLUGIN_VERSION'  // this line only for Kotlin projects
 }
 ```
 
