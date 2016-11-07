@@ -38,7 +38,7 @@ android {
 }
 
 dependencies {
-    compile 'com.github.nitrico.lastadapter:lastadapter:1.2.3'
+    compile 'com.github.nitrico.lastadapter:lastadapter:1.2.4'
     // kapt 'com.android.databinding:compiler:GRADLE_PLUGIN_VERSION'  // this line only for Kotlin projects
 }
 ```
