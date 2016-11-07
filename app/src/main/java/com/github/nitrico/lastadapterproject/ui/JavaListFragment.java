@@ -1,5 +1,6 @@
 package com.github.nitrico.lastadapterproject.ui;
 
+import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.View;
@@ -17,9 +18,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class JavaListFragment extends ListFragment implements LastAdapter.LayoutHandler,
-                                                              LastAdapter.OnBindListener,
-                                                              LastAdapter.OnClickListener,
-                                                              LastAdapter.OnLongClickListener {
+        LastAdapter.OnBindListener,
+        LastAdapter.OnClickListener,
+        LastAdapter.OnLongClickListener {
 
     public JavaListFragment() { }
 
@@ -75,6 +76,10 @@ public class JavaListFragment extends ListFragment implements LastAdapter.Layout
     @Override
     public void onLongClick(@NotNull Object item, @NotNull View view, int type, int position) {
         Toast.makeText(getActivity(), "onLongClick position " +position +": " +item, Toast.LENGTH_SHORT).show();
+    }
+
+    private void toast(Context context, String text) {
+        Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
     }
 
 }

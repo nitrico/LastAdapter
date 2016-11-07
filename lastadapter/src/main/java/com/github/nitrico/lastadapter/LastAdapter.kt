@@ -142,7 +142,7 @@ class LastAdapter private constructor(private val list: List<Any>,
 
     private fun addOnRebindCallback(b: ViewDataBinding, rv: RecyclerView?, pos: Int) {
         b.addOnRebindCallback(object: OnRebindCallback<ViewDataBinding>() {
-            override fun onPreBind(binding: ViewDataBinding) = rv != null && rv.isComputingLayout
+            //override fun onPreBind(binding: ViewDataBinding) = rv != null && rv.isComputingLayout
             override fun onCanceled(binding: ViewDataBinding) {
                 if (rv == null || rv.isComputingLayout) return
                 if (pos != RecyclerView.NO_POSITION) notifyItemChanged(pos, DATA_INVALIDATION)

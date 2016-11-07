@@ -4,8 +4,8 @@ apply plugin: 'kotlin-android'
 android {
     compileSdkVersion vSdkTarget
     buildToolsVersion vBuildTools
-    defaultConfig { minSdkVersion vSdkMin }
-    dataBinding { enabled = true }
+    defaultConfig.minSdkVersion vSdkMin
+    dataBinding.enabled true
 }
 
 dependencies {

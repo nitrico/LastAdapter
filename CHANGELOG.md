@@ -19,8 +19,8 @@ Version 1.2.0 *(2016-08-09)*
 ----------------------------
 
 - **New:** Added `type` parameter to `onBind`, `onClick` and `onLongClick` methods in their respective interfaces. It is an int value that matches the layout resource id used for each item.
-- **Fix:** `for` loop range in `WeakReferenceOnListChangedCallback.onItemRangeMoved`.
-- `WeakReferenceOnListChangedCallback` class moved to a new file.
+- **Fix:** `for` loop range in `ListReference.onItemRangeMoved`.
+- `ListReference` class moved to a new file.
 - Dependencies updated.
 
 

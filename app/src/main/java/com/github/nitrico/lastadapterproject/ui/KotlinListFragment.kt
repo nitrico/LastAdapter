@@ -1,8 +1,10 @@
 package com.github.nitrico.lastadapterproject.ui
 
+import android.content.Context
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import com.github.nitrico.lastadapter.LastAdapter
 import com.github.nitrico.lastadapterproject.BR
 import com.github.nitrico.lastadapterproject.R
@@ -28,7 +30,7 @@ class KotlinListFragment : ListFragment() {
                         else -> 0
                     }
                 }
-                .onBind { println("binded position $position of type $type: $item") }
+                .onBind { println("bound position $position of type $type: $item") }
                 .onClick { if (type == R.layout.item_point) activity?.toast("onClick $position of type $type: $item") }
                 .onLongClick { activity?.toast("onLongClick $position of type $type: $item") }
                 .into(list)
@@ -55,5 +57,7 @@ class KotlinListFragment : ListFragment() {
         }
     }
     */
+
+    private fun Context.toast(text: String) = Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
 
 }

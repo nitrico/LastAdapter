@@ -10,24 +10,24 @@ def libDesc = "Don't write any other RecyclerView adapter again. Not even a View
 def libTags = ['android', 'recyclerview', 'adapter', 'data binding', 'kotlin']
 
 group libGroup
-version '1.2.3'
+version '1.2.4'
 
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
 bintray {
-    configurations = ['archives']
     user properties.getProperty('bintray.user')
     key properties.getProperty('bintray.key')
+    configurations = ['archives']
     pkg {
-        name = libName
         repo = 'maven'
+        name = libName
         desc = libDesc
         websiteUrl = libSite
         issueTrackerUrl = libTracker
         vcsUrl = libGit
-        licenses = ['Apache-2.0']
         labels = libTags
+        licenses = ['Apache-2.0']
         publish = true
         publicDownloadNumbers = true
     }
@@ -36,23 +36,23 @@ bintray {
 install {
     repositories.mavenInstaller {
         pom.project {
-            name = libName
-            description = libDesc
             packaging 'aar'
             groupId libGroup
             artifactId libName
+            name libName
+            description libDesc
             url libSite
 
             licenses {
                 license {
-                    name = 'The Apache Software License, Version 2.0'
+                    name 'The Apache Software License, Version 2.0'
                     url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
                 }
             }
             developers {
                 developer {
-                    name = 'Miguel Ángel Moreno'
                     id 'moreno'
+                    name 'Miguel Ángel Moreno'
                     email 'nitrico@gmail.com'
                 }
             }

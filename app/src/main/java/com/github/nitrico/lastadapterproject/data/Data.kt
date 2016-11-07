@@ -25,6 +25,21 @@ object Data {
         add(Point(5, 3))
         add(Point(5, 4))
         add(Point(5, 5))
+        add(Header("Header 6"))
+        add(Point(6, 1))
+        add(Point(6, 2))
+        add(Point(6, 3))
+        add(Point(6, 4))
+        add(Point(6, 5))
+        add(Point(6, 6))
+        add(Header("Header 7"))
+        add(Point(7, 1))
+        add(Point(7, 2))
+        add(Point(7, 3))
+        add(Point(7, 4))
+        add(Point(7, 5))
+        add(Point(7, 6))
+        add(Point(7, 7))
     }
 
 }

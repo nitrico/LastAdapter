@@ -4,6 +4,8 @@
         <variable name="item" type="com.github.nitrico.lastadapterproject.data.Header" />
     </data>
 
+    <!--android:onClick="@{v -> item.onItemClick(v)}"
+        android:onLongClick="@{v -> item.onItemLongClick(v)}"-->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
@@ -14,9 +16,7 @@
             android:layout_height="wrap_content"
             android:padding="16dp"
             android:background="@android:color/darker_gray"
-            android:text="@{item.text}"
-            android:onClick="@{v -> item.onItemClick(v)}"
-            android:onLongClick="@{v -> item.onItemLongClick(v)}" />
+            android:text="@{item.text}" />
 
     </FrameLayout>
 

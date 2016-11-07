@@ -1,11 +1,11 @@
 buildscript {
     ext {
         vSdkMin = 9
-        vSdkTarget = 24
-        vBuildTools = '24.0.2'
-        vGradlePlugin = '2.2.0'
+        vSdkTarget = 25
+        vBuildTools = '25.0.0'
+        vGradlePlugin = '2.2.2'
         vKotlin = '1.0.4'
-        vSupport = '24.2.1'
+        vSupport = '25.0.0'
     }
     repositories {
         jcenter()
@@ -14,7 +14,7 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:$vGradlePlugin"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$vKotlin"
-        classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7"
+        classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.2"
         classpath "com.github.dcendents:android-maven-gradle-plugin:1.5"
     }
 }

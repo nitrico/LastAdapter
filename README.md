@@ -107,10 +107,10 @@ The LayoutHandler interface allows you to use different layouts based on more co
 ```java
 // Java sample
 LastAdapter.with(listOfItems, BR.item)
-           .layoutHandler(handler)
+           .layoutHandler(typeHandler)
            .into(recyclerView);
 
-private LastAdapter.LayoutHandler handler = new LastAdapter.LayoutHandler() {
+private LastAdapter.LayoutHandler typeHandler = new LastAdapter.LayoutHandler() {
     @Override public int getItemLayout(@NotNull Object item, int position) {
         if (item instanceof Header) {
             return (position == 0) ? R.layout.item_header_first : R.layout.item_header;
