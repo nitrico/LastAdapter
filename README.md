@@ -85,7 +85,7 @@ LastAdapter.with(listOfItems, BR.item)
            .map<Header>(R.layout.item_header)  // or .map(Header::class.java, R.layout.item_header)
            .map<Point>(R.layout.item_point)    // or .map(Point::class.java, R.layout.item_point)
            // 'item: Any', 'view: View', 'type: Int' and 'position: Int' are available inside the lambdas
-           .onBind { println("binded view $view at position $position: $item") }             // Optional
+           .onBind { println("bound view $view at position $position: $item") }             // Optional
            .onClick { println("clicked view $view at position $position: $item") }           // Optional
            .onLongClick { println("long-clicked view $view at position $position: $item") }  // Optional
            .into(recyclerView)
