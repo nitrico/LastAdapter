@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+Version 1.2.4 *(2016-11-07)*
+----------------------------
+
+- **Fix**: Issue with support library 25.0.0 https://github.com/nitrico/LastAdapter/issues/9
+
 Version 1.2.3 *(2016-09-23)*
 ----------------------------
 
