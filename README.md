@@ -15,13 +15,13 @@
 * No need to modify your model classes
 * No need to notify the adapter when data set changed
 * Supports multiple view types
-* Manage item click/long-click in layout or builder
-* Optional OnBindListener
+* Optional Callbacks/Listeners
 * Very fast — no reflection
 * Super easy API
-* Tiny size: **31 KB**
+* Tiny size: **33 KB**
 * Minimum Android SDK: **9**
 
+**Version 2.0 realeased!** Please read [my article at Medium](https://medium.com/@miguelangelmoreno/dont-write-recyclerview-adapters-b1dbc2c683bb)
 
 ## Setup
 
@@ -32,13 +32,11 @@
 
 android {
     ...
-    dataBinding { 
-        enabled true 
-    }
+    dataBinding.enabled true 
 }
 
 dependencies {
-    compile 'com.github.nitrico.lastadapter:lastadapter:1.2.4'
+    compile 'com.github.nitrico.lastadapter:lastadapter:2.0.0'
     // kapt 'com.android.databinding:compiler:GRADLE_PLUGIN_VERSION'  // this line only for Kotlin projects
 }
 ```
@@ -63,7 +61,7 @@ Create your item layouts with `<layout>` as root:
 </layout>
 ```
 
-**It is important that all the item types have the same variable name**, in this case "item". 
+**It is important for all the item types to have the same variable name**, in this case "item". 
 This name is passed to the adapter builder as BR.variableName, in this case BR.item:
 
 ### Java
@@ -72,9 +70,6 @@ This name is passed to the adapter builder as BR.variableName, in this case BR.i
 LastAdapter.with(listOfItems, BR.item)
            .map(Header.class, R.layout.item_header)
            .map(Point.class, R.layout.item_point)
-           .onBindListener(this)       // Optional. 'this' is LastAdapter.OnBindListener
-           .onClickListener(this)      // Optional. 'this' is LastAdapter.OnClickListener
-           .onLongClickListener(this)  // Optional. 'this' is LastAdapter.OnLongClickListener
            .into(recyclerView);
 ```
 
@@ -82,23 +77,14 @@ LastAdapter.with(listOfItems, BR.item)
 
 ```kotlin
 LastAdapter.with(listOfItems, BR.item)
-           .map<Header>(R.layout.item_header)  // or .map(Header::class.java, R.layout.item_header)
-           .map<Point>(R.layout.item_point)    // or .map(Point::class.java, R.layout.item_point)
-           // 'item: Any', 'view: View', 'type: Int' and 'position: Int' are available inside the lambdas
-           .onBind { println("bound view $view at position $position: $item") }             // Optional
-           .onClick { println("clicked view $view at position $position: $item") }           // Optional
-           .onLongClick { println("long-clicked view $view at position $position: $item") }  // Optional
+           .map<Header>(R.layout.item_header)
+           .map<Point>(R.layout.item_point)
            .into(recyclerView)
 ```
 ---
 
 The list of items can be an `ObservableList` if you want to get the adapter **automatically updated** when its content changes, or a simple `List` if you don't need to use this feature.
 
-Use `.build()` method instead of `.into(recyclerView)` if you want to create the adapter but don't assign it to the RecyclerView yet. Both methods return the adapter.
-
-`type` parameter in `onBind`, `onClick` and `onLongClick` is an integer value that **matches the layout resource id** used for each item type. You can use this value to:
-* Manage clicks for different item types in different ways.
-* Get the right binding class for each item (avoiding `findViewById` calls) if there is any operation that you cannot or simply don't want to do using Data Binding.
 
 ### LayoutHandler
 
@@ -107,10 +93,10 @@ The LayoutHandler interface allows you to use different layouts based on more co
 ```java
 // Java sample
 LastAdapter.with(listOfItems, BR.item)
-           .layoutHandler(typeHandler)
+           .handler(typeHandler)
            .into(recyclerView);
 
-private LastAdapter.LayoutHandler typeHandler = new LastAdapter.LayoutHandler() {
+private LayoutHandler typeHandler = new LayoutHandler() {
     @Override public int getItemLayout(@NotNull Object item, int position) {
         if (item instanceof Header) {
             return (position == 0) ? R.layout.item_header_first : R.layout.item_header;
@@ -122,13 +108,12 @@ private LastAdapter.LayoutHandler typeHandler = new LastAdapter.LayoutHandler() 
 ```
 ```kotlin
 // Kotlin sample
-LastAdapter.with(listOfItems, BR.item)
-           .layout { 
-                when (item) { // 'item: Any' and 'position: Int' are available inside the lambda
-                    is Header -> if (position == 0) R.layout.item_header_first else R.layout.item_header
-                    else -> R.layout.item_point 
-                }
-            }.into(recyclerView)
+LastAdapter.with(listOfItems, BR.item).layout {
+    when (item) { // 'item: Any' and 'position: Int' are available inside the lambda
+        is Header -> if (position == 0) R.layout.item_header_first else R.layout.item_header
+        else -> R.layout.item_point 
+    }
+}.into(recyclerView)
 ```
 
 ### Custom fonts
