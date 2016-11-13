@@ -13,7 +13,7 @@
 * No need to write the adapter
 * No need to write the viewholders
 * No need to modify your model classes
-* No need to notify the adapter when data set changed
+* No need to notify the adapter when data set changes
 * Supports multiple view types
 * Optional Callbacks/Listeners
 * Very fast — no reflection
@@ -111,6 +111,8 @@ LastAdapter.with(listOfItems, BR.item).layout {
     }
 }.into(recyclerView)
 ```
+
+**Version 2.0 just released!** Please refer to [my article at Medium](https://medium.com/@miguelangelmoreno/dont-write-recyclerview-adapters-b1dbc2c683bb) until I update this readme.
 
 ### Custom fonts
 
