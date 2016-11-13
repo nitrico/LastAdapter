@@ -64,15 +64,14 @@ Create your item layouts with `<layout>` as root:
 **It is important for all the item types to have the same variable name**, in this case "item". 
 This name is passed to the adapter builder as BR.variableName, in this case BR.item:
 
-### Java
-
 ```java
 // Java
 LastAdapter.with(listOfItems, BR.item)
            .map(Header.class, R.layout.item_header)
            .map(Point.class, R.layout.item_point)
            .into(recyclerView);
-         
+```
+```kotlin     
 // Kotlin
 LastAdapter.with(listOfItems, BR.item)
            .map<Header>(R.layout.item_header)
