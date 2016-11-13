@@ -21,7 +21,7 @@
 * Tiny size: **33 KB**
 * Minimum Android SDK: **9**
 
-**Version 2.0 realeased!** Please read [my article at Medium](https://medium.com/@miguelangelmoreno/dont-write-recyclerview-adapters-b1dbc2c683bb)
+**Version 2.0 just released!** Please read [my article at Medium](https://medium.com/@miguelangelmoreno/dont-write-recyclerview-adapters-b1dbc2c683bb)
 
 ## Setup
 
@@ -67,21 +67,18 @@ This name is passed to the adapter builder as BR.variableName, in this case BR.i
 ### Java
 
 ```java
+// Java
 LastAdapter.with(listOfItems, BR.item)
            .map(Header.class, R.layout.item_header)
            .map(Point.class, R.layout.item_point)
            .into(recyclerView);
-```
-
-### Kotlin
-
-```kotlin
+         
+// Kotlin
 LastAdapter.with(listOfItems, BR.item)
            .map<Header>(R.layout.item_header)
            .map<Point>(R.layout.item_point)
            .into(recyclerView)
 ```
----
 
 The list of items can be an `ObservableList` if you want to get the adapter **automatically updated** when its content changes, or a simple `List` if you don't need to use this feature.
 
