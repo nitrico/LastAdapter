@@ -1,4 +1,4 @@
-package com.github.nitrico.lastadapterproject.data
+package com.github.nitrico.lastadapter_sample.data
 
 import android.view.View
 import android.widget.Toast

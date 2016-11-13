@@ -1,7 +1,8 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <data>
-        <variable name="item" type="com.github.nitrico.lastadapter_sample.data.Point" />
+        <variable name="item" type="com.github.nitrico.lastadapter_sample.data.Car" />
+        <variable name="driver" type="com.github.nitrico.lastadapter_sample.data.Person" />
     </data>
 
     <!--android:onClick="@{v -> item.onItemClick(v)}"
@@ -13,15 +14,15 @@
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/pointX"
+            android:id="@+id/serialNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text='@{"" +item.x}' />
+            android:text='@{"" +item.serialNumber}' />
         <TextView
-            android:id="@+id/pointY"
+            android:id="@+id/model"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text='@{"" +item.y}' />
+            android:text='@{"" +item.model}' />
 
     </LinearLayout>
 

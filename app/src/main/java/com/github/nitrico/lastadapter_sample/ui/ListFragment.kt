@@ -1,4 +1,4 @@
-package com.github.nitrico.lastadapterproject.ui
+package com.github.nitrico.lastadapter_sample.ui
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.github.nitrico.lastadapterproject.R
+import com.github.nitrico.lastadapter_sample.R
 
 open class ListFragment : Fragment() {
 

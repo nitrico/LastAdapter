@@ -8,7 +8,7 @@ android {
     buildToolsVersion vBuildTools
 
     defaultConfig {
-        applicationId "com.github.nitrico.lastadapterproject"
+        applicationId "com.github.nitrico.lastadapter_sample"
         minSdkVersion vSdkMin
         targetSdkVersion vSdkTarget
         versionCode 1

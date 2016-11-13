@@ -1,3 +1,13 @@
 <resources>
+
     <string name="app_name">LastAdapter</string>
+
+    <string name="add_first">Add first</string>
+    <string name="add_last">Add last</string>
+    <string name="add_random">Add random</string>
+
+    <string name="remove_first">Remove first</string>
+    <string name="remove_last">Remove last</string>
+    <string name="remove_random">Remove random</string>
+
 </resources>

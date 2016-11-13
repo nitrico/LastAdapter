@@ -1,4 +1,4 @@
-<manifest package="com.github.nitrico.lastadapterproject" >
+<manifest package="com.github.nitrico.lastadapter_sample" >
 
     <application
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -8,7 +8,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
 
-        <activity android:name=".ui.MainActivity" >
+        <activity android:name="com.github.nitrico.lastadapter_sample.ui.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

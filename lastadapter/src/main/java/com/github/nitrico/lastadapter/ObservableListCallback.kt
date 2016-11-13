@@ -18,14 +18,14 @@ package com.github.nitrico.lastadapter
 
 import android.databinding.ObservableList
 import android.os.Looper
+import android.support.v7.widget.RecyclerView
 import java.lang.ref.WeakReference
 
-internal class WeakReferenceOnListChangedCallback(adapter: LastAdapter)
-: ObservableList.OnListChangedCallback<ObservableList<Any>>() {
+class ObservableListCallback<VH : RecyclerView.ViewHolder>(adapter: RecyclerView.Adapter<VH>)
+    : ObservableList.OnListChangedCallback<ObservableList<Any>>() {
 
-    private val reference = WeakReference<LastAdapter>(adapter)
-
-    private val adapter: LastAdapter?
+    private val reference = WeakReference<RecyclerView.Adapter<VH>>(adapter)
+    private val adapter: RecyclerView.Adapter<VH>?
         get() {
             if (Thread.currentThread() == Looper.getMainLooper().thread) return reference.get()
             else throw IllegalStateException("You must modify the ObservableList on the main thread")
@@ -48,7 +48,7 @@ internal class WeakReferenceOnListChangedCallback(adapter: LastAdapter)
     }
 
     override fun onItemRangeMoved(list: ObservableList<Any>, from: Int, to: Int, count: Int) {
-        adapter?.let { for (i in 0..count-1) adapter?.notifyItemMoved(from+i, to+i) }
+        adapter?.let { for (i in 0..count-1) it.notifyItemMoved(from+i, to+i) }
     }
 
 }

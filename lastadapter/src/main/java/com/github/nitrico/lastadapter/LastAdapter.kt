@@ -22,160 +22,132 @@ import android.databinding.OnRebindCallback
 import android.databinding.ViewDataBinding
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 
 class LastAdapter private constructor(private val list: List<Any>,
                                       private val variable: Int,
-                                      private val map: Map<Class<*>, Int>,
-                                      private val layoutHandler: LayoutHandler?,
-                                      private val onBindListener: OnBindListener?,
-                                      private val onClickListener: OnClickListener?,
-                                      private val onLongClickListener: OnLongClickListener?)
-: RecyclerView.Adapter<LastAdapter.ViewHolder>() {
-
-    companion object {
-        @JvmStatic fun with(list: List<Any>, variable: Int) = Builder(list, variable)
-    }
-
-    class Builder internal constructor(private val list: List<Any>, private val variable: Int) {
-
-        private val map = mutableMapOf<Class<*>, Int>()
-        private var handler: LayoutHandler? = null
-        private var onBind: OnBindListener? = null
-        private var onClick: OnClickListener? = null
-        private var onLongClick: OnLongClickListener? = null
-
-        fun map(clazz: Class<*>, layout: Int) = apply { map.put(clazz, layout) }
-
-        inline fun <reified T: Any> map(layout: Int) = map(T::class.java, layout)
-
-        fun layoutHandler(layoutHandler: LayoutHandler) = apply { handler = layoutHandler }
-
-        inline fun layout(crossinline f: ItemPosition.() -> Int) = layoutHandler(object: LayoutHandler {
-            override fun getItemLayout(item: Any, position: Int)
-                    = ItemPosition(item, position).f()
-        })
-
-        fun onBindListener(listener: OnBindListener) = apply { onBind = listener }
-
-        inline fun onBind(crossinline f: ItemViewTypePosition.() -> Unit) = onBindListener(object: OnBindListener {
-            override fun onBind(item: Any, view: View, type: Int, position: Int)
-                    = ItemViewTypePosition(item, view, type, position).f()
-        })
-
-        fun onClickListener(listener: OnClickListener) = apply { onClick = listener }
-
-        inline fun onClick(crossinline f: ItemViewTypePosition.() -> Unit) = onClickListener(object: OnClickListener {
-            override fun onClick(item: Any, view: View, type: Int, position: Int)
-                    = ItemViewTypePosition(item, view, type, position).f()
-        })
-
-        fun onLongClickListener(listener: OnLongClickListener) = apply { onLongClick = listener }
-
-        inline fun onLongClick(crossinline f: ItemViewTypePosition.() -> Unit) = onLongClickListener(object: OnLongClickListener {
-            override fun onLongClick(item: Any, view: View, type: Int, position: Int)
-                    = ItemViewTypePosition(item, view, type, position).f()
-        })
-
-        fun into(recyclerView: RecyclerView) = build().apply { recyclerView.adapter = this }
-
-        fun build() = LastAdapter(list, variable, map, handler, onBind, onClick, onLongClick)
-
-    }
-
-
-    inner class ViewHolder(internal val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root) {
-
-        fun bindTo(item: Any) {
-            binding.setVariable(variable, item)
-            binding.executePendingBindings()
-
-            if (onClickListener != null) itemView.setOnClickListener {
-                onClickListener.onClick(item, itemView, itemViewType, adapterPosition)
-            }
-            if (onLongClickListener != null) itemView.setOnLongClickListener {
-                onLongClickListener.onLongClick(item, itemView, itemViewType, adapterPosition)
-                true
-            }
-            onBindListener?.onBind(item, itemView, itemViewType, adapterPosition)
-        }
-
-    }
-
+                                      stableIds: Boolean = false) : RecyclerView.Adapter<ViewHolder>() {
 
     private val DATA_INVALIDATION = Any()
-    private val onChange = WeakReferenceOnListChangedCallback(this)
+    private val callback = ObservableListCallback(this)
     private var recyclerView: RecyclerView? = null
     private var inflater: LayoutInflater? = null
+
+    private val map = mutableMapOf<Class<*>, SimpleType>()
+    private var layoutHandler: LayoutHandler? = null
+    private var typeHandler: TypeHandler? = null
+
+    init {
+        setHasStableIds(stableIds)
+    }
+
+    companion object {
+        @JvmStatic @JvmOverloads
+        fun with(list: List<Any>, variable: Int, stableIds: Boolean = false) = LastAdapter(list, variable, stableIds)
+    }
+
+    fun <T : Any> map(clazz: Class<T>, layout: Int) = apply { map[clazz] = SimpleType(layout) }
+
+    inline fun <reified T : Any> map(layout: Int) = map(T::class.java, layout)
+
+    fun <T : Any> map(clazz: Class<T>, type: BaseType<*>) = apply { map[clazz] = type }
+
+    inline fun <reified T : Any> map(type: BaseType<*>) = map(T::class.java, type)
+
+    inline fun <reified T : Any, B : ViewDataBinding> map(layout: Int, noinline f: Type<B>.() -> Unit = { })
+            = map(T::class.java, Type<B>(layout).apply { f() })
+
+    fun handler(handler: Handler) = apply {
+        when (handler) {
+            is LayoutHandler -> layoutHandler = handler
+            is TypeHandler -> typeHandler = handler
+        }
+    }
+
+    inline fun layout(crossinline f: Handler.Params.() -> Int) = handler(object : LayoutHandler {
+        override fun getItemLayout(item: Any, position: Int) = f(Handler.Params(item, position))
+    })
+
+    inline fun type(crossinline f: Handler.Params.() -> BaseType<*>?) = handler(object : TypeHandler {
+        override fun getItemType(item: Any, position: Int) = f(Handler.Params(item, position))
+    })
+
+    fun into(recyclerView: RecyclerView) = apply { recyclerView.adapter = this }
+
+
 
     override fun onCreateViewHolder(view: ViewGroup, type: Int): ViewHolder {
         val binding = DataBindingUtil.inflate<ViewDataBinding>(inflater, type, view, false)
         val holder = ViewHolder(binding)
-        addOnRebindCallback(binding, recyclerView, holder.adapterPosition)
+        val position = holder.adapterPosition
+        binding.addOnRebindCallback(object : OnRebindCallback<ViewDataBinding>() {
+            //override fun onPreBind(binding: ViewDataBinding) = rv.isComputingLayout
+            override fun onCanceled(binding: ViewDataBinding) {
+                if (!recyclerView!!.isComputingLayout && position != RecyclerView.NO_POSITION) {
+                    notifyItemChanged(position, DATA_INVALIDATION)
+                }
+            }
+        })
         return holder
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bindTo(list[position])
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val type = getType(position)!!
+        if (type is BaseType<*>) holder.bind(variable, list[position], type)
+        else holder.bind(variable, list[position])
+    }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int, payloads: MutableList<Any>?) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int, payloads: MutableList<Any>) {
         if (isForDataBinding(payloads)) holder.binding.executePendingBindings()
         else onBindViewHolder(holder, position)
+    }
+
+    private fun isForDataBinding(payloads: List<Any>): Boolean {
+        if (payloads.isEmpty()) return false
+        payloads.forEach { if (it == DATA_INVALIDATION) return false }
+        return true
+    }
+
+    override fun onViewRecycled(holder: ViewHolder) {
+        val position = holder.adapterPosition
+        if (position > 0 && position < list.size) { // ?
+            val type = getType(position)!!
+            if (type is BaseType<*>) holder.recycle(type)
+        }
     }
 
     override fun getItemCount() = list.size
 
     override fun getItemViewType(position: Int) = layoutHandler?.getItemLayout(list[position], position)
+            ?: typeHandler?.getItemType(list[position], position)?.layout
+            ?: getType(position)?.layout
+            ?: throw RuntimeException("Invalid object at position $position: ${list[position].javaClass}")
+
+    private fun getType(position: Int) = typeHandler?.getItemType(list[position], position)
             ?: map[list[position].javaClass]
-            ?: throw RuntimeException("Invalid object at position $position: ${list[position]}")
+
+    override fun getItemId(position: Int): Long {
+        if (hasStableIds()) {
+            val item = list[position]
+            if (item is StableId) return item.stableId
+            throw RuntimeException("${item.javaClass.simpleName} must implement StableId interface.")
+        }
+        return super.getItemId(position)
+    }
 
     override fun onAttachedToRecyclerView(rv: RecyclerView) {
-        if (recyclerView == null && list is ObservableList) list.addOnListChangedCallback(onChange)
+        if (recyclerView == null && list is ObservableList) {
+            list.addOnListChangedCallback(callback)
+        }
         recyclerView = rv
         inflater = LayoutInflater.from(rv.context)
     }
 
     override fun onDetachedFromRecyclerView(rv: RecyclerView) {
-        if (recyclerView != null && list is ObservableList) list.removeOnListChangedCallback(onChange)
+        if (recyclerView != null && list is ObservableList) {
+            list.removeOnListChangedCallback(callback)
+        }
         recyclerView = null
     }
-
-    private fun addOnRebindCallback(b: ViewDataBinding, rv: RecyclerView?, pos: Int) {
-        b.addOnRebindCallback(object: OnRebindCallback<ViewDataBinding>() {
-            //override fun onPreBind(binding: ViewDataBinding) = rv != null && rv.isComputingLayout
-            override fun onCanceled(binding: ViewDataBinding) {
-                if (rv == null || rv.isComputingLayout) return
-                if (pos != RecyclerView.NO_POSITION) notifyItemChanged(pos, DATA_INVALIDATION)
-            }
-        })
-    }
-
-    private fun isForDataBinding(payloads: List<Any>?): Boolean {
-        if (payloads == null || payloads.size == 0) return false
-        payloads.forEach { if (it == DATA_INVALIDATION) return false }
-        return true
-    }
-
-
-    interface LayoutHandler {
-        fun getItemLayout(item: Any, position: Int): Int
-    }
-
-    interface OnBindListener {
-        fun onBind(item: Any, view: View, type: Int, position: Int)
-    }
-
-    interface OnClickListener {
-        fun onClick(item: Any, view: View, type: Int, position: Int)
-    }
-
-    interface OnLongClickListener {
-        fun onLongClick(item: Any, view: View, type: Int, position: Int)
-    }
-
-
-    class ItemPosition(val item: Any, val position: Int)
-
-    class ItemViewTypePosition(val item: Any, val view: View, val type: Int, val position: Int)
 
 }

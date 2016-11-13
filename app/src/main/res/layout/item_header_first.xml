@@ -1,7 +1,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <data>
-        <variable name="item" type="com.github.nitrico.lastadapterproject.data.Header" />
+        <variable name="item" type="com.github.nitrico.lastadapter_sample.data.Header" />
     </data>
 
     <!--android:onClick="@{v -> item.onItemClick(v)}"
