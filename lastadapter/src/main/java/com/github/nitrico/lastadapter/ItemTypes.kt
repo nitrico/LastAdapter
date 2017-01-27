@@ -33,7 +33,8 @@ open class ItemType<B : ViewDataBinding>(layout: Int, @IntegerRes vararg variabl
 open class Type<B : ViewDataBinding>(layout: Int) : BaseType<B>(layout) {
 
     class Params<out B : ViewDataBinding>(val binding: B, val position: Int,
-                                          val view: View = binding.root)
+                                          val view: View = binding.root,
+                                          val viewHolder: ViewHolder? = null)
 
     internal var onBind: (Params<B>.() -> Unit)? = null; private set
     internal var onClick: (Params<B>.() -> Unit)? = null; private set
