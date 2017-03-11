@@ -2,10 +2,10 @@ buildscript {
     ext {
         vSdkMin = 9
         vSdkTarget = 25
-        vBuildTools = '25.0.1'
+        vBuildTools = '25.0.2'
+        vKotlin = '1.1.0'
         vGradlePlugin = '2.2.3'
-        vKotlin = '1.0.5-2'
-        vSupport = '25.0.1'
+        vSupport = '25.2.0'
     }
     repositories {
         jcenter()
