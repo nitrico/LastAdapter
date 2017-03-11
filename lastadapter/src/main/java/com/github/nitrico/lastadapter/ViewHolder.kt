@@ -33,14 +33,14 @@ class ViewHolder(internal val binding: ViewDataBinding) : RecyclerView.ViewHolde
             is Type -> {
                 val onClick = type.onClick
                 if (onClick != null) itemView.setOnClickListener {
-                    onClick(Type.Params(binding as B, adapterPosition))
+                    onClick(Type.Params(binding as B, adapterPosition, viewHolder = this))
                 }
                 val onLongClick = type.onLongClick
                 if (onLongClick != null) itemView.setOnLongClickListener {
-                    onLongClick(Type.Params(binding as B, adapterPosition))
+                    onLongClick(Type.Params(binding as B, adapterPosition, viewHolder = this))
                     true
                 }
-                type.onBind?.invoke(Type.Params(binding as B, adapterPosition))
+                type.onBind?.invoke(Type.Params(binding as B, adapterPosition, viewHolder = this))
             }
             is ItemType -> type.onBind(binding as B, itemView, adapterPosition)
         }
@@ -49,7 +49,7 @@ class ViewHolder(internal val binding: ViewDataBinding) : RecyclerView.ViewHolde
     fun <B : ViewDataBinding> recycle(type: BaseType<B>) {
         @Suppress("UNCHECKED_CAST")
         when (type) {
-            is Type -> type.onRecycle?.invoke(Type.Params(binding as B, adapterPosition))
+            is Type -> type.onRecycle?.invoke(Type.Params(binding as B, adapterPosition, viewHolder = this))
             is ItemType -> type.onRecycle(binding as B, itemView, adapterPosition)
         }
     }
