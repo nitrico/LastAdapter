@@ -26,6 +26,8 @@
 ### Gradle
 
 ```gradle
+// apply plugin: 'kotlin-kapt' // this line only for Kotlin projects
+
 android {
     ...
     dataBinding.enabled true 
@@ -33,7 +35,7 @@ android {
 
 dependencies {
     compile 'com.github.nitrico.lastadapter:lastadapter:2.1.0'
-    // kapt 'com.android.databinding:compiler:GRADLE_PLUGIN_VERSION'  // this line only for Kotlin projects
+    // kapt 'com.android.databinding:compiler:GRADLE_PLUGIN_VERSION' // this line only for Kotlin projects
 }
 ```
 
