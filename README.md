@@ -28,15 +28,13 @@
 ### Gradle
 
 ```gradle
-// apply plugin: 'kotlin-kapt'  // this line only for Kotlin projects
-
 android {
     ...
     dataBinding.enabled true 
 }
 
 dependencies {
-    compile 'com.github.nitrico.lastadapter:lastadapter:2.0.0'
+    compile 'com.github.nitrico.lastadapter:lastadapter:2.1.0'
     // kapt 'com.android.databinding:compiler:GRADLE_PLUGIN_VERSION'  // this line only for Kotlin projects
 }
 ```
@@ -104,8 +102,8 @@ private LayoutHandler typeHandler = new LayoutHandler() {
 ```
 ```kotlin
 // Kotlin sample
-LastAdapter.with(listOfItems, BR.item).layout {
-    when (item) { // 'item: Any' and 'position: Int' are available inside the lambda
+LastAdapter.with(listOfItems, BR.item).layout { item, position ->
+    when (item) {
         is Header -> if (position == 0) R.layout.item_header_first else R.layout.item_header
         else -> R.layout.item_point 
     }
