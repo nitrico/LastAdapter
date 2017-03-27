@@ -20,7 +20,6 @@
 * Tiny size: **31 KB**
 * Minimum Android SDK: **9**
 
-For further information, please take a look at [my article at Medium](https://medium.com/@miguelangelmoreno/dont-write-recyclerview-adapters-b1dbc2c683bb).
 
 ## Setup
 
