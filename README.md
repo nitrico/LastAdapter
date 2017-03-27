@@ -1,4 +1,4 @@
-[![Download](https://api.bintray.com/packages/moreno/maven/lastadapter/images/download.svg) ](https://bintray.com/moreno/maven/lastadapter/_latestVersion)
+[![Download](https://api.bintray.com/packages/moreno/maven/lastadapter/images/download.svg)](https://bintray.com/moreno/maven/lastadapter/_latestVersion)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-LastAdapter-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/3810)
 [![License](https://img.shields.io/badge/License-Apache%202.0-orange.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Gitter](https://badges.gitter.im/nitrico/LastAdapter.svg)](https://gitter.im/nitrico/LastAdapter?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
@@ -43,16 +43,16 @@ dependencies {
 Create your item layouts with `<layout>` as root:
 
 ```xml
-<layout xmlns:android="http://schemas.android.com/apk/res/android" >
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-        <variable name="item" type="com.github.nitrico.lastadapterproject.item.Header" />
+        <variable name="item" type="com.github.nitrico.lastadapterproject.item.Header"/>
     </data>
     
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@{item.text}" />
+        android:text="@{item.text}"/>
         
 </layout>
 ```
