@@ -1,7 +1,7 @@
-<layout xmlns:android="http://schemas.android.com/apk/res/android" >
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-        <variable name="item" type="com.github.nitrico.lastadapter_sample.data.Header" />
+        <variable name="item" type="com.github.nitrico.lastadapter_sample.data.Header"/>
     </data>
 
     <!--android:onClick="@{v -> item.onItemClick(v)}"
@@ -17,7 +17,7 @@
             android:padding="16dp"
             android:background="@android:color/darker_gray"
             android:textStyle="bold"
-            android:text="@{item.text}" />
+            android:text="@{item.text}"/>
 
     </FrameLayout>
 

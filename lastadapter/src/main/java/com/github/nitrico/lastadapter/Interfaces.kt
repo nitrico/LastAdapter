@@ -16,9 +16,7 @@
 
 package com.github.nitrico.lastadapter
 
-interface Handler {
-    class Params(val item: Any, val position: Int)
-}
+interface Handler
 
 interface LayoutHandler : Handler {
     fun getItemLayout(item: Any, position: Int): Int

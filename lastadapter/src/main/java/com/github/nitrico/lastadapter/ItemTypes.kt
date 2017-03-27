@@ -17,32 +17,25 @@
 package com.github.nitrico.lastadapter
 
 import android.databinding.ViewDataBinding
-import android.support.annotation.IntegerRes
-import android.view.View
 
-open class SimpleType(val layout: Int)
+open class SimpleType(internal val layout: Int)
 
 @Suppress("unused")
-open class BaseType<B : ViewDataBinding>(layout: Int, @IntegerRes vararg val variables: Int) : SimpleType(layout)
+open class BaseType<B : ViewDataBinding>(layout: Int) : SimpleType(layout)
 
-open class ItemType<B : ViewDataBinding>(layout: Int, @IntegerRes vararg variables: Int) : BaseType<B>(layout, *variables) {
-    open fun onBind(binding: B, view: View, position: Int) { }
-    open fun onRecycle(binding: B, view: View, position: Int) { }
+open class ItemType<B : ViewDataBinding>(layout: Int) : BaseType<B>(layout) {
+    open fun onBind(viewHolder: ViewHolder<B>) { }
+    open fun onRecycle(viewHolder: ViewHolder<B>) { }
 }
 
 open class Type<B : ViewDataBinding>(layout: Int) : BaseType<B>(layout) {
+    internal var onBind: ((ViewHolder<B>) -> Unit)? = null; private set
+    internal var onClick: ((ViewHolder<B>) -> Unit)? = null; private set
+    internal var onLongClick: ((ViewHolder<B>) -> Unit)? = null; private set
+    internal var onRecycle: ((ViewHolder<B>) -> Unit)? = null; private set
 
-    class Params<out B : ViewDataBinding>(val binding: B, val position: Int,
-                                          val view: View = binding.root)
-
-    internal var onBind: (Params<B>.() -> Unit)? = null; private set
-    internal var onClick: (Params<B>.() -> Unit)? = null; private set
-    internal var onLongClick: (Params<B>.() -> Unit)? = null; private set
-    internal var onRecycle: (Params<B>.() -> Unit)? = null; private set
-
-    fun onBind(f: Params<B>.() -> Unit) = apply { onBind = f }
-    fun onClick(f: Params<B>.() -> Unit) = apply { onClick = f }
-    fun onLongClick(f: Params<B>.() -> Unit) = apply { onLongClick = f }
-    fun onRecycle(f: Params<B>.() -> Unit) = apply { onRecycle = f }
-
+    fun onBind(f: (ViewHolder<B>) -> Unit) = apply { onBind = f }
+    fun onClick(f: (ViewHolder<B>) -> Unit) = apply { onClick = f }
+    fun onLongClick(f: (ViewHolder<B>) -> Unit) = apply { onLongClick = f }
+    fun onRecycle(f: (ViewHolder<B>) -> Unit) = apply { onRecycle = f }
 }

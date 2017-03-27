@@ -24,9 +24,9 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 
-class LastAdapter private constructor(private val list: List<Any>,
-                                      private val variable: Int,
-                                      stableIds: Boolean = false) : RecyclerView.Adapter<ViewHolder>() {
+class LastAdapter<B : ViewDataBinding> private constructor(private val list: List<Any>,
+                                                           private val variable: Int,
+                                                           stableIds: Boolean = false) : RecyclerView.Adapter<ViewHolder<B>>() {
 
     private val DATA_INVALIDATION = Any()
     private val callback = ObservableListCallback(this)
@@ -43,7 +43,7 @@ class LastAdapter private constructor(private val list: List<Any>,
 
     companion object {
         @JvmStatic @JvmOverloads
-        fun with(list: List<Any>, variable: Int, stableIds: Boolean = false) = LastAdapter(list, variable, stableIds)
+        fun with(list: List<Any>, variable: Int, stableIds: Boolean = false) = LastAdapter<ViewDataBinding>(list, variable, stableIds)
     }
 
     fun <T : Any> map(clazz: Class<T>, layout: Int) = apply { map[clazz] = SimpleType(layout) }
@@ -64,25 +64,25 @@ class LastAdapter private constructor(private val list: List<Any>,
         }
     }
 
-    inline fun layout(crossinline f: Handler.Params.() -> Int) = handler(object : LayoutHandler {
-        override fun getItemLayout(item: Any, position: Int) = f(Handler.Params(item, position))
+    inline fun layout(crossinline f: (Any, Int) -> Int) = handler(object : LayoutHandler {
+        override fun getItemLayout(item: Any, position: Int) = f(item, position)
     })
 
-    inline fun type(crossinline f: Handler.Params.() -> BaseType<*>?) = handler(object : TypeHandler {
-        override fun getItemType(item: Any, position: Int) = f(Handler.Params(item, position))
+    inline fun type(crossinline f: (Any, Int) -> BaseType<*>?) = handler(object : TypeHandler {
+        override fun getItemType(item: Any, position: Int) = f(item, position)
     })
 
     fun into(recyclerView: RecyclerView) = apply { recyclerView.adapter = this }
 
 
 
-    override fun onCreateViewHolder(view: ViewGroup, type: Int): ViewHolder {
-        val binding = DataBindingUtil.inflate<ViewDataBinding>(inflater, type, view, false)
-        val holder = ViewHolder(binding)
+    override fun onCreateViewHolder(view: ViewGroup, type: Int): ViewHolder<B> {
+        val binding = DataBindingUtil.inflate<B>(inflater, type, view, false)
+        val holder = ViewHolder<B>(binding)
         val position = holder.adapterPosition
-        binding.addOnRebindCallback(object : OnRebindCallback<ViewDataBinding>() {
-            //override fun onPreBind(binding: ViewDataBinding) = rv.isComputingLayout
-            override fun onCanceled(binding: ViewDataBinding) {
+        binding.addOnRebindCallback(object : OnRebindCallback<B>() {
+            //override fun onPreBind(binding: B) = recyclerView!!.isComputingLayout
+            override fun onCanceled(binding: B) {
                 if (!recyclerView!!.isComputingLayout && position != RecyclerView.NO_POSITION) {
                     notifyItemChanged(position, DATA_INVALIDATION)
                 }
@@ -91,13 +91,16 @@ class LastAdapter private constructor(private val list: List<Any>,
         return holder
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder<B>, position: Int) {
         val type = getType(position)!!
-        if (type is BaseType<*>) holder.bind(variable, list[position], type)
+        if (type is BaseType<*>) {
+            @Suppress("UNCHECKED_CAST")
+            holder.bind(variable, list[position], type as BaseType<B>)
+        }
         else holder.bind(variable, list[position])
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int, payloads: MutableList<Any>) {
+    override fun onBindViewHolder(holder: ViewHolder<B>, position: Int, payloads: MutableList<Any>) {
         if (isForDataBinding(payloads)) holder.binding.executePendingBindings()
         else onBindViewHolder(holder, position)
     }
@@ -108,11 +111,14 @@ class LastAdapter private constructor(private val list: List<Any>,
         return true
     }
 
-    override fun onViewRecycled(holder: ViewHolder) {
+    override fun onViewRecycled(holder: ViewHolder<B>) {
         val position = holder.adapterPosition
         if (position > 0 && position < list.size) { // ?
             val type = getType(position)!!
-            if (type is BaseType<*>) holder.recycle(type)
+            if (type is BaseType<*>) {
+                @Suppress("UNCHECKED_CAST")
+                holder.recycle(type as BaseType<B>)
+            }
         }
     }
 

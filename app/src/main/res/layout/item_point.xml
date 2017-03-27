@@ -1,7 +1,7 @@
-<layout xmlns:android="http://schemas.android.com/apk/res/android" >
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-        <variable name="item" type="com.github.nitrico.lastadapter_sample.data.Point" />
+        <variable name="item" type="com.github.nitrico.lastadapter_sample.data.Point"/>
     </data>
 
     <!--android:onClick="@{v -> item.onItemClick(v)}"
@@ -10,18 +10,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/pointX"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text='@{"" +item.x}' />
+            android:text='@{"" +item.x}'/>
         <TextView
             android:id="@+id/pointY"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text='@{"" +item.y}' />
+            android:text='@{"" +item.y}'/>
 
     </LinearLayout>
 

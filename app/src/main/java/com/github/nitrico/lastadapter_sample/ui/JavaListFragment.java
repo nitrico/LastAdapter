@@ -2,13 +2,15 @@ package com.github.nitrico.lastadapter_sample.ui;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.view.View;
+import android.util.Log;
 import android.widget.Toast;
+
 import com.github.nitrico.lastadapter.BaseType;
 import com.github.nitrico.lastadapter.ItemType;
 import com.github.nitrico.lastadapter.LastAdapter;
 import com.github.nitrico.lastadapter.LayoutHandler;
 import com.github.nitrico.lastadapter.TypeHandler;
+import com.github.nitrico.lastadapter.ViewHolder;
 import com.github.nitrico.lastadapter_sample.BR;
 import com.github.nitrico.lastadapter_sample.R;
 import com.github.nitrico.lastadapter_sample.data.Car;
@@ -28,59 +30,63 @@ import java.util.List;
 
 public class JavaListFragment extends ListFragment {
 
-    private final ItemType<ItemHeaderFirstBinding> TYPE_HEADER_FIRST
-            = new ItemType<ItemHeaderFirstBinding>(R.layout.item_header_first) {
+    public static final String TAG = JavaListFragment.class.getSimpleName();
+
+    private final ItemType<ItemHeaderFirstBinding> TYPE_HEADER_FIRST = new ItemType<ItemHeaderFirstBinding>(R.layout.item_header_first) {
         @Override
-        public void onBind(@NotNull ItemHeaderFirstBinding binding, @NotNull View view, int position) {
-            System.out.println("Bound " +binding.getItem() + " at #" + position);
+        public void onBind(@NotNull ViewHolder<ItemHeaderFirstBinding> viewHolder) {
+            ItemHeaderFirstBinding binding = viewHolder.getBinding();
+            Header item = binding.getItem();
+            int position = viewHolder.getAdapterPosition();
+            Log.d(TAG, "Bound " +item + " at #" + position);
         }
         @Override
-        public void onRecycle(@NotNull ItemHeaderFirstBinding binding, @NotNull View view, int position) {
-            System.out.println("Recycled " +binding.getItem() + " at #" + position);
+        public void onRecycle(@NotNull ViewHolder<ItemHeaderFirstBinding> viewHolder) {
+            Log.d(TAG, "Recycled " +viewHolder.getBinding().getItem() + " at #" + viewHolder.getAdapterPosition());
         }
     };
 
     private final ItemType<ItemHeaderBinding> TYPE_HEADER = new ItemType<ItemHeaderBinding>(R.layout.item_header) {
         @Override
-        public void onBind(@NotNull ItemHeaderBinding binding, @NotNull View view, int position) {
-            System.out.println("Bound " +binding.getItem() + " at #" + position);
+        public void onBind(@NotNull ViewHolder<ItemHeaderBinding> viewHolder) {
+            Log.d(TAG, "Bound " +viewHolder.getBinding().getItem() + " at #" + viewHolder.getAdapterPosition());
         }
         @Override
-        public void onRecycle(@NotNull ItemHeaderBinding binding, @NotNull View view, int position) {
-            System.out.println("Recycled " +binding.getItem() + " at #" + position);
+        public void onRecycle(@NotNull ViewHolder<ItemHeaderBinding> viewHolder) {
+            Log.d(TAG, "Recycled " +viewHolder.getBinding().getItem() + " at #" + viewHolder.getAdapterPosition());
         }
     };
 
     private final ItemType<ItemPointBinding> TYPE_POINT = new ItemType<ItemPointBinding>(R.layout.item_point) {
         @Override
-        public void onBind(@NotNull ItemPointBinding binding, @NotNull View view, int position) {
-            System.out.println("Bound " +binding.getItem() + " at #" + position);
+        public void onBind(@NotNull ViewHolder<ItemPointBinding> viewHolder) {
+            Log.d(TAG, "Bound " +viewHolder.getBinding().getItem() + " at #" + viewHolder.getAdapterPosition());
         }
         @Override
-        public void onRecycle(@NotNull ItemPointBinding binding, @NotNull View view, int position) {
-            System.out.println("Recycled " +binding.getItem() + " at #" + position);
+        public void onRecycle(@NotNull ViewHolder<ItemPointBinding> viewHolder) {
+            Log.d(TAG, "Recycled " +viewHolder.getBinding().getItem() + " at #" + viewHolder.getAdapterPosition());
         }
     };
 
     private final ItemType<ItemCarBinding> TYPE_CAR = new ItemType<ItemCarBinding>(R.layout.item_car) {
         @Override
-        public void onBind(@NotNull ItemCarBinding binding, @NotNull View view, int position) {
-            System.out.println("Bound " +binding.getItem() + " at #" + position);
+        public void onBind(@NotNull ViewHolder<ItemCarBinding> viewHolder) {
+            Log.d(TAG, "Bound " +viewHolder.getBinding().getItem() + " at #" + viewHolder.getAdapterPosition());
         }
         @Override
-        public void onRecycle(@NotNull ItemCarBinding binding, @NotNull View view, int position) {
-            System.out.println("Recycled " +binding.getItem() + " at #" + position);
+        public void onRecycle(@NotNull ViewHolder<ItemCarBinding> viewHolder) {
+            Log.d(TAG, "Recycled " +viewHolder.getBinding().getItem() + " at #" + viewHolder.getAdapterPosition());
         }
     };
 
     private final ItemType<ItemPersonBinding> TYPE_PERSON = new ItemType<ItemPersonBinding>(R.layout.item_person) {
         @Override
-        public void onBind(@NotNull ItemPersonBinding binding, @NotNull View view, int position) {
-            System.out.println("Bound " +binding.getItem() + " at #" + position);
+        public void onBind(@NotNull ViewHolder<ItemPersonBinding> viewHolder) {
+            Log.d(TAG, "Bound " +viewHolder.getBinding().getItem() + " at #" + viewHolder.getAdapterPosition());
         }
         @Override
-        public void onRecycle(@NotNull ItemPersonBinding binding, @NotNull View view, int position) {
-            System.out.println("Recycled " +binding.getItem() + " at #" + position);
+        public void onRecycle(@NotNull ViewHolder<ItemPersonBinding> viewHolder) {
+            Log.d(TAG, "Recycled " +viewHolder.getBinding().getItem() + " at #" + viewHolder.getAdapterPosition());
         }
     };
 
@@ -115,12 +121,12 @@ public class JavaListFragment extends ListFragment {
                 .map(Person.class, TYPE_PERSON)
                 .map(Point.class, new ItemType<ItemPointBinding>(R.layout.item_point) {
                     @Override
-                    public void onBind(@NotNull ItemPointBinding binding, @NotNull View view, int position) {
-                        System.out.println("Bound " +binding.getItem() + " at #" + position);
+                    public void onBind(@NotNull ViewHolder<ItemPointBinding> viewHolder) {
+                        System.out.println("Bound " +viewHolder.getBinding().getItem() + " at #" + viewHolder.getAdapterPosition());
                     }
                     @Override
-                    public void onRecycle(@NotNull ItemPointBinding binding, @NotNull View view, int position) {
-                        System.out.println("Recycled " +binding.getItem() + " at #" + position);
+                    public void onRecycle(@NotNull ViewHolder<ItemPointBinding> viewHolder) {
+                        System.out.println("Recycled " +viewHolder.getBinding().getItem() + " at #" + viewHolder.getAdapterPosition());
                     }
                 })
                 .map(Header.class, TYPE_HEADER)

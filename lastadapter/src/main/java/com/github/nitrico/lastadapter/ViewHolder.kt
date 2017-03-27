@@ -19,38 +19,48 @@ package com.github.nitrico.lastadapter
 import android.databinding.ViewDataBinding
 import android.support.v7.widget.RecyclerView
 
-class ViewHolder(internal val binding: ViewDataBinding) : RecyclerView.ViewHolder(binding.root) {
+class ViewHolder<B : ViewDataBinding>(val binding: B) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(variable: Int, item: Any) {
+    internal fun bind(variable: Int, item: Any) {
         binding.setVariable(variable, item)
         binding.executePendingBindings()
     }
 
-    fun <B : ViewDataBinding> bind(variable: Int, item: Any, type: BaseType<B>) {
+    internal fun bind(variable: Int, item: Any, type: BaseType<B>) {
         bind(variable, item)
-        @Suppress("UNCHECKED_CAST")
         when (type) {
             is Type -> {
-                val onClick = type.onClick
-                if (onClick != null) itemView.setOnClickListener {
-                    onClick(Type.Params(binding as B, adapterPosition))
-                }
-                val onLongClick = type.onLongClick
-                if (onLongClick != null) itemView.setOnLongClickListener {
-                    onLongClick(Type.Params(binding as B, adapterPosition))
-                    true
-                }
-                type.onBind?.invoke(Type.Params(binding as B, adapterPosition))
+                setOnClickListener(type)
+                setOnLongClickListener(type)
+                type.onBind?.invoke(this)
             }
-            is ItemType -> type.onBind(binding as B, itemView, adapterPosition)
+            is ItemType -> type.onBind(this)
         }
     }
 
-    fun <B : ViewDataBinding> recycle(type: BaseType<B>) {
-        @Suppress("UNCHECKED_CAST")
+    internal fun recycle(type: BaseType<B>) {
         when (type) {
-            is Type -> type.onRecycle?.invoke(Type.Params(binding as B, adapterPosition))
-            is ItemType -> type.onRecycle(binding as B, itemView, adapterPosition)
+            is Type -> type.onRecycle?.invoke(this)
+            is ItemType -> type.onRecycle(this)
+        }
+    }
+
+    private fun setOnClickListener(type: Type<B>) {
+        val onClick = type.onClick
+        if (onClick != null) {
+            itemView.setOnClickListener {
+                onClick(this)
+            }
+        }
+    }
+
+    private fun setOnLongClickListener(type: Type<B>) {
+        val onLongClick = type.onLongClick
+        if (onLongClick != null) {
+            itemView.setOnLongClickListener {
+                onLongClick(this)
+                true
+            }
         }
     }
 

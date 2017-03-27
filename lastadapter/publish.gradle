@@ -10,10 +10,10 @@ def libDesc = "Don't write any other RecyclerView adapter again. Not even a View
 def libTags = ['android', 'recyclerview', 'adapter', 'data binding', 'kotlin']
 
 group libGroup
-version '2.0.0'
+version '2.1.0'
 
 Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
+properties.load(rootProject.file('local.properties').newDataInputStream())
 
 bintray {
     user properties.getProperty('bintray.user')

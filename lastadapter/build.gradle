@@ -2,15 +2,15 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion vSdkTarget
-    buildToolsVersion vBuildTools
-    defaultConfig.minSdkVersion vSdkMin
+    compileSdkVersion sdk_target_version
+    buildToolsVersion build_tools_version
+    defaultConfig.minSdkVersion sdk_min_version
     dataBinding.enabled true
 }
 
 dependencies {
-    compile "com.android.support:recyclerview-v7:$vSupport"
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$vKotlin"
+    compile "com.android.support:recyclerview-v7:$support_version"
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
 
 apply from: 'publish.gradle'
