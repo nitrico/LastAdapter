@@ -2,6 +2,7 @@ Change Log
 ==========
 
 Version 2.1.0 *(2017-03-26)*
+----------------------------
 
 **Breaking changes**
 - The ViewHolder is now the only argument in the callbacks. It was added to add ItemTouchHelper support but since the binding, the position and the view are inside the ViewHolder, this is actually the only argument needed.
