@@ -4,19 +4,14 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion sdk_target_version
-    buildToolsVersion build_tools_version
+    compileSdkVersion sdkTarget_version
+    buildToolsVersion buildTools_version
     defaultConfig {
         applicationId "com.github.nitrico.lastadapter_sample"
-        minSdkVersion sdk_min_version
-        targetSdkVersion sdk_target_version
+        minSdkVersion sdkMin_version
+        targetSdkVersion sdkTarget_version
     }
     dataBinding.enabled true
-}
-
-buildscript {
-    repositories { mavenCentral() }
-    dependencies { classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version" }
 }
 
 dependencies {
@@ -25,6 +20,6 @@ dependencies {
     compile "com.android.support:design:$support_version"
     compile "com.android.support:recyclerview-v7:$support_version"
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    kapt "com.android.databinding:compiler:$gradle_plugin_version"
+    kapt "com.android.databinding:compiler:$gradlePlugin_version"
     compile project(":lastadapter")
 }

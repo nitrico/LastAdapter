@@ -6,18 +6,18 @@ def libGroup = 'com.github.nitrico.' + libName
 def libSite = 'https://github.com/nitrico/' + libName
 def libGit = libSite + '.git'
 def libTracker = libSite + '/issues'
-def libDesc = "Don't write any other RecyclerView adapter again. Not even a ViewHolder!"
+def libDesc = "Don't write any other RecyclerView adapter again. Not even a Holder!"
 def libTags = ['android', 'recyclerview', 'adapter', 'data binding', 'kotlin']
 
 group libGroup
-version '2.1.0'
+version '2.2.0'
 
 Properties properties = new Properties()
 properties.load(rootProject.file('local.properties').newDataInputStream())
 
 bintray {
-    user properties.getProperty('bintray.user')
-    key properties.getProperty('bintray.key')
+    user properties.getProperty('bintray_user')
+    key properties.getProperty('bintray_key')
     configurations = ['archives']
     pkg {
         repo = 'maven'

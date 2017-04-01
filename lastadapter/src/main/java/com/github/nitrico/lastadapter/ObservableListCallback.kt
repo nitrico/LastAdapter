@@ -21,11 +21,11 @@ import android.os.Looper
 import android.support.v7.widget.RecyclerView
 import java.lang.ref.WeakReference
 
-class ObservableListCallback<VH : RecyclerView.ViewHolder>(adapter: RecyclerView.Adapter<VH>)
+class ObservableListCallback<H : RecyclerView.ViewHolder>(adapter: RecyclerView.Adapter<H>)
     : ObservableList.OnListChangedCallback<ObservableList<Any>>() {
 
-    private val reference = WeakReference<RecyclerView.Adapter<VH>>(adapter)
-    private val adapter: RecyclerView.Adapter<VH>?
+    private val reference = WeakReference<RecyclerView.Adapter<H>>(adapter)
+    private val adapter: RecyclerView.Adapter<H>?
         get() {
             if (Thread.currentThread() == Looper.getMainLooper().thread) return reference.get()
             else throw IllegalStateException("You must modify the ObservableList on the main thread")

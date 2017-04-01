@@ -16,16 +16,9 @@
 
 package com.github.nitrico.lastadapter
 
-interface Handler
+import android.databinding.ViewDataBinding
+import android.support.v7.widget.RecyclerView
 
-interface TypeHandler : Handler {
-    fun getItemType(item: Any, position: Int): BaseType?
-}
-
-interface LayoutHandler : Handler {
-    fun getItemLayout(item: Any, position: Int): Int
-}
-
-interface StableId {
-    val stableId: Long
+open class Holder<B : ViewDataBinding>(val binding: B) : RecyclerView.ViewHolder(binding.root) {
+    internal var created = false
 }
