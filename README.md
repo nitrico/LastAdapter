@@ -1,7 +1,6 @@
 [![Download](https://api.bintray.com/packages/moreno/maven/lastadapter/images/download.svg)](https://bintray.com/moreno/maven/lastadapter/_latestVersion)
-[![Size](https://img.shields.io/badge/Size-33 KB-e91e63.svg)](http://www.methodscount.com/?lib=com.github.nitrico.lastadapter%3Alastadapter%3A%2B)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-LastAdapter-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/3810)
-[![License](https://img.shields.io/:License-Apache 2.0-orange.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
+[![License](https://img.shields.io/badge/License-Apache%202.0-orange.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Gitter](https://badges.gitter.im/nitrico/LastAdapter.svg)](https://gitter.im/nitrico/LastAdapter?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 # LastAdapter
@@ -18,17 +17,16 @@
 * Optional Callbacks/Listeners
 * Very fast — no reflection
 * Super easy API
-* Tiny size: **33 KB**
+* Tiny size: **31 KB**
 * Minimum Android SDK: **9**
 
-**Version 2.0 just released!** Please refer to [my article at Medium](https://medium.com/@miguelangelmoreno/dont-write-recyclerview-adapters-b1dbc2c683bb) until I update this readme.
 
 ## Setup
 
 ### Gradle
 
 ```gradle
-// apply plugin: 'kotlin-kapt'  // this line only for Kotlin projects
+// apply plugin: 'kotlin-kapt' // this line only for Kotlin projects
 
 android {
     ...
@@ -36,8 +34,8 @@ android {
 }
 
 dependencies {
-    compile 'com.github.nitrico.lastadapter:lastadapter:2.0.0'
-    // kapt 'com.android.databinding:compiler:GRADLE_PLUGIN_VERSION'  // this line only for Kotlin projects
+    compile 'com.github.nitrico.lastadapter:lastadapter:2.1.0'
+    // kapt 'com.android.databinding:compiler:GRADLE_PLUGIN_VERSION' // this line only for Kotlin projects
 }
 ```
 
@@ -47,16 +45,16 @@ dependencies {
 Create your item layouts with `<layout>` as root:
 
 ```xml
-<layout xmlns:android="http://schemas.android.com/apk/res/android" >
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
-        <variable name="item" type="com.github.nitrico.lastadapterproject.item.Header" />
+        <variable name="item" type="com.github.nitrico.lastadapterproject.item.Header"/>
     </data>
     
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@{item.text}" />
+        android:text="@{item.text}"/>
         
 </layout>
 ```
@@ -104,15 +102,15 @@ private LayoutHandler typeHandler = new LayoutHandler() {
 ```
 ```kotlin
 // Kotlin sample
-LastAdapter.with(listOfItems, BR.item).layout {
-    when (item) { // 'item: Any' and 'position: Int' are available inside the lambda
+LastAdapter.with(listOfItems, BR.item).layout { item, position ->
+    when (item) {
         is Header -> if (position == 0) R.layout.item_header_first else R.layout.item_header
         else -> R.layout.item_point 
     }
 }.into(recyclerView)
 ```
 
-**Version 2.0 just released!** Please refer to [my article at Medium](https://medium.com/@miguelangelmoreno/dont-write-recyclerview-adapters-b1dbc2c683bb) until I update this readme.
+For further information, please take a look at [my article at Medium](https://medium.com/@miguelangelmoreno/dont-write-recyclerview-adapters-b1dbc2c683bb).
 
 ### Custom fonts
 

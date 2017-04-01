@@ -1,6 +1,14 @@
 Change Log
 ==========
 
+Version 2.1.0 *(2017-03-26)*
+----------------------------
+
+**Breaking changes**
+- The ViewHolder is now the only argument in the callbacks. It was added to add ItemTouchHelper support but since the binding, the position and the view are inside the ViewHolder, this is actually the only argument needed.
+- In Kotlin, arguments for Handlers (item & position) need to be explicitly declared now.
+- Updated dependencies: Kotlin 1.1.1, Support libraries 25.3.0, Gradle 3.3, Gradle plugin 2.3.0
+
 Version 1.2.4 *(2016-11-07)*
 ----------------------------
 
