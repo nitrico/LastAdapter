@@ -17,7 +17,7 @@
 * Optional Callbacks/Listeners
 * Very fast — no reflection
 * Super easy API
-* Tiny size: **31 KB**
+* Tiny size: **26 KB**
 * Minimum Android SDK: **9**
 
 
@@ -34,7 +34,7 @@ android {
 }
 
 dependencies {
-    compile 'com.github.nitrico.lastadapter:lastadapter:2.1.0'
+    compile 'com.github.nitrico.lastadapter:lastadapter:2.2.0'
     // kapt 'com.android.databinding:compiler:GRADLE_PLUGIN_VERSION' // this line only for Kotlin projects
 }
 ```
