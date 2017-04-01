@@ -6,10 +6,10 @@ Version 2.2.0 *(2017-04-01)*
 
 **Breaking changes**
 - **New:** Removed `with` constructor – Use default constructors instead.
-- **New:** ViewHolder class renamed to Holder.
 - **New:** Added `onCreate` callback as it is a more convenient place to set the click listeners.
 - **New:** Click listeners are not set in on `onCreate`.
-- **New:** Added support for different variable names depending on the type while still support the old "only one variable name" for all types.
+- **New:** Added support for different variable names depending on the type, while still support the old "only one variable name"-style for all types.
+- **New:** ViewHolder class renamed to Holder.
 - Smaller size despite including new features!
 
 Version 2.1.0 *(2017-03-26)*
