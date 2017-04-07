@@ -64,14 +64,14 @@ This name is passed to the adapter builder as BR.variableName, in this case BR.i
 
 ```java
 // Java
-LastAdapter.with(listOfItems, BR.item)
+new LastAdapter(listOfItems, BR.item)
            .map(Header.class, R.layout.item_header)
            .map(Point.class, R.layout.item_point)
            .into(recyclerView);
 ```
 ```kotlin     
 // Kotlin
-LastAdapter.with(listOfItems, BR.item)
+LastAdapter(listOfItems, BR.item)
            .map<Header>(R.layout.item_header)
            .map<Point>(R.layout.item_point)
            .into(recyclerView)
@@ -86,7 +86,7 @@ The LayoutHandler interface allows you to use different layouts based on more co
 
 ```java
 // Java sample
-LastAdapter.with(listOfItems, BR.item)
+new LastAdapter(listOfItems, BR.item)
            .handler(typeHandler)
            .into(recyclerView);
 
@@ -102,7 +102,7 @@ private LayoutHandler typeHandler = new LayoutHandler() {
 ```
 ```kotlin
 // Kotlin sample
-LastAdapter.with(listOfItems, BR.item).layout { item, position ->
+LastAdapter(listOfItems, BR.item).layout { item, position ->
     when (item) {
         is Header -> if (position == 0) R.layout.item_header_first else R.layout.item_header
         else -> R.layout.item_point 
