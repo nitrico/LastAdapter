@@ -13,7 +13,7 @@
 * No need to write the viewholders
 * No need to modify your model classes
 * No need to notify the adapter when data set changes
-* Supports multiple view types
+* Supports multiple item view types
 * Optional Callbacks/Listeners
 * Very fast — no reflection
 * Super easy API
