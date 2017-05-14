@@ -1,13 +1,24 @@
 Change Log
 ==========
 
+Version 2.2.0 *(2017-04-01)*
+----------------------------
+
+**Breaking changes**
+- **New:** Removed `with` constructor – Use default constructors instead.
+- **New:** Added `onCreate` callback as it is a more convenient place to set the click listeners.
+- **New:** Click listeners are not set in on `onCreate`.
+- **New:** Added support for different variable names depending on the type, while still support the old "only one variable name"-style for all types.
+- **New:** ViewHolder class renamed to Holder.
+- Smaller size despite including new features!
+
 Version 2.1.0 *(2017-03-26)*
 ----------------------------
 
 **Breaking changes**
-- The ViewHolder is now the only argument in the callbacks. It was added to add ItemTouchHelper support but since the binding, the position and the view are inside the ViewHolder, this is actually the only argument needed.
+- **New:** The ViewHolder is now the only argument in the callbacks. It was added to add ItemTouchHelper support but since the binding, the position and the view are inside the ViewHolder, this is actually the only argument needed.
 - In Kotlin, arguments for Handlers (item & position) need to be explicitly declared now.
-- Updated dependencies: Kotlin 1.1.1, Support libraries 25.3.0, Gradle 3.3, Gradle plugin 2.3.0
+- Updated dependencies: Kotlin 1.1.1, Support libraries 25.3.0, Gradle 3.3, Gradle plugin 2.3.0.
 
 Version 1.2.4 *(2016-11-07)*
 ----------------------------
