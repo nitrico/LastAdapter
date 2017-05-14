@@ -12,35 +12,35 @@ import com.github.nitrico.lastadapter_sample.databinding.*
 
 class KotlinListFragment : ListFragment() {
 
-    private val TYPE_HEADER = Type<ItemHeaderBinding>(R.layout.item_header)
+    private val typeHeader = Type<ItemHeaderBinding>(R.layout.item_header)
             .onCreate { println("Created ${it.binding.item} at #${it.adapterPosition}") }
             .onBind { println("Bound ${it.binding.item} at #${it.adapterPosition}") }
             .onRecycle { println("Recycled ${it.binding.item} at #${it.adapterPosition}") }
             .onClick { activity.toast("Clicked #${it.adapterPosition}: ${it.binding.item}") }
             .onLongClick { activity.toast("Long-clicked #${it.adapterPosition}: ${it.binding.item}") }
 
-    private val TYPE_HEADER_FIRST = Type<ItemHeaderFirstBinding>(R.layout.item_header_first)
+    private val typeHeaderFirst = Type<ItemHeaderFirstBinding>(R.layout.item_header_first)
             .onCreate { println("Created ${it.binding.item} at #${it.adapterPosition}") }
             .onBind { println("Bound ${it.binding.item} at #${it.adapterPosition}") }
             .onRecycle { println("Recycled ${it.binding.item} at #${it.adapterPosition}") }
             .onClick { activity.toast("Clicked #${it.adapterPosition}: ${it.binding.item}") }
             .onLongClick { activity.toast("Long-clicked #${it.adapterPosition}: ${it.binding.item}") }
 
-    private val TYPE_POINT = Type<ItemPointBinding>(R.layout.item_point)
+    private val typePoint = Type<ItemPointBinding>(R.layout.item_point)
             .onCreate { println("Created ${it.binding.item} at #${it.adapterPosition}") }
             .onBind { println("Bound ${it.binding.item} at #${it.adapterPosition}") }
             .onRecycle { println("Recycled ${it.binding.item} at #${it.adapterPosition}") }
             .onClick { activity.toast("Clicked #${it.adapterPosition}: ${it.binding.item}") }
             .onLongClick { activity.toast("Long-clicked #${it.adapterPosition}: ${it.binding.item}") }
 
-    private val TYPE_CAR = Type<ItemCarBinding>(R.layout.item_car)
+    private val typeCar = Type<ItemCarBinding>(R.layout.item_car)
             .onCreate { println("Created ${it.binding.item} at #${it.adapterPosition}") }
             .onBind { println("Bound ${it.binding.item} at #${it.adapterPosition}") }
             .onRecycle { println("Recycled ${it.binding.item} at #${it.adapterPosition}") }
             .onClick { activity.toast("Clicked #${it.adapterPosition}: ${it.binding.item}") }
             .onLongClick { activity.toast("Long-clicked #${it.adapterPosition}: ${it.binding.item}") }
 
-    private val TYPE_PERSON = Type<ItemPersonBinding>(R.layout.item_person)
+    private val typePerson = Type<ItemPersonBinding>(R.layout.item_person)
             .onCreate { println("Created ${it.binding.item} at #${it.adapterPosition}") }
             .onBind { println("Bound ${it.binding.item} at #${it.adapterPosition}") }
             .onBind { println("Recycled ${it.binding.item} at #${it.adapterPosition}") }
@@ -69,9 +69,9 @@ class KotlinListFragment : ListFragment() {
     }
 
     private fun setMapAdapterWithListeners(items: List<Any>, stableIds: Boolean) {
-        list.adapter = LastAdapter(items, stableIds)
+        list.adapter = LastAdapter(items, BR.item, stableIds)
                 .map<Header, ItemHeaderBinding>(R.layout.item_header)
-                .map<Point>(TYPE_POINT)
+                .map<Point>(typePoint)
                 .map<Car>(Type<ItemCarBinding>(R.layout.item_car)
                         .onCreate { println("Created ${it.binding.item} at #${it.adapterPosition}") }
                         .onBind { println("Bound ${it.binding.item} at #${it.adapterPosition}") }
@@ -104,10 +104,10 @@ class KotlinListFragment : ListFragment() {
     private fun setTypeHandlerAdapter(items: List<Any>, stableIds: Boolean) {
         LastAdapter(items, BR.item, stableIds).type { item, position ->
             when (item) {
-                is Header -> if (position == 0) TYPE_HEADER_FIRST else TYPE_HEADER
-                is Point -> TYPE_POINT
-                is Person -> TYPE_PERSON
-                is Car -> TYPE_CAR
+                is Header -> if (position == 0) typeHeaderFirst else typeHeader
+                is Point -> typePoint
+                is Person -> typePerson
+                is Car -> typeCar
                 else -> null
             }
         }.into(list)

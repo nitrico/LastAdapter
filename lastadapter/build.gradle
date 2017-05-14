@@ -11,7 +11,6 @@ android {
 dependencies {
     compile "com.android.support:recyclerview-v7:$support_version"
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    kapt "com.android.databinding:compiler:$gradlePlugin_version"
 }
 
 apply from: 'publish.gradle'

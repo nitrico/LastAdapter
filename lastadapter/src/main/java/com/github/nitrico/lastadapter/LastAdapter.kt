@@ -60,8 +60,8 @@ class LastAdapter(private val list: List<Any>,
 
     inline fun <reified T : Any, B : ViewDataBinding> map(layout: Int,
                                                           variable: Int? = null,
-                                                          noinline f: Type<B>.() -> Unit = { })
-            = map(T::class.java, Type<B>(layout, variable).apply { f() })
+                                                          noinline f: (Type<B>.() -> Unit)? = null)
+            = map(T::class.java, Type<B>(layout, variable).apply { f?.invoke(this) })
 
     fun handler(handler: Handler) = apply {
         when (handler) {
@@ -89,12 +89,15 @@ class LastAdapter(private val list: List<Any>,
 
     override fun onCreateViewHolder(view: ViewGroup, viewType: Int): Holder<ViewDataBinding> {
         val binding = DataBindingUtil.inflate<ViewDataBinding>(inflater, viewType, view, false)
-        val holder = Holder<ViewDataBinding>(binding)
+        val holder = Holder(binding)
         binding.addOnRebindCallback(object : OnRebindCallback<ViewDataBinding>() {
-            override fun onPreBind(binding: ViewDataBinding) = recyclerView!!.isComputingLayout
+            override fun onPreBind(binding: ViewDataBinding) = recyclerView?.isComputingLayout ?: false
             override fun onCanceled(binding: ViewDataBinding) {
+                if (recyclerView?.isComputingLayout ?: true) {
+                    return
+                }
                 val position = holder.adapterPosition
-                if (!recyclerView!!.isComputingLayout && position != RecyclerView.NO_POSITION) {
+                if (position != RecyclerView.NO_POSITION) {
                     notifyItemChanged(position, DATA_INVALIDATION)
                 }
             }
@@ -125,7 +128,7 @@ class LastAdapter(private val list: List<Any>,
 
     override fun onViewRecycled(holder: Holder<ViewDataBinding>) {
         val position = holder.adapterPosition
-        if (position > 0 && position < list.size) { // ?
+        if (position != RecyclerView.NO_POSITION) {
             val type = getType(position)!!
             if (type is AbsType<*>) {
                 @Suppress("UNCHECKED_CAST")

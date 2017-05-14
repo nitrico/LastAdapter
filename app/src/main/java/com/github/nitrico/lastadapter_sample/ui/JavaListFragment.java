@@ -32,24 +32,19 @@ public class JavaListFragment extends ListFragment {
 
     public static final String TAG = JavaListFragment.class.getSimpleName();
 
-    private final ItemType<ItemHeaderFirstBinding> TYPE_HEADER_FIRST = new ItemType<ItemHeaderFirstBinding>(R.layout.item_header_first) {
+    private final ItemType<ItemHeaderFirstBinding> typeHeaderFirst = new ItemType<ItemHeaderFirstBinding>(R.layout.item_header_first) {
         @Override
-        public void onCreate(final @NotNull Holder<ItemHeaderFirstBinding> holder) {
-            final Header item = holder.getBinding().getItem();
-            final int position = holder.getAdapterPosition();
+        public void onCreate(@NotNull final Holder<ItemHeaderFirstBinding> holder) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    toast(getContext(), "Clicked " +item + " at #" + position);
+                    toast(getContext(), "Clicked " +holder.getBinding().getItem() + " at #" + holder.getAdapterPosition());
                 }
             });
         }
         @Override
         public void onBind(@NotNull Holder<ItemHeaderFirstBinding> holder) {
-            ItemHeaderFirstBinding binding = holder.getBinding();
-            Header item = binding.getItem();
-            int position = holder.getAdapterPosition();
-            Log.d(TAG, "Bound " +item + " at #" + position);
+            Log.d(TAG, "Bound " + holder.getBinding().getItem() + " at #" + holder.getAdapterPosition());
         }
         @Override
         public void onRecycle(@NotNull Holder<ItemHeaderFirstBinding> holder) {
@@ -57,15 +52,13 @@ public class JavaListFragment extends ListFragment {
         }
     };
 
-    private final ItemType<ItemHeaderBinding> TYPE_HEADER = new ItemType<ItemHeaderBinding>(R.layout.item_header) {
+    private final ItemType<ItemHeaderBinding> typeHeader = new ItemType<ItemHeaderBinding>(R.layout.item_header) {
         @Override
         public void onCreate(final @NotNull Holder<ItemHeaderBinding> holder) {
-            final Header item = holder.getBinding().getItem();
-            final int position = holder.getAdapterPosition();
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    toast(getContext(), "Clicked " +item + " at #" + position);
+                    toast(getContext(), "Clicked " +holder.getBinding().getItem() + " at #" + holder.getAdapterPosition());
                 }
             });
         }
@@ -79,15 +72,13 @@ public class JavaListFragment extends ListFragment {
         }
     };
 
-    private final ItemType<ItemPointBinding> TYPE_POINT = new ItemType<ItemPointBinding>(R.layout.item_point) {
+    private final ItemType<ItemPointBinding> typePoint = new ItemType<ItemPointBinding>(R.layout.item_point) {
         @Override
         public void onCreate(final @NotNull Holder<ItemPointBinding> holder) {
-            final Point item = holder.getBinding().getItem();
-            final int position = holder.getAdapterPosition();
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    toast(getContext(), "Clicked " +item + " at #" + position);
+                    toast(getContext(), "Clicked " +holder.getBinding().getItem() + " at #" + holder.getAdapterPosition());
                 }
             });
         }
@@ -101,15 +92,13 @@ public class JavaListFragment extends ListFragment {
         }
     };
 
-    private final ItemType<ItemCarBinding> TYPE_CAR = new ItemType<ItemCarBinding>(R.layout.item_car) {
+    private final ItemType<ItemCarBinding> typeCar = new ItemType<ItemCarBinding>(R.layout.item_car) {
         @Override
         public void onCreate(final @NotNull Holder<ItemCarBinding> holder) {
-            final Car item = holder.getBinding().getItem();
-            final int position = holder.getAdapterPosition();
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    toast(getContext(), "Clicked " +item + " at #" + position);
+                    toast(getContext(), "Clicked " +holder.getBinding().getItem() + " at #" + holder.getAdapterPosition());
                 }
             });
         }
@@ -123,15 +112,13 @@ public class JavaListFragment extends ListFragment {
         }
     };
 
-    private final ItemType<ItemPersonBinding> TYPE_PERSON = new ItemType<ItemPersonBinding>(R.layout.item_person) {
+    private final ItemType<ItemPersonBinding> typePerson = new ItemType<ItemPersonBinding>(R.layout.item_person) {
         @Override
-        public void onCreate(@NotNull Holder<ItemPersonBinding> holder) {
-            final Person item = holder.getBinding().getItem();
-            final int position = holder.getAdapterPosition();
+        public void onCreate(final @NotNull Holder<ItemPersonBinding> holder) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    toast(getContext(), "Clicked " +item + " at #" + position);
+                    toast(getContext(), "Clicked " +holder.getBinding().getItem() + " at #" + holder.getAdapterPosition());
                 }
             });
         }
@@ -147,7 +134,6 @@ public class JavaListFragment extends ListFragment {
 
 
     public JavaListFragment() { }
-
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -174,8 +160,8 @@ public class JavaListFragment extends ListFragment {
 
     private void setMapAdapterWithListeners(List<Object> items, boolean stableIds) {
         new LastAdapter(items, BR.item, stableIds)
-                .map(Car.class, TYPE_CAR)
-                .map(Person.class, TYPE_PERSON)
+                .map(Car.class, typeCar)
+                .map(Person.class, typePerson)
                 .map(Point.class, new ItemType<ItemPointBinding>(R.layout.item_point) {
                     @Override
                     public void onBind(@NotNull Holder<ItemPointBinding> holder) {
@@ -186,7 +172,7 @@ public class JavaListFragment extends ListFragment {
                         Log.d(TAG, "Recycled " + holder.getBinding().getItem() + " at #" + holder.getAdapterPosition());
                     }
                 })
-                .map(Header.class, TYPE_HEADER)
+                .map(Header.class, typeHeader)
                 .into(list);
     }
 
@@ -207,10 +193,10 @@ public class JavaListFragment extends ListFragment {
         new LastAdapter(items, BR.item, stableIds).handler(new TypeHandler() {
             @Override
             public BaseType getItemType(@NotNull Object item, int position) {
-                if (item instanceof Header) return position == 0 ? TYPE_HEADER_FIRST : TYPE_HEADER;
-                else if (item instanceof Point) return TYPE_POINT;
-                else if (item instanceof Person) return TYPE_PERSON;
-                else if (item instanceof Car) return TYPE_CAR;
+                if (item instanceof Header) return position == 0 ? typeHeaderFirst : typeHeader;
+                else if (item instanceof Point) return typePoint;
+                else if (item instanceof Person) return typePerson;
+                else if (item instanceof Car) return typeCar;
                 return null;
             }
         }).into(list);
