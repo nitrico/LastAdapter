@@ -10,10 +10,5 @@ pipeline {
         
       }
     }
-    stage('') {
-      steps {
-        sh './gradlew build'
-      }
-    }
   }
 }
