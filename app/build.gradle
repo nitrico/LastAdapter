@@ -1,25 +1,27 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+    id 'kotlin-kapt'
+}
 
 android {
-    compileSdkVersion sdkTarget_version
-    buildToolsVersion buildTools_version
+    compileSdkVersion versions.sdkTarget
+    buildToolsVersion versions.buildTools
     defaultConfig {
         applicationId "com.github.nitrico.lastadapter_sample"
-        minSdkVersion sdkMin_version
-        targetSdkVersion sdkTarget_version
+        minSdkVersion versions.sdkMin
+        targetSdkVersion versions.sdkTarget
     }
     dataBinding.enabled true
 }
 
 dependencies {
-    compile "com.android.support:appcompat-v7:$support_version"
-    compile "com.android.support:cardview-v7:$support_version"
-    compile "com.android.support:design:$support_version"
-    compile "com.android.support:recyclerview-v7:$support_version"
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    kapt "com.android.databinding:compiler:$gradlePlugin_version"
+    compile "com.android.support:appcompat-v7:$versions.support"
+    compile "com.android.support:cardview-v7:$versions.support"
+    compile "com.android.support:design:$versions.support"
+    compile "com.android.support:recyclerview-v7:$versions.support"
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin"
+    kapt "com.android.databinding:compiler:$versions.gradlePlugin"
     compile project(":lastadapter")
 }

@@ -113,6 +113,6 @@ class KotlinListFragment : ListFragment() {
         }.into(list)
     }
 
-    private fun Context.toast(text: String) = Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
+    private fun Context?.toast(text: String) = this?.let { Toast.makeText(it, text, Toast.LENGTH_SHORT).show() }
 
 }

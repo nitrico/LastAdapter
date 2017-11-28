@@ -19,7 +19,7 @@ open class ListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        list = view.findViewById(R.id.list) as RecyclerView
+        list = view.findViewById<RecyclerView>(R.id.list)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

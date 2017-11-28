@@ -128,7 +128,7 @@ class LastAdapter(private val list: List<Any>,
 
     override fun onViewRecycled(holder: Holder<ViewDataBinding>) {
         val position = holder.adapterPosition
-        if (position != RecyclerView.NO_POSITION) {
+        if (position != RecyclerView.NO_POSITION && position < list.size) {
             val type = getType(position)!!
             if (type is AbsType<*>) {
                 @Suppress("UNCHECKED_CAST")

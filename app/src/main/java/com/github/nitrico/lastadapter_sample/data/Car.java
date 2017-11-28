@@ -4,8 +4,8 @@ import com.github.nitrico.lastadapter.StableId;
 
 public class Car implements StableId {
 
-    private Long serialNumber;
-    private String model;
+    private final Long serialNumber;
+    private final String model;
 
     public Car(Long serialNumber, String model) {
         this.serialNumber = serialNumber;
