@@ -13,7 +13,7 @@
 * No need to write the viewholders
 * No need to modify your model classes
 * No need to notify the adapter when data set changes
-* Supports multiple view types
+* Supports multiple item view types
 * Optional Callbacks/Listeners
 * Very fast — no reflection
 * Super easy API
@@ -34,7 +34,7 @@ android {
 }
 
 dependencies {
-    compile 'com.github.nitrico.lastadapter:lastadapter:2.2.0'
+    compile 'com.github.nitrico.lastadapter:lastadapter:2.2.2'
     // kapt 'com.android.databinding:compiler:GRADLE_PLUGIN_VERSION' // this line only for Kotlin projects
 }
 ```
