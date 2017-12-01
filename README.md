@@ -34,7 +34,7 @@ android {
 }
 
 dependencies {
-    compile 'com.github.nitrico.lastadapter:lastadapter:2.2.2'
+    compile 'com.github.nitrico.lastadapter:lastadapter:2.3.0'
     // kapt 'com.android.databinding:compiler:GRADLE_PLUGIN_VERSION' // this line only for Kotlin projects
 }
 ```
@@ -87,10 +87,10 @@ The LayoutHandler interface allows you to use different layouts based on more co
 ```java
 // Java sample
 new LastAdapter(listOfItems, BR.item)
-           .handler(typeHandler)
+           .handler(handler)
            .into(recyclerView);
 
-private LayoutHandler typeHandler = new LayoutHandler() {
+private LayoutHandler handler = new LayoutHandler() {
     @Override public int getItemLayout(@NotNull Object item, int position) {
         if (item instanceof Header) {
             return (position == 0) ? R.layout.item_header_first : R.layout.item_header;
