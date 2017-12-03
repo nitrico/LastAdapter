@@ -1,6 +1,15 @@
 Change Log
 ==========
 
+Version 2.3.0 *(2017-11-28)*
+----------------------------
+- **Fix**: [`IndexOutOfBoundExeption` when not using ObservableList](https://github.com/nitrico/LastAdapter/issues/28)
+- Update target SDK to 27
+- Update Kotlin to version 1.2.0
+- Update support libraries to version 27.0.2
+- Update Android build tools to version 27.0.1
+- Update Android Gradle Plugin to version 3.0.1
+
 Version 2.2.0 *(2017-04-01)*
 ----------------------------
 
