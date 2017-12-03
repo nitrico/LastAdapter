@@ -17,7 +17,7 @@
 * Optional Callbacks/Listeners
 * Very fast — no reflection
 * Super easy API
-* Tiny size: **26 KB**
+* Tiny size: **~30 KB**
 * Minimum Android SDK: **9**
 
 
