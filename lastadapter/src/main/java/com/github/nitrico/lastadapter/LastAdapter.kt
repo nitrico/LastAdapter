@@ -35,7 +35,7 @@ class LastAdapter(private val list: List<Any>,
     private val DATA_INVALIDATION = Any()
     private val callback = ObservableListCallback(this)
     private var recyclerView: RecyclerView? = null
-    private var inflater: LayoutInflater? = null
+    private lateinit var inflater: LayoutInflater
 
     private val map = mutableMapOf<Class<*>, BaseType>()
     private var layoutHandler: LayoutHandler? = null
@@ -90,7 +90,7 @@ class LastAdapter(private val list: List<Any>,
     override fun onCreateViewHolder(view: ViewGroup, viewType: Int): Holder<ViewDataBinding> {
         val binding = DataBindingUtil.inflate<ViewDataBinding>(inflater, viewType, view, false)
         val holder = Holder(binding)
-        binding.addOnRebindCallback(object : OnRebindCallback<ViewDataBinding>() {
+        binding?.addOnRebindCallback(object : OnRebindCallback<ViewDataBinding>() {
             override fun onPreBind(binding: ViewDataBinding) = recyclerView?.isComputingLayout ?: false
             override fun onCanceled(binding: ViewDataBinding) {
                 if (recyclerView?.isComputingLayout ?: true) {
@@ -107,8 +107,8 @@ class LastAdapter(private val list: List<Any>,
 
     override fun onBindViewHolder(holder: Holder<ViewDataBinding>, position: Int) {
         val type = getType(position)!!
-        holder.binding.setVariable(getVariable(type), list[position])
-        holder.binding.executePendingBindings()
+        holder.binding?.setVariable(getVariable(type), list[position])
+        holder.binding?.executePendingBindings()
         @Suppress("UNCHECKED_CAST")
         if (type is AbsType<*>) {
             if (!holder.created) {
@@ -120,7 +120,7 @@ class LastAdapter(private val list: List<Any>,
 
     override fun onBindViewHolder(holder: Holder<ViewDataBinding>, position: Int, payloads: List<Any>) {
         if (isForDataBinding(payloads)) {
-            holder.binding.executePendingBindings()
+            holder.binding?.executePendingBindings()
         } else {
             super.onBindViewHolder(holder, position, payloads)
         }

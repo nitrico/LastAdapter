@@ -3,8 +3,8 @@ buildscript {
             sdkMin : 14,
             sdkTarget : 27,
             buildTools : '27.0.1',
-            gradlePlugin : '3.0.1',
-            kotlin : '1.2.0',
+            gradlePlugin : '3.1.0-alpha06',
+            kotlin : '1.2.10',
             support : '27.0.2'
     ]
     repositories {
