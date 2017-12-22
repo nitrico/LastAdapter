@@ -13,39 +13,39 @@ import com.github.nitrico.lastadapter_sample.databinding.*
 class KotlinListFragment : ListFragment() {
 
     private val typeHeader = Type<ItemHeaderBinding>(R.layout.item_header)
-            .onCreate { println("Created ${it.binding.item} at #${it.adapterPosition}") }
-            .onBind { println("Bound ${it.binding.item} at #${it.adapterPosition}") }
-            .onRecycle { println("Recycled ${it.binding.item} at #${it.adapterPosition}") }
-            .onClick { activity.toast("Clicked #${it.adapterPosition}: ${it.binding.item}") }
-            .onLongClick { activity.toast("Long-clicked #${it.adapterPosition}: ${it.binding.item}") }
+            .onCreate { println("Created ${it.binding?.item} at #${it.adapterPosition}") }
+            .onBind { println("Bound ${it.binding?.item} at #${it.adapterPosition}") }
+            .onRecycle { println("Recycled ${it.binding?.item} at #${it.adapterPosition}") }
+            .onClick { activity.toast("Clicked #${it.adapterPosition}: ${it.binding?.item}") }
+            .onLongClick { activity.toast("Long-clicked #${it.adapterPosition}: ${it.binding?.item}") }
 
     private val typeHeaderFirst = Type<ItemHeaderFirstBinding>(R.layout.item_header_first)
-            .onCreate { println("Created ${it.binding.item} at #${it.adapterPosition}") }
-            .onBind { println("Bound ${it.binding.item} at #${it.adapterPosition}") }
-            .onRecycle { println("Recycled ${it.binding.item} at #${it.adapterPosition}") }
-            .onClick { activity.toast("Clicked #${it.adapterPosition}: ${it.binding.item}") }
-            .onLongClick { activity.toast("Long-clicked #${it.adapterPosition}: ${it.binding.item}") }
+            .onCreate { println("Created ${it.binding?.item} at #${it.adapterPosition}") }
+            .onBind { println("Bound ${it.binding?.item} at #${it.adapterPosition}") }
+            .onRecycle { println("Recycled ${it.binding?.item} at #${it.adapterPosition}") }
+            .onClick { activity.toast("Clicked #${it.adapterPosition}: ${it.binding?.item}") }
+            .onLongClick { activity.toast("Long-clicked #${it.adapterPosition}: ${it.binding?.item}") }
 
     private val typePoint = Type<ItemPointBinding>(R.layout.item_point)
-            .onCreate { println("Created ${it.binding.item} at #${it.adapterPosition}") }
-            .onBind { println("Bound ${it.binding.item} at #${it.adapterPosition}") }
-            .onRecycle { println("Recycled ${it.binding.item} at #${it.adapterPosition}") }
-            .onClick { activity.toast("Clicked #${it.adapterPosition}: ${it.binding.item}") }
-            .onLongClick { activity.toast("Long-clicked #${it.adapterPosition}: ${it.binding.item}") }
+            .onCreate { println("Created ${it.binding?.item} at #${it.adapterPosition}") }
+            .onBind { println("Bound ${it.binding?.item} at #${it.adapterPosition}") }
+            .onRecycle { println("Recycled ${it.binding?.item} at #${it.adapterPosition}") }
+            .onClick { activity.toast("Clicked #${it.adapterPosition}: ${it.binding?.item}") }
+            .onLongClick { activity.toast("Long-clicked #${it.adapterPosition}: ${it.binding?.item}") }
 
     private val typeCar = Type<ItemCarBinding>(R.layout.item_car)
-            .onCreate { println("Created ${it.binding.item} at #${it.adapterPosition}") }
-            .onBind { println("Bound ${it.binding.item} at #${it.adapterPosition}") }
-            .onRecycle { println("Recycled ${it.binding.item} at #${it.adapterPosition}") }
-            .onClick { activity.toast("Clicked #${it.adapterPosition}: ${it.binding.item}") }
-            .onLongClick { activity.toast("Long-clicked #${it.adapterPosition}: ${it.binding.item}") }
+            .onCreate { println("Created ${it.binding?.item} at #${it.adapterPosition}") }
+            .onBind { println("Bound ${it.binding?.item} at #${it.adapterPosition}") }
+            .onRecycle { println("Recycled ${it.binding?.item} at #${it.adapterPosition}") }
+            .onClick { activity.toast("Clicked #${it.adapterPosition}: ${it.binding?.item}") }
+            .onLongClick { activity.toast("Long-clicked #${it.adapterPosition}: ${it.binding?.item}") }
 
     private val typePerson = Type<ItemPersonBinding>(R.layout.item_person)
-            .onCreate { println("Created ${it.binding.item} at #${it.adapterPosition}") }
-            .onBind { println("Bound ${it.binding.item} at #${it.adapterPosition}") }
-            .onBind { println("Recycled ${it.binding.item} at #${it.adapterPosition}") }
-            .onClick { activity.toast("Clicked #${it.adapterPosition}: ${it.binding.item}") }
-            .onLongClick { activity.toast("Long-clicked #${it.adapterPosition}: ${it.binding.item}") }
+            .onCreate { println("Created ${it.binding?.item} at #${it.adapterPosition}") }
+            .onBind { println("Bound ${it.binding?.item} at #${it.adapterPosition}") }
+            .onBind { println("Recycled ${it.binding?.item} at #${it.adapterPosition}") }
+            .onClick { activity.toast("Clicked #${it.adapterPosition}: ${it.binding?.item}") }
+            .onLongClick { activity.toast("Long-clicked #${it.adapterPosition}: ${it.binding?.item}") }
 
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -73,18 +73,18 @@ class KotlinListFragment : ListFragment() {
                 .map<Header, ItemHeaderBinding>(R.layout.item_header)
                 .map<Point>(typePoint)
                 .map<Car>(Type<ItemCarBinding>(R.layout.item_car)
-                        .onCreate { println("Created ${it.binding.item} at #${it.adapterPosition}") }
-                        .onBind { println("Bound ${it.binding.item} at #${it.adapterPosition}") }
-                        .onRecycle { println("Recycled ${it.binding.item} at #${it.adapterPosition}") }
-                        .onClick { activity.toast("Clicked #${it.adapterPosition}: ${it.binding.item}") }
-                        .onLongClick { activity.toast("Long-clicked #${it.adapterPosition}: ${it.binding.item}") }
+                        .onCreate { println("Created ${it.binding?.item} at #${it.adapterPosition}") }
+                        .onBind { println("Bound ${it.binding?.item} at #${it.adapterPosition}") }
+                        .onRecycle { println("Recycled ${it.binding?.item} at #${it.adapterPosition}") }
+                        .onClick { activity.toast("Clicked #${it.adapterPosition}: ${it.binding?.item}") }
+                        .onLongClick { activity.toast("Long-clicked #${it.adapterPosition}: ${it.binding?.item}") }
                 )
                 .map<Person, ItemPersonBinding>(R.layout.item_person) {
-                    onCreate { println("Created ${it.binding.item} at #${it.adapterPosition}") }
-                    onBind { println("Bound ${it.binding.item} at #${it.adapterPosition}") }
-                    onRecycle { println("Recycled ${it.binding.item} at #${it.adapterPosition}") }
-                    onClick { activity.toast("Clicked #${it.adapterPosition}: ${it.binding.item}") }
-                    onLongClick { activity.toast("Long-clicked #${it.adapterPosition}: ${it.binding.item}") }
+                    onCreate { println("Created ${it.binding?.item} at #${it.adapterPosition}") }
+                    onBind { println("Bound ${it.binding?.item} at #${it.adapterPosition}") }
+                    onRecycle { println("Recycled ${it.binding?.item} at #${it.adapterPosition}") }
+                    onClick { activity.toast("Clicked #${it.adapterPosition}: ${it.binding?.item}") }
+                    onLongClick { activity.toast("Long-clicked #${it.adapterPosition}: ${it.binding?.item}") }
                 }
                 .into(list)
     }

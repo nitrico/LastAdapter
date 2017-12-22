@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
+    id 'kotlin-kapt'
 }
 
 android {
@@ -10,7 +11,18 @@ android {
     dataBinding.enabled true
 }
 
+afterEvaluate {
+    android.libraryVariants.all {
+        def name = it.name.capitalize()
+        tasks["kapt${name}Kotlin"].dependsOn("transformDataBindingWithDataBindingMergeArtifactsFor${name}")
+
+    }
+}
+
+
 dependencies {
+    //Data binding
+    kapt "com.android.databinding:compiler:$versions.gradlePlugin"
     compile "com.android.support:recyclerview-v7:$versions.support"
     compile "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin"
 }
