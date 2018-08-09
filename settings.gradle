@@ -1,1 +1,1 @@
-include ':app', ':lastadapter'
+include ':app', ':lastadapter', 'sample', 'lastadapterx'
