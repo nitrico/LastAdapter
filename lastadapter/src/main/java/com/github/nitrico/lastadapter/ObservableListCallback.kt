@@ -16,9 +16,9 @@
 
 package com.github.nitrico.lastadapter
 
-import android.databinding.ObservableList
 import android.os.Looper
-import android.support.v7.widget.RecyclerView
+import androidx.databinding.ObservableList
+import androidx.recyclerview.widget.RecyclerView
 import java.lang.ref.WeakReference
 
 class ObservableListCallback<H : RecyclerView.ViewHolder>(adapter: RecyclerView.Adapter<H>)
@@ -48,7 +48,7 @@ class ObservableListCallback<H : RecyclerView.ViewHolder>(adapter: RecyclerView.
     }
 
     override fun onItemRangeMoved(list: ObservableList<Any>, from: Int, to: Int, count: Int) {
-        adapter?.let { for (i in 0..count-1) it.notifyItemMoved(from+i, to+i) }
+        adapter?.let { for (i in 0..count - 1) it.notifyItemMoved(from + i, to + i) }
     }
 
 }

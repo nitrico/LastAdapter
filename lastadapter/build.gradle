@@ -11,8 +11,8 @@ android {
 }
 
 dependencies {
-    compile "com.android.support:recyclerview-v7:$versions.support"
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin"
+    compileOnly "androidx.recyclerview:recyclerview:$versions.support"
+    compileOnly "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin"
 }
 
 apply from: 'publish.gradle'
