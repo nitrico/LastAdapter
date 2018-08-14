@@ -16,7 +16,8 @@
 
 package com.github.nitrico.lastadapter
 
-import android.databinding.ViewDataBinding
+import androidx.databinding.ViewDataBinding
+
 
 open class BaseType
 @JvmOverloads constructor(open val layout: Int, open val variable: Int? = null)
@@ -27,9 +28,9 @@ abstract class AbsType<B : ViewDataBinding>
 
 open class ItemType<B : ViewDataBinding>
 @JvmOverloads constructor(layout: Int, variable: Int? = null) : AbsType<B>(layout, variable) {
-    open fun onCreate(holder: Holder<B>) { }
-    open fun onBind(holder: Holder<B>) { }
-    open fun onRecycle(holder: Holder<B>) { }
+    open fun onCreate(holder: Holder<B>) {}
+    open fun onBind(holder: Holder<B>) {}
+    open fun onRecycle(holder: Holder<B>) {}
 }
 
 open class Type<B : ViewDataBinding>

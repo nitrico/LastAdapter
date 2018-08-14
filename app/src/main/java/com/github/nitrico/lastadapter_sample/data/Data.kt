@@ -1,6 +1,6 @@
 package com.github.nitrico.lastadapter_sample.data
 
-import android.databinding.ObservableArrayList
+import androidx.databinding.ObservableArrayList
 
 object Data {
 
