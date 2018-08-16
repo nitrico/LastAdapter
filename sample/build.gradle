@@ -1,0 +1,25 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+}
+
+android {
+    compileSdkVersion versions.sdkTarget
+    buildToolsVersion versions.buildTools
+    defaultConfig {
+        applicationId "com.github.nitrico.lastadapter_sample"
+        minSdkVersion versions.sdkMin
+        targetSdkVersion versions.sdkTarget
+    }
+    dataBinding.enabled true
+}
+
+dependencies {
+    implementation "androidx.appcompat:appcompat:$versions.androidX"
+    implementation "androidx.cardview:cardview:$versions.androidX"
+    implementation "com.google.android.material:material:$versions.androidX"
+    implementation "androidx.recyclerview:recyclerview:$versions.androidX"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin"
+    implementation project(':lastadapterx')
+}

@@ -1,0 +1,18 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+}
+
+android {
+    compileSdkVersion versions.sdkTarget
+    buildToolsVersion versions.buildTools
+    defaultConfig.minSdkVersion versions.sdkMin
+    dataBinding.enabled true
+}
+
+dependencies {
+    implementation "androidx.recyclerview:recyclerview:$versions.androidX"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin"
+}
+
+apply from: 'publish.gradle'
